@@ -9,10 +9,9 @@ import './App.css';
 import Header from './shared/components/navigation/header/header';
 import BackgroundVideo from './shared/components/video/video';
 import { GlobalStyles } from './globalStyles';
-import NewPlace from './pages/new-place/new-place';
 import Users from './user/pages/users';
-import PlaceItem from './places/components/place-item';
 import Places from './places/pages/places';
+import NewPlace from './places/pages/new-place';
 
 function App() {
   const [loading, setLoading] = useState(true);
