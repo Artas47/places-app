@@ -1,6 +1,6 @@
 import React from 'react';
 import * as Styled from './video.styles';
-import clip from '../../video/background-video.mp4';
+import clip from '../../../resources/video/background-video.mp4';
 
 const BackgroundVideo = () => {
   return (

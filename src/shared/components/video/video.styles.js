@@ -6,7 +6,10 @@ export const Video = styled.video`
   left: 0;
   width: 100%;
   height: 100%;
-  opacity: 0.7;
+  min-height: 100%;
+  min-width: 100%;
+  opacity: 0.9;
   overflow: hidden;
   object-fit: fill;
+  z-index: -1;
 `;
