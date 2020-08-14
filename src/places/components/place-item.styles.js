@@ -49,7 +49,7 @@ export const PlaceItemDescriptionContent = styled.h3`
 
 export const PlaceItemButton = styled.button`
   height: 3.5rem;
-  width: 15rem;
+  width: 16rem;
   color: #616161;
   border: 0;
   background-color: #fff;
@@ -57,8 +57,10 @@ export const PlaceItemButton = styled.button`
   padding: 0 3rem;
   outline: none;
   transition: all 0.2s;
+  font-size: 1.6rem;
+  border-radius: 0.5rem;
   cursor: pointer;
-  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+  /* box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3); */
   :hover {
     background-color: #e8e8e8;
   }

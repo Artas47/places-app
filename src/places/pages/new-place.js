@@ -5,6 +5,7 @@ import Form from '../../shared/components/form-elements/form';
 import Label from '../../shared/components/form-elements/label';
 import styled from 'styled-components';
 import Button from '../../shared/components/button/button';
+import validator from 'validator';
 
 const FormWrapper = styled.div`
   width: 40rem;
@@ -26,16 +27,18 @@ const NewPlace = () => {
   return (
     <FormWrapper>
       <Form onSubmit={handleSubmit(onSubmit)}>
-        <Label htmlFor='email'>Email</Label>
-        <Input id='email' name='email' register={register} />
-        <Label htmlFor='password'>Password</Label>
+        <Label htmlFor='title'>Title</Label>
+        <Input id='title' name='title' register={register} />
+        <Label htmlFor='description'>Description</Label>
         <Input
-          id='password'
-          name='password'
-          type='password'
-          register={register({ required: true })}
+          id='description'
+          name='description'
+          type='description'
+          register={register}
         />
-        {errors.password && 'Password is required.'}
+        {errors.password && errors.password.message}
+        <br />
+        {errors.email && errors.email.message}
         <Button type='submit'>Submit</Button>
       </Form>
     </FormWrapper>
