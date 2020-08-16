@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const placesRoutes = require('./routes/places-routes');
 const usersRoutes = require('./routes/users-routes');
 const HttpError = require('./models/http-error');
+const mongoose = require('mongoose');
 
 const port = process.env.PORT || 5000;
 
@@ -27,6 +28,15 @@ app.use((error, req, res, next) => {
   res.send({ message: error.message || 'An unknown error occured!' });
 });
 
-app.listen(port, () => {
-  console.log('app started');
-});
+mongoose
+  .connect(
+    'mongodb+srv://artas:1234qwer@cluster0.lee0p.mongodb.net/places?retryWrites=true&w=majority'
+  )
+  .then(
+    app.listen(port, () => {
+      console.log('app started');
+    })
+  )
+  .catch((err) => {
+    console.log(err);
+  });
