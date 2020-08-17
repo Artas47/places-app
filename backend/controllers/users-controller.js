@@ -10,35 +10,59 @@ const DUMMY_USERS = [
   },
 ];
 
-const getUsers = (req, res) => {
-  res.send({ users: DUMMY_USERS });
+const getUsers = async (req, res) => {
+  let users;
+  try {
+    users = await User.find({}, '-password');
+  } catch (err) {
+    return next(new HttpError('FAILED', 500));
+  }
+  res.send({ users });
 };
 
-const signup = (req, res) => {
+const signup = async (req, res) => {
   const { name, email, password } = req.body;
-
-  const hasUser = DUMMY_USERS.find((user) => user.email === email);
-
-  if (hasUser) {
-    return next(new HttpError('Could add user, already exists', 422));
+  let existingUser;
+  try {
+    existingUser = await User.findOne({ email });
+  } catch (err) {
+    return next(new HttpError('Signup failed, try again later'));
   }
 
-  const newUser = { name, email, password };
+  if (existingUser) {
+    return next(new HttpError('User doesnt exist', 422));
+  }
 
-  DUMMY_USERS.push(newUser);
+  const createdUser = new User({
+    name,
+    email,
+    image: 'asdasddas',
+    password,
+    places: [],
+  });
 
-  res.status(201).send({ user: newUser });
+  try {
+    await createdUser.save();
+    res.status(201).send({ createdUser });
+  } catch (err) {
+    return next(new HttpError('Creating user failed'));
+  }
 };
 
-const login = (req, res, next) => {
+const login = async (req, res, next) => {
   const { email, password } = req.body;
 
-  const identifiedUser = DUMMY_USERS.find((u) => u.email === email);
-
-  if (!identifiedUser || identifiedUser.password !== password) {
-    return next(new HttpError('Could not identify user'));
+  try {
+    existingUser = await User.findOne({ email });
+  } catch (err) {
+    return next(new HttpError('Looging  in failed, try again later'));
   }
-  res.send({ message: 'Logged in' });
+
+  if (!existingUser || existingUser.password !== password) {
+    return next(new HttpError('ERROR', 422));
+  }
+
+  res.send({ message: 'logged in' });
 };
 
 exports.getUsers = getUsers;
