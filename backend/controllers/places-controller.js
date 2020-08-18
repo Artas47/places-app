@@ -11,10 +11,10 @@ const getPlaceById = async (req, res, next) => {
     place = await Place.findById(_id);
     res.send({ place });
   } catch (err) {
-    return next(new HttpError('Could not find a place for provided id', 404));
+    return next(new HttpError('Could not find a place', 404));
   }
   if (!place) {
-    return next(new HttpError('Could not find a place for provided id', 404));
+    return next(new HttpError('Could not find a place by provided id', 404));
   }
 };
 
@@ -50,11 +50,11 @@ const createPlace = async (req, res, next) => {
   try {
     user = await User.findById(creator);
   } catch (err) {
-    return next(new HttpError('FAILED'));
+    return next(new HttpError('Something went wrong. Try again later.'));
   }
 
   if (!user) {
-    return next(new HttpError('FAILED'));
+    return next(new HttpError('User not found'));
   }
 
   try {
@@ -65,8 +65,6 @@ const createPlace = async (req, res, next) => {
     await user.save({ session });
     await session.commitTransaction();
     res.send(place);
-    // await place.save();
-    // res.status(201).send(place);
   } catch (err) {
     console.log('err', err);
     return next(new HttpError('Creating place failed, please try again.', 500));
@@ -87,7 +85,7 @@ const updatePlace = async (req, res, next) => {
   try {
     const _id = req.params.pid;
     const place = await Place.findById(_id);
-    console.log('place', place);
+
     if (!place) {
       return next(new HttpError('Could not find place', 404));
     }
@@ -103,11 +101,10 @@ const updatePlace = async (req, res, next) => {
 const deletePlace = async (req, res, next) => {
   let place;
   try {
-    // const place = await Place.findByIdAndDelete(_id);
     place = await Place.findById(req.params.pid).populate('creator');
     console.log('place', place);
   } catch (err) {
-    return next(new HttpError('Could not delete placee', 400));
+    return next(new HttpError('Could not find place', 400));
   }
   if (!place) {
     return next(new HttpError('Could not find place', 404));
@@ -121,7 +118,7 @@ const deletePlace = async (req, res, next) => {
     await session.commitTransaction();
     res.status(200).send({ message: 'Deleted' });
   } catch (err) {
-    return next(new HttpError('Could nottt find place', 404));
+    return next(new HttpError('Could not delete place', 400));
   }
 };
 
