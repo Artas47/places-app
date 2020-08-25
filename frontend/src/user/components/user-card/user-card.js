@@ -9,7 +9,7 @@ const UserCard = ({ name, interests, following, followers, likes }) => {
         <Styled.UserCardHeaderImage src={ProfilePic} />
         <Styled.UserCardHeaderName>{name}</Styled.UserCardHeaderName>
         <Styled.UserCardHeaderInterests>
-          {interests.join(', ')}
+          {interests ? interests.join(', ') : ''}
         </Styled.UserCardHeaderInterests>
       </Styled.UserCardHeader>
       <Styled.UserCardFooter>
@@ -17,18 +17,20 @@ const UserCard = ({ name, interests, following, followers, likes }) => {
         <Styled.UserCardFooterRatings>
           <Styled.UserCardFooterRating>
             <Styled.UserCardRatingsCount>
-              {following}
+              {following ? following : 0}
             </Styled.UserCardRatingsCount>
             <Styled.UserCardFooterText>following</Styled.UserCardFooterText>
           </Styled.UserCardFooterRating>
           <Styled.UserCardFooterRating>
             <Styled.UserCardRatingsCount>
-              {followers}
+              {followers ? followers : 0}
             </Styled.UserCardRatingsCount>
             <Styled.UserCardFooterText>followers</Styled.UserCardFooterText>
           </Styled.UserCardFooterRating>
           <Styled.UserCardFooterRating>
-            <Styled.UserCardRatingsCount>{likes}</Styled.UserCardRatingsCount>
+            <Styled.UserCardRatingsCount>
+              {likes ? likes : 0}
+            </Styled.UserCardRatingsCount>
             <Styled.UserCardFooterText>likes</Styled.UserCardFooterText>
           </Styled.UserCardFooterRating>
         </Styled.UserCardFooterRatings>

@@ -5,7 +5,7 @@ export const UserCard = styled.div`
   height: 50rem;
   background-color: rgba(255, 255, 255, 0.5);
   border-radius: 1rem;
-  margin: 0 auto;
+  margin: 2rem auto;
   overflow: hidden;
   box-shadow: 1px 4px 5px rgba(0, 0, 0, 0.3);
 `;
