@@ -1,16 +1,7 @@
 const HttpError = require('../models/http-error');
 const User = require('../models/user');
 
-const DUMMY_USERS = [
-  {
-    id: 'u1',
-    name: 'Max Schwarz',
-    email: 'test@test.com',
-    password: 'testers',
-  },
-];
-
-const getUsers = async (req, res) => {
+const getUsers = async (req, res, next) => {
   let users;
   try {
     users = await User.find({}, '-password');
@@ -20,7 +11,7 @@ const getUsers = async (req, res) => {
   res.send({ users });
 };
 
-const signup = async (req, res) => {
+const signup = async (req, res, next) => {
   const { name, email, password } = req.body;
   let existingUser;
   try {
@@ -30,7 +21,7 @@ const signup = async (req, res) => {
   }
 
   if (existingUser) {
-    return next(new HttpError('User doesnt exist', 422));
+    return next(new HttpError('User already exist', 422));
   }
 
   const createdUser = new User({
