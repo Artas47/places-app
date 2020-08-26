@@ -1,28 +1,28 @@
 import React, { useEffect, useState } from 'react';
 import UsersList from '../components/users-list/users-list';
-import axios from 'axios';
+import { useHttpClient } from '../../shared/hooks/http-hook';
 
 const Users = () => {
-  const [error, setError] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
   const [users, setUsers] = useState([]);
+  const { sendRequest, isLoading, error } = useHttpClient();
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        setIsLoading(true);
-        const response = await axios.get('http://localhost:5000/api/users');
-        setUsers(response.data.users);
-        setIsLoading(false);
-      } catch (err) {
-        setIsLoading(false);
-        setError(err.message);
-      }
+        const responseData = await sendRequest(
+          'http://localhost:5000/api/users',
+          'GET'
+        );
+        setUsers(responseData.users);
+      } catch (err) {}
     };
     fetchUsers();
-  }, []);
-  console.log('users', users);
+  }, [sendRequest]);
+
   if (!users.length) {
     return 'no users';
+  }
+  if (isLoading) {
+    return 'SPINNER';
   }
   return <>{<UsersList items={users} />}</>;
 };

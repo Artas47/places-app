@@ -12,7 +12,7 @@ export const useHttpClient = () => {
       const httpAbortController = new AbortController();
       activeHttpRequests.current.push(httpAbortController);
       try {
-        const responseData = await fetch(url, {
+        const response = await fetch(url, {
           method,
           body,
           headers,
@@ -20,13 +20,20 @@ export const useHttpClient = () => {
         });
 
         const responseData = await response.json();
+
+        activeHttpRequests.current = activeHttpRequests.current.filter(
+          (reqCtrl) => reqCtrl !== httpAbortController
+        );
+
         if (!response.ok) {
           throw new Error(responseData.message);
         }
+        setIsLoading(false);
         return responseData;
       } catch (err) {
-        setIsLoading(false);
         setError(err.message);
+        setIsLoading(false);
+        throw err;
       }
     },
     []

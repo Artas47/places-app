@@ -5,7 +5,6 @@ import Form from '../../shared/components/form-elements/form';
 import Label from '../../shared/components/form-elements/label';
 import styled from 'styled-components';
 import Button from '../../shared/components/button/button';
-import validator from 'validator';
 
 const FormWrapper = styled.div`
   width: 40rem;

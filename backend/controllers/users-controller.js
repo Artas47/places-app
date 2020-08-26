@@ -50,7 +50,7 @@ const login = async (req, res, next) => {
   }
 
   if (!existingUser || existingUser.password !== password) {
-    return next(new HttpError('ERROR', 422));
+    return next(new HttpError('Email or password are incorrect', 422));
   }
 
   res.send({ message: 'logged in' });

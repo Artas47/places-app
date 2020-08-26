@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import Input from '../../shared/components/form-elements/input';
 import Form from '../../shared/components/form-elements/form';
@@ -7,8 +7,8 @@ import styled from 'styled-components';
 import Button from '../../shared/components/button/button';
 import validator from 'validator';
 import { AuthContext } from '../../shared/context/auth-context';
-import axios from 'axios';
 import Spinner from '../../shared/components/spinner/spinner';
+import { useHttpClient } from '../../shared/hooks/http-hook';
 
 const FormWrapper = styled.div`
   width: 40rem;
@@ -41,59 +41,43 @@ const ErrorContainer = styled.div`
 
 const Auth = () => {
   const [isLoggingIn, setIsLoggingIn] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(false);
+
+  const { isLoading, error, sendRequest, clearError } = useHttpClient();
+
   const { login } = useContext(AuthContext);
   const { register, handleSubmit, errors } = useForm(); // initialise the hook
   const onSubmit = async (data) => {
-    setIsLoading(true);
     if (!isLoggingIn) {
       try {
-        const response = await axios.post(
+        await sendRequest(
           'http://localhost:5000/api/users/login',
+          'POST',
           JSON.stringify({
             email: data.email,
             password: data.password,
           }),
           {
-            headers: {
-              'Content-Type': 'application/json',
-            },
+            'Content-Type': 'application/json',
           }
         );
-        console.log('response', response);
-        setIsLoading(false);
         login();
-      } catch (err) {
-        setError(err.message || 'Something went wrong');
-        setIsLoading(false);
-      }
+      } catch (err) {}
     } else {
       try {
-        const response = await fetch('http://localhost:5000/api/users/signup', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
+        await sendRequest(
+          'http://localhost:5000/api/users/signup',
+          'POST',
+          JSON.stringify({
             name: data.name,
             email: data.email,
             password: data.password,
           }),
-        });
-
-        const responseData = await response.json();
-        if (!response.ok) {
-          throw new Error(responseData.message);
-        }
-        console.log(responseData);
-        setIsLoading(false);
+          {
+            'Content-Type': 'application/json',
+          }
+        );
         login();
-      } catch (err) {
-        console.log('err', err);
-        setError(err.message || 'Something went wrong');
-        setIsLoading(false);
-      }
+      } catch (err) {}
     }
   };
   console.log('error', error);
