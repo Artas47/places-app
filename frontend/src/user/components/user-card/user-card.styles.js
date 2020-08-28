@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import CustomButton from '../../../shared/components/button/button';
 
 export const UserCard = styled.div`
   width: 50rem;
@@ -8,16 +9,14 @@ export const UserCard = styled.div`
   margin: 2rem auto;
   overflow: hidden;
   box-shadow: 1px 4px 5px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s;
+  :hover {
+    background-color: rgba(255, 255, 255, 1);
+  }
 `;
 
 export const UserCardHeader = styled.div`
   width: 100%;
-  background: rgb(148, 187, 233);
-  background: linear-gradient(
-    145deg,
-    rgba(148, 187, 233, 0.5082808123249299) 0%,
-    rgba(91, 140, 198, 0.5082808123249299) 100%
-  );
   height: 70%;
   display: flex;
   flex-direction: column;
@@ -52,7 +51,7 @@ export const UserCardHeaderInterests = styled.p`
 export const UserCardFooter = styled.div`
   width: 100%;
   height: 30%;
-  background-color: #2c2c54;
+  background-color: #2b2b52;
   opacity: 0.8;
   position: relative;
 `;
@@ -98,17 +97,9 @@ export const UserCardRatingsCount = styled.p`
   font-weight: 600;
 `;
 
-export const UserCardButton = styled.button`
-  /* width: 5rem; */
+export const UserCardButton = styled(CustomButton)`
   position: absolute;
   right: 50%;
-  box-shadow: 1px -2px 5px rgba(0, 0, 0, 0.3);
   transform: translate(50%, -50%);
-  padding: 1.3rem 5rem;
-  border-radius: 4rem;
-  font-size: 1.8rem;
-  border: 0;
-  /* height: 3rem; */
-  background-color: #fff;
-  outline: none;
+  color: #2f363f;
 `;

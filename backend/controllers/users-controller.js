@@ -53,7 +53,10 @@ const login = async (req, res, next) => {
     return next(new HttpError('Email or password are incorrect', 422));
   }
 
-  res.send({ message: 'logged in' });
+  res.send({
+    message: 'logged in',
+    user: existingUser.toObject({ getters: true }),
+  });
 };
 
 exports.getUsers = getUsers;

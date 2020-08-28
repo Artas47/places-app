@@ -1,10 +1,14 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import Input from '../../shared/components/form-elements/input';
 import Form from '../../shared/components/form-elements/form';
 import Label from '../../shared/components/form-elements/label';
 import styled from 'styled-components';
 import Button from '../../shared/components/button/button';
+import { AuthContext } from '../../shared/context/auth-context';
+import { useHttpClient } from '../../shared/hooks/http-hook';
+import Spinner from '../../shared/components/spinner/spinner';
+import { useHistory } from 'react-router-dom';
 
 const FormWrapper = styled.div`
   width: 40rem;
@@ -19,27 +23,62 @@ const FormWrapper = styled.div`
 
 const NewPlace = () => {
   const { register, handleSubmit, errors } = useForm(); // initialise the hook
-  const onSubmit = (data) => {
-    console.log(data);
+  const { isLoading, error, sendRequest, clearError } = useHttpClient();
+  const { userId } = useContext(AuthContext);
+  const history = useHistory();
+  const onSubmit = async (data) => {
+    try {
+      await sendRequest(
+        'http://localhost:5000/api/places',
+        'POST',
+        JSON.stringify({
+          title: data.title,
+          description: data.description,
+          address: 'warsaw',
+          image: 'chuj',
+          creator: userId,
+        }),
+        {
+          'Content-Type': 'application/json',
+        }
+      );
+      history.push('/');
+    } catch (err) {}
   };
 
   return (
     <FormWrapper>
-      <Form onSubmit={handleSubmit(onSubmit)}>
-        <Label htmlFor='title'>Title</Label>
-        <Input id='title' name='title' register={register} />
-        <Label htmlFor='description'>Description</Label>
-        <Input
-          id='description'
-          name='description'
-          type='description'
-          register={register}
-        />
-        {errors.password && errors.password.message}
-        <br />
-        {errors.email && errors.email.message}
-        <Button type='submit'>Submit</Button>
-      </Form>
+      <fieldset disabled={isLoading} style={{ border: '0' }}>
+        {isLoading ? (
+          <div
+            style={{
+              position: 'absolute',
+              left: '50%',
+              top: '60%',
+              transform: 'translate(-50%, -50%)',
+            }}
+          >
+            <Spinner />
+          </div>
+        ) : (
+          ''
+        )}
+        <Form onSubmit={handleSubmit(onSubmit)}>
+          <Label htmlFor='title'>Title</Label>
+          <Input id='title' name='title' register={register} />
+          <Label htmlFor='description'>Description</Label>
+          <Input
+            id='description'
+            name='description'
+            type='description'
+            register={register}
+          />
+          {errors.password && errors.password.message}
+          <br />
+          {errors.email && errors.email.message}
+          <Button type='submit'>Submit</Button>
+        </Form>
+      </fieldset>
     </FormWrapper>
   );
 };

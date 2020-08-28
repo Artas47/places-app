@@ -2,16 +2,20 @@ import React from 'react';
 import styled from 'styled-components';
 
 const StyledButton = styled.button`
-  /* width: 5rem; */
   padding: 1.2rem 5rem;
   border-radius: 2rem;
   border: 0;
   background-color: #e8e8e8;
   color: #666666;
   outline: none;
-  margin-top: 2rem;
-  box-shadow: 1px 2px 2px rgba(0, 0, 0, 0.3);
+  box-shadow: 1px 4px 4px rgba(0, 0, 0, 0.3);
   font-size: 1.6rem;
+  transition: all 0.3s;
+  border: 2px solid transparent;
+  :hover {
+    box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.3);
+    border: 2px solid #2b2b52;
+  }
 `;
 
 const Button = (props) => {

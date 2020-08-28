@@ -49,7 +49,7 @@ const Auth = () => {
   const onSubmit = async (data) => {
     if (!isLoggingIn) {
       try {
-        await sendRequest(
+        const responseData = await sendRequest(
           'http://localhost:5000/api/users/login',
           'POST',
           JSON.stringify({
@@ -60,7 +60,8 @@ const Auth = () => {
             'Content-Type': 'application/json',
           }
         );
-        login();
+        login(responseData.user.id);
+        console.log('responseData', responseData);
       } catch (err) {}
     } else {
       try {

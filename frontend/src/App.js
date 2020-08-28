@@ -18,13 +18,16 @@ import { AuthContext } from './shared/context/auth-context';
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [loading, setLoading] = useState(true);
-
-  const login = useCallback(() => {
+  const [userId, setUserId] = useState(false);
+  console.log('userId', userId);
+  const login = useCallback((uid) => {
     setIsLoggedIn(true);
+    setUserId(uid);
   }, []);
 
   const logout = useCallback(() => {
     setIsLoggedIn(false);
+    setUserId(null);
   }, []);
 
   useLayoutEffect(() => {
@@ -58,9 +61,6 @@ function App() {
         <Route path='/' exact>
           <Users />
         </Route>
-        <Route path='/places' exact>
-          <Places />
-        </Route>
         <Route path='/auth' exact>
           <Auth />
         </Route>
@@ -72,7 +72,7 @@ function App() {
   return (
     <div style={{ position: 'relative' }}>
       <GlobalStyles />
-      <AuthContext.Provider value={{ isLoggedIn, login, logout }}>
+      <AuthContext.Provider value={{ isLoggedIn, userId, login, logout }}>
         <Router>
           <Header />
           <BackgroundVideo />

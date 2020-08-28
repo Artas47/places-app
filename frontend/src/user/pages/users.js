@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import UsersList from '../components/users-list/users-list';
 import { useHttpClient } from '../../shared/hooks/http-hook';
+import Spinner from '../../shared/components/spinner/spinner';
 
 const Users = () => {
   const [users, setUsers] = useState([]);
@@ -18,11 +19,11 @@ const Users = () => {
     fetchUsers();
   }, [sendRequest]);
 
+  if (isLoading) {
+    return <Spinner />;
+  }
   if (!users.length) {
     return 'no users';
-  }
-  if (isLoading) {
-    return 'SPINNER';
   }
   return <>{<UsersList items={users} />}</>;
 };

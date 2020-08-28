@@ -14,7 +14,7 @@ const StyledInput = styled.input`
 `;
 
 const Input = (props) => {
-  return <StyledInput ref={props.register} {...props} />;
+  return <StyledInput autoComplete={'off'} ref={props.register} {...props} />;
 };
 
 export default Input;

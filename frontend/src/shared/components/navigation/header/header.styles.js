@@ -16,6 +16,7 @@ export const Logo = styled.h2`
   letter-spacing: 2px;
   margin-left: 3rem;
   font-size: 2rem;
+  cursor: pointer;
 `;
 
 export const Nav = styled.nav`

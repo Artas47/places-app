@@ -1,6 +1,7 @@
 import React from 'react';
 import ProfilePic from '../../../resources/images/profile-pic.jpg';
 import * as Styled from './user-card.styles';
+import CustomButton from '../../../shared/components/button/button';
 
 const UserCard = ({ name, interests, following, followers, likes }) => {
   return (
