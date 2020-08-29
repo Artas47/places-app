@@ -63,7 +63,6 @@ const Auth = () => {
           }
         );
         login(responseData.user.id);
-        console.log('responseData', responseData);
       } catch (err) {}
     } else {
       try {
@@ -83,7 +82,6 @@ const Auth = () => {
       } catch (err) {}
     }
   };
-  console.log('error', error);
   const onLoggedChange = () => {
     setIsLoggingIn((prevState) => !prevState);
   };
@@ -100,9 +98,8 @@ const Auth = () => {
       </>
     );
   };
-  console.log('error', error);
   return (
-    <Fade in={true}>
+    <Fade in={true} classNames='fade'>
       <div>
         {isLoading ? (
           <Spinner

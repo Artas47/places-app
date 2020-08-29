@@ -5,9 +5,9 @@ import { AuthContext } from '../../shared/context/auth-context';
 import Spinner from '../../shared/components/spinner/spinner';
 
 const Places = () => {
-  const [places, setPlaces] = useState([]);
+  // const [places, setPlaces] = useState([]);
   const { sendRequest, isLoading } = useHttpClient();
-  const { userId } = useContext(AuthContext);
+  const { userId, places, setPlaces } = useContext(AuthContext);
 
   useEffect(() => {
     const fetchPlaces = async () => {

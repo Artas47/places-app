@@ -14,12 +14,14 @@ import Places from './places/pages/places';
 import NewPlace from './places/pages/new-place';
 import Auth from './user/pages/auth';
 import { AuthContext } from './shared/context/auth-context';
+import Modal from './shared/components/modal/modal';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [loading, setLoading] = useState(true);
   const [userId, setUserId] = useState(false);
-  console.log('userId', userId);
+  const [places, setPlaces] = useState([]);
+
   const login = useCallback((uid) => {
     setIsLoggedIn(true);
     setUserId(uid);
@@ -52,6 +54,10 @@ function App() {
         <Route path='/places/new' exact>
           <NewPlace />
         </Route>
+        <Route path='/places/edit/:placeId' exact>
+          <Places />
+          <Modal />
+        </Route>
         <Redirect to='/' />
       </Switch>
     );
@@ -72,11 +78,13 @@ function App() {
   return (
     <div style={{ position: 'relative' }}>
       <GlobalStyles />
-      <AuthContext.Provider value={{ isLoggedIn, userId, login, logout }}>
+      <AuthContext.Provider
+        value={{ isLoggedIn, userId, login, logout, places, setPlaces }}
+      >
         <Router>
           <Header />
           <BackgroundVideo />
-          <main>{routes}</main>
+          <main style={{ width: '100%', height: '100%' }}>{routes}</main>
         </Router>
       </AuthContext.Provider>
     </div>

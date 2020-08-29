@@ -102,7 +102,6 @@ const deletePlace = async (req, res, next) => {
   let place;
   try {
     place = await Place.findById(req.params.pid).populate('creator');
-    console.log('place', place);
   } catch (err) {
     return next(new HttpError('Could not find place', 400));
   }

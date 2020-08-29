@@ -1,10 +1,10 @@
-import React from "react";
-import { CSSTransition } from "react-transition-group";
-import "./fade.css";
+import React from 'react';
+import { CSSTransition } from 'react-transition-group';
+import './fade.css';
 
-const Fade = ({ children, ...props }) => {
+const Fade = ({ children, classNames, ...props }) => {
   return (
-    <CSSTransition classNames="fade" timeout={1000} {...props} appear>
+    <CSSTransition classNames={classNames} timeout={1000} {...props} appear>
       {children}
     </CSSTransition>
   );

@@ -6,3 +6,12 @@
   opacity: 1;
   transition: all 0.3s ease-out;
 }
+
+.fadeModal-appear {
+  opacity: 0;
+}
+
+.fadeModal-appear.fadeModal-appear-active {
+  opacity: 1;
+  transition: all 0.2s ease-out;
+}

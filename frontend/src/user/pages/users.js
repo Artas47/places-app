@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import UsersList from '../components/users-list/users-list';
 import { useHttpClient } from '../../shared/hooks/http-hook';
 import Spinner from '../../shared/components/spinner/spinner';
+import Modal from '../../shared/components/modal/modal';
 
 const Users = () => {
   const [users, setUsers] = useState([]);
