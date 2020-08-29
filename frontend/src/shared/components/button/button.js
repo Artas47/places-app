@@ -13,8 +13,8 @@ const StyledButton = styled.button`
   transition: all 0.3s;
   border: 2px solid transparent;
   :hover {
-    box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.3);
-    border: 2px solid #2b2b52;
+    background-color: #bfbfbf;
+    /* color: #f5f5f5; */
   }
 `;
 

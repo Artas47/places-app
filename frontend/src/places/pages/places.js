@@ -21,26 +21,18 @@ const Places = () => {
     };
     fetchPlaces();
   }, [sendRequest, userId]);
-  console.log('placessssss', places);
-  return (
-    <div>
-      {isLoading ? (
-        <div
-          style={{
-            position: 'absolute',
-            left: '50%',
-            top: '60%',
-            transform: 'translate(-50%, -50%)',
-          }}
-        >
-          <Spinner />
-        </div>
-      ) : (
-        ''
-      )}
-      <PlaceList places={places} />
-    </div>
-  );
+
+  const renderPlacesContent = () => {
+    if (isLoading) {
+      return <Spinner className={['centered', 'color-white']} />;
+    } else if (!places.length) {
+      return <div>No places</div>;
+    } else {
+      return <PlaceList places={places} />;
+    }
+  };
+
+  return <div>{renderPlacesContent()}</div>;
 };
 
 export default Places;

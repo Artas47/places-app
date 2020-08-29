@@ -12,6 +12,7 @@
     "react-hook-form": "^6.3.3",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.3",
+    "react-transition-group": "^4.4.1",
     "styled-components": "^5.1.1",
     "validator": "^13.1.1"
   },

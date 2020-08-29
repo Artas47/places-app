@@ -9,16 +9,18 @@ import validator from 'validator';
 import { AuthContext } from '../../shared/context/auth-context';
 import Spinner from '../../shared/components/spinner/spinner';
 import { useHttpClient } from '../../shared/hooks/http-hook';
+import Fade from '../../shared/components/fade-animation/fade';
 
 const FormWrapper = styled.div`
   width: 40rem;
-  /* height: 45rem; */
   background-color: rgba(255, 255, 255, 0.92);
+  z-index: '10';
   padding: 7rem;
   margin: 10rem auto;
   border-radius: 1rem;
   overflow: hidden;
   box-shadow: 0px 0px 26px 6px rgba(0, 0, 0, 0.52);
+  transition: all 0.2s;
 `;
 
 const SignUpText = styled.p`
@@ -42,7 +44,7 @@ const ErrorContainer = styled.div`
 const Auth = () => {
   const [isLoggingIn, setIsLoggingIn] = useState(false);
 
-  const { isLoading, error, sendRequest, clearError } = useHttpClient();
+  const { error, isLoading, sendRequest, clearError } = useHttpClient();
 
   const { login } = useContext(AuthContext);
   const { register, handleSubmit, errors } = useForm(); // initialise the hook
@@ -100,58 +102,64 @@ const Auth = () => {
   };
   console.log('error', error);
   return (
-    <FormWrapper>
-      <fieldset disabled={isLoading} style={{ border: '0' }}>
+    <Fade in={true}>
+      <div>
         {isLoading ? (
-          <div
+          <Spinner
             style={{
               position: 'absolute',
+              top: '50%',
               left: '50%',
-              top: '60%',
               transform: 'translate(-50%, -50%)',
+              zIndex: '1',
             }}
-          >
-            <Spinner />
-          </div>
+            className='color-white'
+          />
         ) : (
           ''
         )}
-        <Form onSubmit={handleSubmit(onSubmit)}>
-          {isLoggingIn ? renderNameInput() : ''}
-          <Label htmlFor='email'>Email</Label>
-          <Input
-            id='email'
-            name='email'
-            register={register({
-              validate: (value) =>
-                validator.isEmail(value) || 'Email is invalid',
-              required: 'Email is required',
-            })}
-          />
-          <Label htmlFor='password'>Password</Label>
-          <Input
-            id='password'
-            name='password'
-            type='password'
-            register={register({ required: 'Password is required' })}
-          />
-          <ErrorContainer>
-            {errors.password && errors.password.message}
-            <br />
-            {errors.email && errors.email.message}
-            <br />
-            {errors.name && errors.name.message}
-            {error ? error : ''}
-          </ErrorContainer>
-          <Button type='submit'>{!isLoggingIn ? 'Log in' : 'Sign up'}</Button>
-          <SignUpText onClick={onLoggedChange}>
-            {!isLoggingIn
-              ? 'Doest have an account? Sign up.'
-              : 'Already have an accout? Log in.'}
-          </SignUpText>
-        </Form>
-      </fieldset>
-    </FormWrapper>
+        <FormWrapper style={{ filter: isLoading ? 'brightness(0.5)' : '' }}>
+          <fieldset disabled={isLoading} style={{ border: '0' }}>
+            <Form onSubmit={handleSubmit(onSubmit)}>
+              {isLoggingIn ? renderNameInput() : ''}
+              <Label htmlFor='email'>Email</Label>
+              <Input
+                id='email'
+                name='email'
+                register={register({
+                  validate: (value) =>
+                    validator.isEmail(value) || 'Email is invalid',
+                  required: 'Email is required',
+                })}
+              />
+              <Label htmlFor='password'>Password</Label>
+              <Input
+                id='password'
+                name='password'
+                type='password'
+                register={register({ required: 'Password is required' })}
+              />
+              <ErrorContainer>
+                {errors.password && errors.password.message}
+                <br />
+                {errors.email && errors.email.message}
+                <br />
+                {errors.name && errors.name.message}
+                {error ? error : ''}
+              </ErrorContainer>
+              <Button type='submit'>
+                {!isLoggingIn ? 'Log in' : 'Sign up'}
+              </Button>
+              <SignUpText onClick={onLoggedChange}>
+                {!isLoggingIn
+                  ? 'Doest have an account? Sign up.'
+                  : 'Already have an accout? Log in.'}
+              </SignUpText>
+            </Form>
+          </fieldset>
+        </FormWrapper>
+      </div>
+    </Fade>
   );
 };
 

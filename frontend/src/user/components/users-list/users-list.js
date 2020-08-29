@@ -1,6 +1,7 @@
 import React from 'react';
 import * as Styled from './users-list.styles';
 import UserCard from '../user-card/user-card';
+import Fade from '../../../shared/components/fade-animation/fade';
 
 const UsersList = ({ items }) => {
   if (items.length === 0) {
@@ -14,13 +15,15 @@ const UsersList = ({ items }) => {
     <Styled.UsersList>
       {items.map((user) => {
         return (
-          <UserCard
-            name={user.name}
-            interests={user.interests}
-            following={user.following}
-            followers={user.followers}
-            likes={user.likes}
-          />
+          <Fade in={true}>
+            <UserCard
+              name={user.name}
+              interests={user.interests}
+              following={user.following}
+              followers={user.followers}
+              likes={user.likes}
+            />
+          </Fade>
         );
       })}
     </Styled.UsersList>

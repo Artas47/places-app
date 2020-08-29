@@ -19,13 +19,17 @@ const Users = () => {
     fetchUsers();
   }, [sendRequest]);
 
-  if (isLoading) {
-    return <Spinner />;
-  }
-  if (!users.length) {
-    return 'no users';
-  }
-  return <>{<UsersList items={users} />}</>;
+  const renderUsersContent = () => {
+    if (isLoading) {
+      return <Spinner className={['centered', 'color-white']} />;
+    } else if (!users.length) {
+      return <div>No users</div>;
+    } else {
+      return <UsersList items={users} />;
+    }
+  };
+
+  return <div>{renderUsersContent()}</div>;
 };
 
 export default Users;

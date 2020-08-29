@@ -1,11 +1,13 @@
 import React from 'react';
 import './spinner.css';
 
-const Spinner = () => {
+const Spinner = ({ className, style }) => {
   return (
     <div
-      style={{ position: 'absolute', top: '100%', left: '50%' }}
-      className='lds-ring'
+      style={style}
+      className={`lds-ring ${
+        Array.isArray(className) ? className.join(' ') : className
+      }`}
     >
       <div></div>
       <div></div>

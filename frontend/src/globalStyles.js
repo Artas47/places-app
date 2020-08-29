@@ -28,5 +28,6 @@ export const GlobalStyles = createGlobalStyle`
     font-family: 'Roboto', sans-serif;
     background-color: #F9F9F9;
     width: 100vw;
+    overflow-x: hidden;
   }
 `;

@@ -11,6 +11,11 @@ const StyledInput = styled.input`
   margin-bottom: 4rem;
   color: #666666;
   font-size: 1.6rem;
+  border-bottom: 2px solid transparent;
+  transition: all 0.2s;
+  :focus {
+    border-bottom: 2px solid rgba(79, 146, 227, 0.74);
+  }
 `;
 
 const Input = (props) => {
