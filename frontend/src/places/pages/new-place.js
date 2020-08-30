@@ -8,7 +8,7 @@ import Button from '../../shared/components/button/button';
 import { AuthContext } from '../../shared/context/auth-context';
 import { useHttpClient } from '../../shared/hooks/http-hook';
 import Spinner from '../../shared/components/spinner/spinner';
-import { useHistory, useParams } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import Fade from '../../shared/components/fade-animation/fade';
 
 const FormWrapper = styled.div`
@@ -24,10 +24,9 @@ const FormWrapper = styled.div`
 
 const NewPlace = () => {
   const { register, handleSubmit, errors } = useForm(); // initialise the hook
-  const { isLoading, error, sendRequest, clearError } = useHttpClient();
+  const { isLoading, sendRequest } = useHttpClient();
   const { userId } = useContext(AuthContext);
   const history = useHistory();
-  const params = useParams();
 
   const onSubmit = async (data) => {
     try {

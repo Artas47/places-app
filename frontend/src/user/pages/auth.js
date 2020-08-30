@@ -10,6 +10,7 @@ import { AuthContext } from '../../shared/context/auth-context';
 import Spinner from '../../shared/components/spinner/spinner';
 import { useHttpClient } from '../../shared/hooks/http-hook';
 import Fade from '../../shared/components/fade-animation/fade';
+import ImageUpload from '../../shared/components/form-elements/image-upload';
 
 const FormWrapper = styled.div`
   width: 40rem;
@@ -44,7 +45,7 @@ const ErrorContainer = styled.div`
 const Auth = () => {
   const [isLoggingIn, setIsLoggingIn] = useState(false);
 
-  const { error, isLoading, sendRequest, clearError } = useHttpClient();
+  const { error, isLoading, sendRequest } = useHttpClient();
 
   const { login } = useContext(AuthContext);
   const { register, handleSubmit, errors } = useForm(); // initialise the hook
@@ -66,17 +67,16 @@ const Auth = () => {
       } catch (err) {}
     } else {
       try {
+        console.log('data', data);
+        const formData = new FormData();
+        formData.append('email', data.email);
+        formData.append('name', data.name);
+        formData.append('password', data.password);
+        formData.append('image', data.image[0]);
         await sendRequest(
           'http://localhost:5000/api/users/signup',
           'POST',
-          JSON.stringify({
-            name: data.name,
-            email: data.email,
-            password: data.password,
-          }),
-          {
-            'Content-Type': 'application/json',
-          }
+          formData
         );
         login();
       } catch (err) {}
@@ -119,6 +119,11 @@ const Auth = () => {
           <fieldset disabled={isLoading} style={{ border: '0' }}>
             <Form onSubmit={handleSubmit(onSubmit)}>
               {isLoggingIn ? renderNameInput() : ''}
+              {isLoggingIn ? (
+                <ImageUpload register={register()} name='image' id='image-id' />
+              ) : (
+                ''
+              )}
               <Label htmlFor='email'>Email</Label>
               <Input
                 id='email'

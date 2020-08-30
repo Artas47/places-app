@@ -7,7 +7,6 @@ import styled from 'styled-components';
 import Button from '../../shared/components/button/button';
 import { AuthContext } from '../../shared/context/auth-context';
 import { useHttpClient } from '../../shared/hooks/http-hook';
-import Spinner from '../../shared/components/spinner/spinner';
 import { useHistory, useParams } from 'react-router-dom';
 
 const FormWrapper = styled.div`
@@ -23,7 +22,7 @@ const FormWrapper = styled.div`
 
 const UpdatePlace = () => {
   const { register, handleSubmit, errors } = useForm();
-  const { isLoading, error, sendRequest, clearError } = useHttpClient();
+  const { isLoading, sendRequest } = useHttpClient();
   const [loadedPlace, setLoadedPlace] = useState(null);
   const { placeId } = useParams();
   const { setPlaces, userId } = useContext(AuthContext);
