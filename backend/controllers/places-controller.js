@@ -34,7 +34,7 @@ const getPlacesByUserId = async (req, res, next) => {
 };
 
 const createPlace = async (req, res, next) => {
-  const { title, description, address, creator, image } = req.body;
+  const { title, description, address, creator } = req.body;
   const coordinates = await getCoordsForAdress(address);
   const place = new Place({
     title,
@@ -42,7 +42,7 @@ const createPlace = async (req, res, next) => {
     location: coordinates,
     address,
     creator,
-    image,
+    image: req.file.path,
   });
 
   let user;

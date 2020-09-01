@@ -27,12 +27,13 @@ const userSchema = Schema({
   },
   image: {
     type: String,
-    required: true,
+    // required: true,
   },
   places: [
     {
       type: mongoose.Types.ObjectId,
       required: true,
+      ref: 'Place',
     },
   ],
 });

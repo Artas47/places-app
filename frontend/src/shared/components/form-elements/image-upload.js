@@ -1,4 +1,5 @@
 import React, { useRef, useState, useEffect } from 'react';
+import './image-upload.css';
 
 const ImageUpload = (props) => {
   const [file, setFile] = useState(null);
@@ -24,7 +25,7 @@ const ImageUpload = (props) => {
   const pickedHandler = (e) => {
     let pickedFile;
     let fileIsValid = isValid;
-    console.log('e.target.', e.target.files);
+
     if (e.target.files || e.target.files.length === 1) {
       pickedFile = e.target.files[0];
       setFile(pickedFile);
@@ -36,34 +37,54 @@ const ImageUpload = (props) => {
       fileIsValid = false;
     }
     // props.onInput(props.id, pickedFile, fileIsValid);
-    console.log('e.target.', e.target);
   };
 
   return (
-    <div>
-      <input
-        // ref={inputRef}
-        ref={props.register}
-        {...props}
-        id={props.id}
-        // style={{ display: 'none' }}
-        type='file'
-        accept='.jpg,.png,.jpeg'
-        onChange={pickedHandler}
-      />
+    <div
+      style={{
+        width: '100%',
+        height: '100%',
+        display: 'flex',
+        flex: '1',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+      }}
+    >
+      <label
+        className='upload-button'
+        style={{ marginBottom: previewUrl ? '2rem' : '3rem' }}
+      >
+        <input
+          // ref={inputRef}
+          ref={props.register}
+          {...props}
+          id={props.id}
+          // style={{ display: 'none' }}
+          type='file'
+          accept='.jpg,.png,.jpeg'
+          className='choose'
+          // onClick={pickImageHandler}
+          onChange={pickedHandler}
+        />
+        Upload profile picture
+      </label>
       <div>
         <div>
-          {previewUrl ? (
-            <img src={previewUrl} alt='Preview' />
-          ) : (
-            'Please pick an image'
+          {previewUrl && (
+            <img
+              className='img'
+              style={{ width: '100%', height: '100%', marginBottom: '2rem' }}
+              src={previewUrl}
+              alt='Preview'
+            />
           )}
         </div>
         {/* <button stype='button' onClick={pickImageHandler}>
           Pick image
         </button> */}
       </div>
-      {!isValid && 'error kurwaa'}
+      {/* {!isValid && 'error kurwaa'} */}
     </div>
   );
 };

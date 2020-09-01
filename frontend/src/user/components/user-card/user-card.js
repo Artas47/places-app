@@ -1,12 +1,15 @@
 import React from 'react';
-import ProfilePic from '../../../resources/images/profile-pic.jpg';
+import ProfilePic from '../../../resources/images/user.svg';
 import * as Styled from './user-card.styles';
 
-const UserCard = ({ name, interests, following, followers, likes }) => {
+const UserCard = ({ name, interests, following, followers, likes, image }) => {
   return (
     <Styled.UserCard>
       <Styled.UserCardHeader>
-        <Styled.UserCardHeaderImage src={ProfilePic} />
+        {console.log('image', image)}
+        <Styled.UserCardHeaderImage
+          src={image ? `http://localhost:5000/${image}` : ProfilePic}
+        />
         <Styled.UserCardHeaderName>{name}</Styled.UserCardHeaderName>
         <Styled.UserCardHeaderInterests>
           {interests ? interests.join(', ') : ''}

@@ -27,10 +27,12 @@ const signup = async (req, res, next) => {
   const createdUser = new User({
     name,
     email,
-    image: 'asdasddas',
+    // image: req.file.path,
     password,
     places: [],
   });
+
+  req.file ? (createdUser['image'] = req.file.path) : null;
 
   try {
     await createdUser.save();

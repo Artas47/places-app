@@ -22,6 +22,7 @@ const UsersList = ({ items }) => {
               following={user.following}
               followers={user.followers}
               likes={user.likes}
+              image={user.image}
             />
           </Fade>
         );

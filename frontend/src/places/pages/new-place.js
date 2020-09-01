@@ -10,10 +10,11 @@ import { useHttpClient } from '../../shared/hooks/http-hook';
 import Spinner from '../../shared/components/spinner/spinner';
 import { useHistory } from 'react-router-dom';
 import Fade from '../../shared/components/fade-animation/fade';
+import ImageUpload from '../../shared/components/form-elements/image-upload';
 
 const FormWrapper = styled.div`
   width: 40rem;
-  height: 40rem;
+  height: auto;
   background-color: rgba(255, 255, 255, 0.92);
   padding: 7rem;
   margin: 10rem auto;
@@ -30,20 +31,13 @@ const NewPlace = () => {
 
   const onSubmit = async (data) => {
     try {
-      await sendRequest(
-        'http://localhost:5000/api/places',
-        'POST',
-        JSON.stringify({
-          title: data.title,
-          description: data.description,
-          address: 'warsaw',
-          image: 'asdasd',
-          creator: userId,
-        }),
-        {
-          'Content-Type': 'application/json',
-        }
-      );
+      const formData = new FormData();
+      formData.append('title', data.title);
+      formData.append('description', data.description);
+      formData.append('image', data.image[0]);
+      formData.append('creator', userId);
+      formData.append('address', 'warsaw');
+      await sendRequest('http://localhost:5000/api/places', 'POST', formData);
       history.push('/');
     } catch (err) {}
   };
@@ -76,6 +70,7 @@ const NewPlace = () => {
               type='description'
               register={register}
             />
+            <ImageUpload register={register()} name='image' id='image-id' />
             {errors.password && errors.password.message}
             <br />
             {errors.email && errors.email.message}

@@ -16,7 +16,7 @@ const FormWrapper = styled.div`
   width: 40rem;
   background-color: rgba(255, 255, 255, 0.92);
   z-index: '10';
-  padding: 7rem;
+  padding: 6rem;
   margin: 10rem auto;
   border-radius: 1rem;
   overflow: hidden;
@@ -67,7 +67,6 @@ const Auth = () => {
       } catch (err) {}
     } else {
       try {
-        console.log('data', data);
         const formData = new FormData();
         formData.append('email', data.email);
         formData.append('name', data.name);
@@ -82,6 +81,7 @@ const Auth = () => {
       } catch (err) {}
     }
   };
+
   const onLoggedChange = () => {
     setIsLoggingIn((prevState) => !prevState);
   };
