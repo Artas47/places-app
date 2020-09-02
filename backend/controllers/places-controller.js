@@ -3,6 +3,7 @@ const Place = require('../models/place');
 const getCoordsForAdress = require('../utils/location');
 const User = require('../models/user');
 const mongoose = require('mongoose');
+const fs = require('fs');
 
 const getPlaceById = async (req, res, next) => {
   const _id = req.params.pid;
@@ -108,6 +109,9 @@ const deletePlace = async (req, res, next) => {
   if (!place) {
     return next(new HttpError('Could not find place', 404));
   }
+
+  const imagePath = place.image;
+
   try {
     const session = await mongoose.startSession();
     session.startTransaction();
@@ -119,6 +123,10 @@ const deletePlace = async (req, res, next) => {
   } catch (err) {
     return next(new HttpError('Could not delete place', 400));
   }
+
+  fs.unlink(imagePath, (err) => {
+    console.log(err);
+  });
 };
 
 exports.getPlaceById = getPlaceById;

@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom';
 import { useHttpClient } from '../../shared/hooks/http-hook';
 import { AuthContext } from '../../shared/context/auth-context';
 
-const PlaceItem = ({ name, description, id }) => {
+const PlaceItem = ({ name, description, id, image }) => {
   const history = useHistory();
   const { setPlaces, userId } = useContext(AuthContext);
   const { sendRequest } = useHttpClient();
@@ -20,7 +20,11 @@ const PlaceItem = ({ name, description, id }) => {
 
   return (
     <Styled.PlaceItem>
-      <Styled.PlaceItemImg />
+      <Styled.PlaceItemImg
+        imageUrl={image}
+        src={`http://localhost:5000/${image}`}
+        style={{ width: '100%', height: '70%' }}
+      />
       <Styled.PlaceItemDescription>
         <Styled.PlaceItemDescriptionName>
           {name}

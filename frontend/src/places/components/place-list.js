@@ -16,6 +16,7 @@ const PlaceList = ({ places }) => {
               title={place.title}
               description={place.description}
               id={place._id}
+              image={place.image}
             />
           </Fade>
         );

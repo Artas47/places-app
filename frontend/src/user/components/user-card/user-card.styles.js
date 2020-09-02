@@ -30,6 +30,9 @@ export const UserCardHeaderImage = styled.img`
   max-width: 15rem;
   max-height: 15rem;
   border-radius: 50%;
+  /* background-color: red; */
+  fill: red;
+  color: red;
 `;
 
 export const UserCardHeaderName = styled.p`
