@@ -97,9 +97,7 @@ const login = async (req, res, next) => {
       { expiresIn: '1h' }
     );
   } catch (err) {
-    return next(
-      new HttpError('Could not create user, please try again later', 500)
-    );
+    return next(new HttpError('Login failed, please try again later', 500));
   }
 
   if (!isValidPassword) {
