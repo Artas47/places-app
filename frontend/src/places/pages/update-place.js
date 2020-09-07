@@ -25,7 +25,7 @@ const UpdatePlace = () => {
   const { isLoading, sendRequest } = useHttpClient();
   const [loadedPlace, setLoadedPlace] = useState(null);
   const { placeId } = useParams();
-  const { setPlaces, userId } = useContext(AuthContext);
+  const { setPlaces, userId, token } = useContext(AuthContext);
   const history = useHistory();
   useEffect(() => {
     const fetchData = async () => {
@@ -40,6 +40,7 @@ const UpdatePlace = () => {
   }, [sendRequest, placeId]);
 
   const onSubmit = async (data) => {
+    console.log('data', data);
     try {
       await sendRequest(
         `http://localhost:5000/api/places/${loadedPlace._id}`,
@@ -47,11 +48,9 @@ const UpdatePlace = () => {
         JSON.stringify({
           title: data.title,
           description: data.description,
-          // address: 'warsaw',
-          // image: 'asdasd',
-          // creator: userId,
         }),
         {
+          Authorization: 'Bearer ' + token,
           'Content-Type': 'application/json',
         }
       );

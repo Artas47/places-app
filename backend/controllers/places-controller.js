@@ -91,6 +91,13 @@ const updatePlace = async (req, res, next) => {
       return next(new HttpError('Could not find place', 404));
     }
 
+    console.log('place.creator', place.creator);
+    console.log('req', req.userData.userId);
+
+    if (place.creator.toString() !== req.userData.userId) {
+      return next(new HttpError('You are not allowed to edit this place', 401));
+    }
+
     updates.forEach((update) => (place[update] = req.body[update]));
     await place.save();
     res.send(place);
@@ -103,8 +110,15 @@ const deletePlace = async (req, res, next) => {
   let place;
   try {
     place = await Place.findById(req.params.pid).populate('creator');
+    console.log('place.creator.toString()', place.creator._id);
+    console.log('req.userData', req.userData);
+    if (place.creator._id.toString() !== req.userData.userId) {
+      return next(
+        new HttpError('You are not allowed to delete this place', 401)
+      );
+    }
   } catch (err) {
-    return next(new HttpError('Could not find place', 400));
+    return next(new HttpError('Could not delete place', 400));
   }
   if (!place) {
     return next(new HttpError('Could not find place', 404));

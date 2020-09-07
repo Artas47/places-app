@@ -26,9 +26,9 @@ const FormWrapper = styled.div`
 const NewPlace = () => {
   const { register, handleSubmit, errors } = useForm(); // initialise the hook
   const { isLoading, sendRequest } = useHttpClient();
-  const { userId } = useContext(AuthContext);
+  const { userId, token } = useContext(AuthContext);
   const history = useHistory();
-
+  console.log('token', token);
   const onSubmit = async (data) => {
     try {
       const formData = new FormData();
@@ -37,7 +37,9 @@ const NewPlace = () => {
       formData.append('image', data.image[0]);
       formData.append('creator', userId);
       formData.append('address', 'warsaw');
-      await sendRequest('http://localhost:5000/api/places', 'POST', formData);
+      await sendRequest('http://localhost:5000/api/places', 'POST', formData, {
+        Authorization: 'Bearer ' + token,
+      });
       history.push('/');
     } catch (err) {}
   };

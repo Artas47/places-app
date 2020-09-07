@@ -6,11 +6,18 @@ import { AuthContext } from '../../shared/context/auth-context';
 
 const PlaceItem = ({ name, description, id, image }) => {
   const history = useHistory();
-  const { setPlaces, userId } = useContext(AuthContext);
+  const { setPlaces, userId, token } = useContext(AuthContext);
   const { sendRequest } = useHttpClient();
 
   const onDeletePlace = async () => {
-    await sendRequest(`http://localhost:5000/api/places/${id}`, 'DELETE');
+    await sendRequest(
+      `http://localhost:5000/api/places/${id}`,
+      'DELETE',
+      null,
+      {
+        Authorization: 'Bearer ' + token,
+      }
+    );
     const responseData = await sendRequest(
       `http://localhost:5000/api/places/user/${userId}`,
       'GET'

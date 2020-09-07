@@ -1,4 +1,9 @@
-import React, { useLayoutEffect, useState, useCallback } from 'react';
+import React, {
+  useLayoutEffect,
+  useState,
+  useCallback,
+  useEffect,
+} from 'react';
 import {
   BrowserRouter as Router,
   Route,
@@ -17,20 +22,29 @@ import { AuthContext } from './shared/context/auth-context';
 import Modal from './shared/components/modal/modal';
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [token, setToken] = useState(false);
   const [loading, setLoading] = useState(true);
   const [userId, setUserId] = useState(false);
   const [places, setPlaces] = useState([]);
 
-  const login = useCallback((uid) => {
-    setIsLoggedIn(true);
+  const login = useCallback((uid, token) => {
+    setToken(token);
+    localStorage.setItem('userData', JSON.stringify({ userId: uid, token }));
     setUserId(uid);
   }, []);
 
   const logout = useCallback(() => {
-    setIsLoggedIn(false);
+    setToken(null);
     setUserId(null);
+    localStorage.removeItem('userData');
   }, []);
+
+  useEffect(() => {
+    const storedData = JSON.parse(localStorage.getItem('userData'));
+    if (storedData && storedData.token) {
+      login(storedData.userId, storedData.token);
+    }
+  }, [login]);
 
   useLayoutEffect(() => {
     setLoading(false);
@@ -42,7 +56,7 @@ function App() {
 
   let routes;
 
-  if (isLoggedIn) {
+  if (token) {
     routes = (
       <Switch>
         <Route path='/' exact>
@@ -79,7 +93,15 @@ function App() {
     <div style={{ position: 'relative' }}>
       <GlobalStyles />
       <AuthContext.Provider
-        value={{ isLoggedIn, userId, login, logout, places, setPlaces }}
+        value={{
+          isLoggedIn: !!token,
+          userId,
+          token,
+          login,
+          logout,
+          places,
+          setPlaces,
+        }}
       >
         <Router>
           <Header />

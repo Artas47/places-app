@@ -88,7 +88,7 @@ const login = async (req, res, next) => {
       new HttpError('Could not log in, place check your credentials')
     );
   }
-
+  console.log('isValidPassword', isValidPassword);
   let token;
   try {
     token = jwt.sign(
@@ -101,12 +101,12 @@ const login = async (req, res, next) => {
   }
 
   if (!isValidPassword) {
-    return next(new HttpError('Looging  in failed, try again later'));
+    return next(new HttpError('Logging failed, try again later'));
   }
 
   res.send({
-    message: 'logged in',
-    user: existingUser.toObject({ getters: true }),
+    userId: existingUser.id,
+    email: existingUser.email,
     token,
   });
 };
