@@ -1,50 +1,27 @@
-import React, {
-  useLayoutEffect,
-  useState,
-  useCallback,
-  useEffect,
-} from 'react';
+import React, { useLayoutEffect, useState } from "react";
 import {
   BrowserRouter as Router,
   Route,
   Redirect,
   Switch,
-} from 'react-router-dom';
-import './App.css';
-import Header from './shared/components/navigation/header/header';
-import BackgroundVideo from './shared/components/video/video';
-import { GlobalStyles } from './globalStyles';
-import Users from './user/pages/users';
-import Places from './places/pages/places';
-import NewPlace from './places/pages/new-place';
-import Auth from './user/pages/auth';
-import { AuthContext } from './shared/context/auth-context';
-import Modal from './shared/components/modal/modal';
+} from "react-router-dom";
+import "./App.css";
+import Header from "./shared/components/navigation/header/header";
+import BackgroundVideo from "./shared/components/video/video";
+import { GlobalStyles } from "./globalStyles";
+import Users from "./user/pages/users";
+import Places from "./places/pages/places";
+import NewPlace from "./places/pages/new-place";
+import Auth from "./user/pages/auth";
+import { AuthContext } from "./shared/context/auth-context";
+import Modal from "./shared/components/modal/modal";
+import { useAuth } from "./shared/hooks/auth-hook";
 
 function App() {
-  const [token, setToken] = useState(false);
   const [loading, setLoading] = useState(true);
-  const [userId, setUserId] = useState(false);
   const [places, setPlaces] = useState([]);
 
-  const login = useCallback((uid, token) => {
-    setToken(token);
-    localStorage.setItem('userData', JSON.stringify({ userId: uid, token }));
-    setUserId(uid);
-  }, []);
-
-  const logout = useCallback(() => {
-    setToken(null);
-    setUserId(null);
-    localStorage.removeItem('userData');
-  }, []);
-
-  useEffect(() => {
-    const storedData = JSON.parse(localStorage.getItem('userData'));
-    if (storedData && storedData.token) {
-      login(storedData.userId, storedData.token);
-    }
-  }, [login]);
+  const { token, userId, login, logout } = useAuth();
 
   useLayoutEffect(() => {
     setLoading(false);
@@ -59,38 +36,38 @@ function App() {
   if (token) {
     routes = (
       <Switch>
-        <Route path='/' exact>
+        <Route path="/" exact>
           <Users />
         </Route>
-        <Route path='/places' exact>
+        <Route path="/places" exact>
           <Places />
         </Route>
-        <Route path='/places/new' exact>
+        <Route path="/places/new" exact>
           <NewPlace />
         </Route>
-        <Route path='/places/edit/:placeId' exact>
+        <Route path="/places/edit/:placeId" exact>
           <Places />
           <Modal />
         </Route>
-        <Redirect to='/' />
+        <Redirect to="/" />
       </Switch>
     );
   } else {
     routes = (
       <Switch>
-        <Route path='/' exact>
+        <Route path="/" exact>
           <Users />
         </Route>
-        <Route path='/auth' exact>
+        <Route path="/auth" exact>
           <Auth />
         </Route>
-        <Redirect to='/auth' />
+        <Redirect to="/auth" />
       </Switch>
     );
   }
 
   return (
-    <div style={{ position: 'relative' }}>
+    <div style={{ position: "relative" }}>
       <GlobalStyles />
       <AuthContext.Provider
         value={{
@@ -106,7 +83,7 @@ function App() {
         <Router>
           <Header />
           <BackgroundVideo />
-          <main style={{ width: '100%', height: '100%' }}>{routes}</main>
+          <main style={{ width: "100%", height: "100%" }}>{routes}</main>
         </Router>
       </AuthContext.Provider>
     </div>
