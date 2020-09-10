@@ -3,6 +3,7 @@ const Place = require("../models/place");
 const getCoordsForAdress = require("../utils/location");
 const User = require("../models/user");
 const mongoose = require("mongoose");
+const { validationResult } = require('express-validator');
 const fs = require("fs");
 
 const getPlaceById = async (req, res, next) => {
@@ -35,41 +36,47 @@ const getPlacesByUserId = async (req, res, next) => {
 };
 
 const createPlace = async (req, res, next) => {
-  const { title, description, address, creator } = req.body;
-  const coordinates = await getCoordsForAdress(address);
-  const place = new Place({
-    title,
-    description,
-    location: coordinates,
-    address,
-    creator,
-    image: req.file.path,
-  });
+  console.log('req.body', req.body);
+  // const errors = validationResult(req);
+  // if (!errors.isEmpty()) {
+  //   return next(
+  //     new HttpError('Invalid inputs passed, please check your data.', 422)
+  //   );
+  // }
+  // const { title, description, address, creator } = req.body;
+  // const coordinates = await getCoordsForAdress(address);
+  // const place = new Place({
+  //   title,
+  //   description,
+  //   location: coordinates,
+  //   address,
+  //   creator,
+  //   image: req.file.path,
+  // });
 
-  let user;
+  // let user;
 
-  try {
-    user = await User.findById(creator);
-  } catch (err) {
-    return next(new HttpError("Something went wrong. Try again later."));
-  }
+  // try {
+  //   user = await User.findById(creator);
+  // } catch (err) {
+  //   return next(new HttpError("Something went wrong. Try again later."));
+  // }
 
-  if (!user) {
-    return next(new HttpError("User not found"));
-  }
-
-  try {
-    const session = await mongoose.startSession();
-    session.startTransaction();
-    await place.save({ session });
-    user.places.push(place);
-    await user.save({ session });
-    await session.commitTransaction();
-    res.send(place);
-  } catch (err) {
-    console.log("err", err);
-    return next(new HttpError("Creating place failed, please try again.", 500));
-  }
+  // if (!user) {
+  //   return next(new HttpError("User not found"));
+  // }
+  // // console.log('user', user)
+  // try {
+  //   const session = await mongoose.startSession();
+  //   session.startTransaction();
+  //   await place.save({ session });
+  //   user.places.push(place);
+  //   await user.save({ session });
+  //   await session.commitTransaction();
+  //   res.status(201).send(place);
+  // } catch (err) {
+  //   return next(new HttpError("Creating place failed, please try again.", 500));
+  // }
 };
 
 const updatePlace = async (req, res, next) => {
@@ -91,9 +98,6 @@ const updatePlace = async (req, res, next) => {
       return next(new HttpError("Could not find place", 404));
     }
 
-    console.log("place.creator", place.creator);
-    console.log("req", req.userData.userId);
-
     if (place.creator.toString() !== req.userData.userId) {
       return next(new HttpError("You are not allowed to edit this place", 401));
     }
@@ -110,8 +114,6 @@ const deletePlace = async (req, res, next) => {
   let place;
   try {
     place = await Place.findById(req.params.pid).populate("creator");
-    console.log("place.creator.toString()", place.creator._id);
-    console.log("req.userData", req.userData);
     if (place.creator._id.toString() !== req.userData.userId) {
       return next(
         new HttpError("You are not allowed to delete this place", 401)

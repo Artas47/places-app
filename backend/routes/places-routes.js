@@ -15,8 +15,6 @@ router.use(auth);
 
 router.post('/', fileUpload.single('image'), placesControllers.createPlace);
 
-router.post('/', placesControllers.createPlace);
-
 router.patch('/:pid', placesControllers.updatePlace);
 
 router.delete('/:pid', placesControllers.deletePlace);

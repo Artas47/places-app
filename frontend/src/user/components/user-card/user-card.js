@@ -6,7 +6,6 @@ const UserCard = ({ name, interests, following, followers, likes, image }) => {
   return (
     <Styled.UserCard>
       <Styled.UserCardHeader>
-        {console.log('image', image)}
         <Styled.UserCardHeaderImage
           src={image ? `http://localhost:5000/${image}` : ProfilePic}
         />

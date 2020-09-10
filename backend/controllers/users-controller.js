@@ -14,6 +14,7 @@ const getUsers = async (req, res, next) => {
 };
 
 const signup = async (req, res, next) => {
+  console.log('req.body', req.body)
   const { name, email, password } = req.body;
   let existingUser;
   try {
@@ -31,7 +32,7 @@ const signup = async (req, res, next) => {
     hashedPassword = await bcrypt.hash(password, 12);
   } catch (err) {
     return next(
-      new HttpError('Could not create user, please try again later', 500)
+      new HttpError('Could not createe user, please try again later', 500)
     );
   }
 
@@ -42,7 +43,7 @@ const signup = async (req, res, next) => {
     places: [],
   });
 
-  req.file ? (createdUser['image'] = req.file.path) : null;
+  // req.file ? (createdUser['image'] = req.file.path) : null;
 
   let token;
   try {
@@ -88,7 +89,7 @@ const login = async (req, res, next) => {
       new HttpError('Could not log in, place check your credentials')
     );
   }
-  console.log('isValidPassword', isValidPassword);
+  
   let token;
   try {
     token = jwt.sign(

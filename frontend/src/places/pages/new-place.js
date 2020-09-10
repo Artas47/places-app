@@ -28,8 +28,9 @@ const NewPlace = () => {
   const { isLoading, sendRequest } = useHttpClient();
   const { userId, token } = useContext(AuthContext);
   const history = useHistory();
-  console.log('token', token);
+  
   const onSubmit = async (data) => {
+    console.log('data', data)
     try {
       const formData = new FormData();
       formData.append('title', data.title);
@@ -37,6 +38,7 @@ const NewPlace = () => {
       formData.append('image', data.image[0]);
       formData.append('creator', userId);
       formData.append('address', 'warsaw');
+
       await sendRequest('http://localhost:5000/api/places', 'POST', formData, {
         Authorization: 'Bearer ' + token,
       });

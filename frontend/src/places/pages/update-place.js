@@ -40,7 +40,6 @@ const UpdatePlace = () => {
   }, [sendRequest, placeId]);
 
   const onSubmit = async (data) => {
-    console.log('data', data);
     try {
       await sendRequest(
         `http://localhost:5000/api/places/${loadedPlace._id}`,

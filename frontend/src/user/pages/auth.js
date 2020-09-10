@@ -68,16 +68,18 @@ const Auth = () => {
     } else {
       try {
         const formData = new FormData();
+        console.log('data', data)
         formData.append('email', data.email);
         formData.append('name', data.name);
         formData.append('password', data.password);
         formData.append('image', data.image[0]);
-        await sendRequest(
+        console.log('formData', formData)
+        const responseData = await sendRequest(
           'http://localhost:5000/api/users/signup',
           'POST',
           formData
         );
-        login();
+        login(responseData.userId, responseData.token);
       } catch (err) {}
     }
   };

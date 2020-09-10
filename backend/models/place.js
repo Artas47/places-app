@@ -13,7 +13,7 @@ const placeSchema = new Schema({
   },
   image: {
     type: String,
-    required: true,
+    // required: true,
   },
   address: { type: String },
   location: {

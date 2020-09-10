@@ -17,10 +17,7 @@ export const PlaceItemImg = styled.img`
   height: 10rem; */
   /* background-image: url('http://localhost:5000/uploads/images/048827e4-f651-427a-b5fb-57fc072ec127.png'); */
   ${(props) => {
-    console.log('props', props);
-    console.log('object', `http://localhost:5000/${props.imageUrl}`);
     const img = `http://localhost:5000/${props.imageUrl}`;
-    console.log('img', img);
     return (
       props.imageUrl &&
       css`
