@@ -24,8 +24,6 @@ const Places = () => {
   const renderPlacesContent = () => {
     if (isLoading) {
       return <Spinner className={['centered', 'color-white']} />;
-    } else if (!places.length) {
-      return <div>No places</div>;
     } else {
       return <PlaceList places={places} />;
     }

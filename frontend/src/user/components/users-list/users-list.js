@@ -14,6 +14,7 @@ const UsersList = ({ items }) => {
   return (
     <Styled.UsersList>
       {items.map((user) => {
+        console.log('user', user)
         return (
           <Fade in={true} classNames='fade'>
             <UserCard

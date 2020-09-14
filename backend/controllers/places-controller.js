@@ -36,47 +36,46 @@ const getPlacesByUserId = async (req, res, next) => {
 };
 
 const createPlace = async (req, res, next) => {
-  console.log('req.body', req.body);
-  // const errors = validationResult(req);
-  // if (!errors.isEmpty()) {
-  //   return next(
-  //     new HttpError('Invalid inputs passed, please check your data.', 422)
-  //   );
-  // }
-  // const { title, description, address, creator } = req.body;
-  // const coordinates = await getCoordsForAdress(address);
-  // const place = new Place({
-  //   title,
-  //   description,
-  //   location: coordinates,
-  //   address,
-  //   creator,
-  //   image: req.file.path,
-  // });
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return next(
+      new HttpError('Invalid inputs passed, please check your data.', 422)
+    );
+  }
+  const { title, description, address, creator } = req.body;
+  const coordinates = await getCoordsForAdress(address);
+  const place = new Place({
+    title,
+    description,
+    location: coordinates,
+    address,
+    creator,
+    image: req.file.path,
+  });
 
-  // let user;
+  let user;
 
-  // try {
-  //   user = await User.findById(creator);
-  // } catch (err) {
-  //   return next(new HttpError("Something went wrong. Try again later."));
-  // }
+  try {
+    user = await User.findById(creator);
+  } catch (err) {
+    return next(new HttpError("Something went wrong. Try again later."));
+  }
 
-  // if (!user) {
-  //   return next(new HttpError("User not found"));
-  // }
-  // // console.log('user', user)
-  // try {
-  //   const session = await mongoose.startSession();
-  //   session.startTransaction();
-  //   await place.save({ session });
-  //   user.places.push(place);
-  //   await user.save({ session });
-  //   await session.commitTransaction();
-  //   res.status(201).send(place);
-  // } catch (err) {
-  //   return next(new HttpError("Creating place failed, please try again.", 500));
-  // }
+  if (!user) {
+    return next(new HttpError("User not found"));
+  }
+  // console.log('user', user)
+  try {
+    const session = await mongoose.startSession();
+    session.startTransaction();
+    await place.save({ session });
+    user.places.push(place);
+    await user.save({ session });
+    await session.commitTransaction();
+    res.status(201).send(place);
+  } catch (err) {
+    return next(new HttpError("Creating place failed, please try again.", 500));
+  }
 };
 
 const updatePlace = async (req, res, next) => {

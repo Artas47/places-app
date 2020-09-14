@@ -43,7 +43,7 @@ const signup = async (req, res, next) => {
     places: [],
   });
 
-  // req.file ? (createdUser['image'] = req.file.path) : null;
+  req.file ? (createdUser['image'] = req.file.path) : null;
 
   let token;
   try {
