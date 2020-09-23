@@ -1,5 +1,5 @@
-import React, { useRef, useState, useEffect } from 'react';
-import './image-upload.css';
+import React, { useRef, useState, useEffect } from "react";
+import "./image-upload.css";
 
 const ImageUpload = (props) => {
   const [file, setFile] = useState(null);
@@ -42,28 +42,25 @@ const ImageUpload = (props) => {
   return (
     <div
       style={{
-        width: '100%',
-        height: '100%',
-        display: 'flex',
-        flex: '1',
-        flexDirection: 'column',
-        justifyContent: 'center',
-        alignItems: 'center',
+        width: "100%",
+        height: "100%",
+        display: "flex",
+        flex: "1",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
       }}
     >
-      <label
-        className='upload-button'
-        style={{ marginBottom: previewUrl ? '2rem' : '3rem' }}
-      >
+      <label className="upload-button">
         <input
           // ref={inputRef}
           ref={props.register}
           {...props}
           id={props.id}
           // style={{ display: 'none' }}
-          type='file'
-          accept='.jpg,.png,.jpeg'
-          className='choose'
+          type="file"
+          accept=".jpg,.png,.jpeg"
+          className="choose"
           // onClick={pickImageHandler}
           onChange={pickedHandler}
         />
@@ -73,10 +70,10 @@ const ImageUpload = (props) => {
         <div>
           {previewUrl && (
             <img
-              className='img'
-              style={{ width: '100%', height: '100%', marginBottom: '2rem' }}
+              className="img"
+              style={{ width: "100%", height: "100%", margin: "2rem 0" }}
               src={previewUrl}
-              alt='Preview'
+              alt="Preview"
             />
           )}
         </div>

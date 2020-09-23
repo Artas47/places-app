@@ -1,5 +1,5 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
 
 const StyledButton = styled.button`
   padding: 1.2rem 5rem;
@@ -12,6 +12,7 @@ const StyledButton = styled.button`
   font-size: 1.6rem;
   transition: all 0.3s;
   border: 2px solid transparent;
+  cursor: pointer;
   :hover {
     background-color: #bfbfbf;
   }

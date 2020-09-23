@@ -3,7 +3,7 @@ const Place = require("../models/place");
 const getCoordsForAdress = require("../utils/location");
 const User = require("../models/user");
 const mongoose = require("mongoose");
-const { validationResult } = require('express-validator');
+const { validationResult } = require("express-validator");
 const fs = require("fs");
 
 const getPlaceById = async (req, res, next) => {
@@ -39,11 +39,16 @@ const createPlace = async (req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return next(
-      new HttpError('Invalid inputs passed, please check your data.', 422)
+      new HttpError("Invalid inputs passed, please check your data.", 422)
     );
   }
   const { title, description, address, creator } = req.body;
   const coordinates = await getCoordsForAdress(address);
+
+  if (!req?.file?.path) {
+    return next(new HttpError("Image is required"));
+  }
+
   const place = new Place({
     title,
     description,
@@ -57,6 +62,7 @@ const createPlace = async (req, res, next) => {
 
   try {
     user = await User.findById(creator);
+    console.log("user", user);
   } catch (err) {
     return next(new HttpError("Something went wrong. Try again later."));
   }
