@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import UsersList from '../components/users-list/users-list';
-import { useHttpClient } from '../../shared/hooks/http-hook';
-import Spinner from '../../shared/components/spinner/spinner';
+import React, { useEffect, useState } from "react";
+import UsersList from "../components/users-list/users-list";
+import { useHttpClient } from "../../shared/hooks/http-hook";
+import Spinner from "../../shared/components/spinner/spinner";
+import Searchbar from "../../shared/components/searchbar/searchbar";
 
 const Users = () => {
   const [users, setUsers] = useState([]);
@@ -10,8 +11,8 @@ const Users = () => {
     const fetchUsers = async () => {
       try {
         const responseData = await sendRequest(
-          'http://localhost:5000/api/users',
-          'GET'
+          "http://localhost:5000/api/users",
+          "GET"
         );
         setUsers(responseData.users);
       } catch (err) {}
@@ -21,11 +22,16 @@ const Users = () => {
 
   const renderUsersContent = () => {
     if (isLoading) {
-      return <Spinner className={['centered', 'color-white']} />;
+      return <Spinner className={["centered", "color-white"]} />;
     } else if (!users.length) {
       return <div>No users</div>;
     } else {
-      return <UsersList items={users} />;
+      return (
+        <>
+          <Searchbar />
+          <UsersList items={users} />{" "}
+        </>
+      );
     }
   };
 
