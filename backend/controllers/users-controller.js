@@ -1,30 +1,53 @@
-const HttpError = require('../models/http-error');
-const User = require('../models/user');
-const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
+const HttpError = require("../models/http-error");
+const User = require("../models/user");
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
 
 const getUsers = async (req, res, next) => {
   let users;
+  console.log(req.query);
+  const page = parseInt(req.query.page);
+  const limit = parseInt(req.query.limit);
+
+  const startIndex = (page - 1) * limit;
+  const endIndex = page * limit;
+
+  const results = {};
+
   try {
-    users = await User.find({}, '-password');
+    users = await User.find({}, "-password");
+    if (endIndex < users.length) {
+      results.next = {
+        page: page + 1,
+        limit,
+      };
+    }
+
+    if (startIndex > 0) {
+      results.previous = {
+        page: page - 1,
+        limit,
+      };
+    }
+    results.results = users.slice(startIndex, endIndex);
   } catch (err) {
-    return next(new HttpError('FAILED', 500));
+    return next(new HttpError("FAILED", 500));
   }
-  res.send({ users });
+  res.send({ ...results });
 };
 
 const signup = async (req, res, next) => {
-  console.log('req.body', req.body)
+  console.log("req.body", req.body);
   const { name, email, password } = req.body;
   let existingUser;
   try {
     existingUser = await User.findOne({ email });
   } catch (err) {
-    return next(new HttpError('Signup failed, try again later'));
+    return next(new HttpError("Signup failed, try again later"));
   }
 
   if (existingUser) {
-    return next(new HttpError('User already exist', 422));
+    return next(new HttpError("User already exist", 422));
   }
 
   let hashedPassword;
@@ -32,7 +55,7 @@ const signup = async (req, res, next) => {
     hashedPassword = await bcrypt.hash(password, 12);
   } catch (err) {
     return next(
-      new HttpError('Could not createe user, please try again later', 500)
+      new HttpError("Could not createe user, please try again later", 500)
     );
   }
 
@@ -43,18 +66,18 @@ const signup = async (req, res, next) => {
     places: [],
   });
 
-  req.file ? (createdUser['image'] = req.file.path) : null;
+  req.file ? (createdUser["image"] = req.file.path) : null;
 
   let token;
   try {
     token = jwt.sign(
       { userId: createdUser.id, email: createdUser.email },
-      'supersecret',
-      { expiresIn: '1h' }
+      "supersecret",
+      { expiresIn: "1h" }
     );
   } catch (err) {
     return next(
-      new HttpError('Could not create user, please try again later', 500)
+      new HttpError("Could not create user, please try again later", 500)
     );
   }
 
@@ -64,7 +87,7 @@ const signup = async (req, res, next) => {
       .status(201)
       .send({ userId: createdUser.id, email: createdUser.email, token: token });
   } catch (err) {
-    return next(new HttpError('Creating user failed'));
+    return next(new HttpError("Creating user failed"));
   }
 };
 
@@ -74,11 +97,11 @@ const login = async (req, res, next) => {
   try {
     existingUser = await User.findOne({ email });
   } catch (err) {
-    return next(new HttpError('Looging  in failed, try again later'));
+    return next(new HttpError("Looging  in failed, try again later"));
   }
 
   if (!existingUser) {
-    return next(new HttpError('Email or password are incorrect', 422));
+    return next(new HttpError("Email or password are incorrect", 422));
   }
 
   let isValidPassword = false;
@@ -86,23 +109,23 @@ const login = async (req, res, next) => {
     isValidPassword = await bcrypt.compare(password, existingUser.password);
   } catch (err) {
     return next(
-      new HttpError('Could not log in, place check your credentials')
+      new HttpError("Could not log in, place check your credentials")
     );
   }
-  
+
   let token;
   try {
     token = jwt.sign(
       { userId: existingUser.id, email: existingUser.email },
-      'supersecret',
-      { expiresIn: '1h' }
+      "supersecret",
+      { expiresIn: "1h" }
     );
   } catch (err) {
-    return next(new HttpError('Login failed, please try again later', 500));
+    return next(new HttpError("Login failed, please try again later", 500));
   }
 
   if (!isValidPassword) {
-    return next(new HttpError('Logging failed, try again later'));
+    return next(new HttpError("Logging failed, try again later"));
   }
 
   res.send({
