@@ -6,4 +6,5 @@ export const UsersList = styled.main`
   display: flex;
   flex-wrap: wrap;
   overflow: hidden;
+  margin-bottom: 6rem;
 `;

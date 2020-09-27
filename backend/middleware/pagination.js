@@ -1,5 +1,5 @@
 const paginatedResults = (model) => {
-  return (req, res, next) => {
+  return async (req, res, next) => {
     const page = parseInt(req.query.page);
     const limit = parseInt(req.query.limit);
 
@@ -8,12 +8,16 @@ const paginatedResults = (model) => {
 
     const results = {};
 
-    if (endIndex < model.length) {
+    if (endIndex < (await model.countDocuments().exec())) {
       results.next = {
         page: page + 1,
         limit,
       };
     }
+
+    results.pageNumber = Math.round(
+      (await model.countDocuments().exec()) / limit + 0.4
+    );
 
     if (startIndex > 0) {
       results.previous = {
@@ -22,9 +26,18 @@ const paginatedResults = (model) => {
       };
     }
 
-    results.results = model.slice(startIndex, endIndex);
-    res.paginatedResults = results;
-    next();
+    try {
+      results.results = await model
+        .find({}, "-password")
+        .limit(limit)
+        .skip(startIndex)
+        .exec();
+      console.log("paginatedResults", results);
+      res.paginatedResults = results;
+      next();
+    } catch (e) {
+      console.log("e", e);
+    }
   };
 };
 

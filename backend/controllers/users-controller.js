@@ -5,35 +5,13 @@ const jwt = require("jsonwebtoken");
 
 const getUsers = async (req, res, next) => {
   let users;
-  console.log(req.query);
-  const page = parseInt(req.query.page);
-  const limit = parseInt(req.query.limit);
-
-  const startIndex = (page - 1) * limit;
-  const endIndex = page * limit;
-
-  const results = {};
-
+  console.log("res", res.paginatedResults);
   try {
-    users = await User.find({}, "-password");
-    if (endIndex < users.length) {
-      results.next = {
-        page: page + 1,
-        limit,
-      };
-    }
-
-    if (startIndex > 0) {
-      results.previous = {
-        page: page - 1,
-        limit,
-      };
-    }
-    results.results = users.slice(startIndex, endIndex);
+    // users = await User.find({}, "-password");
+    res.send({ ...res.paginatedResults });
   } catch (err) {
     return next(new HttpError("FAILED", 500));
   }
-  res.send({ ...results });
 };
 
 const signup = async (req, res, next) => {
