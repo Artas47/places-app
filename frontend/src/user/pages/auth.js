@@ -125,7 +125,12 @@ const Auth = () => {
             <Form onSubmit={handleSubmit(onSubmit)}>
               {isLoggingIn ? renderNameInput() : ""}
               {isLoggingIn ? (
-                <ImageUpload register={register()} name="image" id="image-id" />
+                <ImageUpload
+                  register={register()}
+                  name="image"
+                  id="image-id"
+                  buttonText="Upload profile image"
+                />
               ) : (
                 ""
               )}

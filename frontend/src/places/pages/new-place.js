@@ -91,7 +91,12 @@ const NewPlace = () => {
                 type="description"
                 register={register}
               />
-              <ImageUpload register={register()} name="image" id="image-id" />
+              <ImageUpload
+                register={register()}
+                name="image"
+                id="image-id"
+                buttonText="Upload place image"
+              />
               <ErrorBox>{error ? error : ""}</ErrorBox>
               <Button type="submit">Submit</Button>
             </Form>

@@ -64,7 +64,7 @@ const ImageUpload = (props) => {
           // onClick={pickImageHandler}
           onChange={pickedHandler}
         />
-        Upload profile picture
+        {props.buttonText}
       </label>
       <div>
         <div>

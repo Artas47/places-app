@@ -1,10 +1,10 @@
-import styled, { css } from 'styled-components';
+import styled, { css } from "styled-components";
 
 export const PlaceItem = styled.div`
   height: 60rem;
   width: 60rem;
   margin: 4rem auto;
-  border-radius: 2rem;
+  border-radius: 0.5rem;
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -21,7 +21,7 @@ export const PlaceItemImg = styled.img`
     return (
       props.imageUrl &&
       css`
-        background-image: url('${img}');
+        background-image: url("${img}");
         background-repeat: no-repeat;
         background-size: cover;
         background-position: center;

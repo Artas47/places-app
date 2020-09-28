@@ -8,7 +8,7 @@ export const Searchbar = styled.div`
 `;
 
 export const SearchbarInput = styled.input`
-  padding: 1.5rem 3rem;
+  padding: 1.3rem 3rem;
   width: 25%;
   border-radius: 3rem;
   border: none;

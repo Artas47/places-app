@@ -1,9 +1,10 @@
-import styled from 'styled-components';
-import { NavLink } from 'react-router-dom';
+import styled from "styled-components";
+import { NavLink } from "react-router-dom";
 
 export const Header = styled.header`
   width: 100%;
-  background-color: rgba(125, 125, 125, 0.1);
+  // background-color: #ffffff;
+  // border-bottom: 1px solid #d4d4d4;
   height: 6rem;
   display: flex;
   justify-content: space-between;

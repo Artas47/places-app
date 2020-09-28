@@ -1,5 +1,5 @@
-import styled from 'styled-components';
-import CustomButton from '../../../shared/components/button/button';
+import styled from "styled-components";
+import CustomButton from "../../../shared/components/button/button";
 
 export const UserCard = styled.div`
   width: 50rem;
@@ -17,7 +17,7 @@ export const UserCard = styled.div`
 
 export const UserCardHeader = styled.div`
   width: 100%;
-  height: 70%;
+  height: 65%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -53,7 +53,7 @@ export const UserCardHeaderInterests = styled.p`
 
 export const UserCardFooter = styled.div`
   width: 100%;
-  height: 30%;
+  height: 35%;
   background-color: #2b2b52;
   opacity: 0.8;
   position: relative;
@@ -62,7 +62,7 @@ export const UserCardFooter = styled.div`
 export const UserCardFooterRatings = styled.div`
   display: flex;
   width: 100%;
-  height: 100%;
+  height: 70%;
   justify-content: space-around;
   align-items: center;
 `;
@@ -76,7 +76,7 @@ export const UserCardFooterRating = styled.div`
   position: relative;
   &:not(:last-child) {
     :after {
-      content: '';
+      content: "";
       position: absolute;
       top: 0;
       right: 0;
@@ -101,8 +101,12 @@ export const UserCardRatingsCount = styled.p`
 `;
 
 export const UserCardButton = styled(CustomButton)`
-  position: absolute;
-  right: 50%;
-  transform: translate(50%, -50%);
-  color: #2f363f;
+  // position: absolute;
+  width: 50%;
+  border-radius: 0;
+  color: #fff;
+  background-color: rgba(255, 255, 255, 0.2);
+  :hover {
+    background-color: rgba(255, 255, 255, 0.3);
+  }
 `;

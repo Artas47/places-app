@@ -1,8 +1,19 @@
-import React from 'react';
-import ProfilePic from '../../../resources/images/user.svg';
-import * as Styled from './user-card.styles';
+import React from "react";
+import ProfilePic from "../../../resources/images/user.svg";
+import * as Styled from "./user-card.styles";
+import { useHttpClient } from "../../../shared/hooks/http-hook";
+import { useHistory } from "react-router-dom";
 
-const UserCard = ({ name, interests, following, followers, likes, image }) => {
+const UserCard = ({
+  name,
+  interests,
+  following,
+  followers,
+  likes,
+  image,
+  id,
+}) => {
+  const history = useHistory();
   return (
     <Styled.UserCard>
       <Styled.UserCardHeader>
@@ -11,11 +22,18 @@ const UserCard = ({ name, interests, following, followers, likes, image }) => {
         />
         <Styled.UserCardHeaderName>{name}</Styled.UserCardHeaderName>
         <Styled.UserCardHeaderInterests>
-          {interests ? interests.join(', ') : ''}
+          {interests ? interests.join(", ") : ""}
         </Styled.UserCardHeaderInterests>
       </Styled.UserCardHeader>
       <Styled.UserCardFooter>
-        <Styled.UserCardButton>Follow</Styled.UserCardButton>
+        <div style={{ display: "flex" }}>
+          <Styled.UserCardButton>Follow</Styled.UserCardButton>
+          <Styled.UserCardButton
+            onClick={() => history.push(`/places/user/${id}`)}
+          >
+            View places
+          </Styled.UserCardButton>
+        </div>
         <Styled.UserCardFooterRatings>
           <Styled.UserCardFooterRating>
             <Styled.UserCardRatingsCount>

@@ -16,6 +16,7 @@ import Auth from "./user/pages/auth";
 import { AuthContext } from "./shared/context/auth-context";
 import Modal from "./shared/components/modal/modal";
 import { useAuth } from "./shared/hooks/auth-hook";
+import UsersPlaces from "./places/pages/users-places";
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -48,6 +49,9 @@ function App() {
         <Route path="/places/edit/:placeId" exact>
           <Places />
           <Modal />
+        </Route>
+        <Route path="/places/user/:userId" exact>
+          <UsersPlaces />
         </Route>
         <Redirect to="/" />
       </Switch>

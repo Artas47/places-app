@@ -70,15 +70,18 @@ const Users = () => {
           margin: "0 auto",
           width: "100%",
           color: "#fff",
-          backgroundColor: "rgba(0,0,0,0.7)",
+          backgroundColor: "rgba(0,0,0,0.2)",
         }}
       >
         {pagesArray.map((page) => (
           <span
             style={{
               margin: "0 1rem",
-              color: currentPage === page ? "red" : "#fff",
+              color: "#fff",
+              fontSize: currentPage === page ? "2.5rem" : "2rem",
+              // color: currentPage === page ? "" : "#fff",
               cursor: "pointer",
+              fontWeight: "bold",
               padding: "1rem",
             }}
             onClick={() => setCurrentPage(page)}
