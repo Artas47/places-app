@@ -34,4 +34,6 @@ export const NavLinkItem = styled(NavLink)`
   letter-spacing: 0.7px;
   color: rgba(0, 0, 0, 0.6);
   text-decoration: none;
+  // font-weight: 500;
+  color: #fff;
 `;

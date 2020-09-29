@@ -1,4 +1,5 @@
 import styled, { css } from "styled-components";
+import CustomButton from "../../shared/components/button/button";
 
 export const PlaceItem = styled.div`
   height: 60rem;
@@ -57,21 +58,28 @@ export const PlaceItemDescriptionContent = styled.h3`
   font-weight: 400;
 `;
 
-export const PlaceItemButton = styled.button`
-  height: 3.5rem;
-  width: 16rem;
-  color: #616161;
+export const PlaceItemButton = styled(CustomButton)`
+  position: relative;
+  width: 100%;
+  border-radius: 0;
+  overflow: hidden;
+  color: #fff;
+  background-color: #2b2b52;
+  margin: 0;
   border: 0;
-  background-color: #fff;
-  border: 1px solid #ccc;
-  padding: 0 3rem;
-  outline: none;
-  transition: all 0.2s;
-  font-size: 1.6rem;
-  border-radius: 0.5rem;
-  cursor: pointer;
-  /* box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3); */
   :hover {
-    background-color: #e8e8e8;
+    background-color: rgba(43, 43, 82, 0.7);
+  }
+  :not(:last-child) {
+    :after {
+      content: " ";
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 2px;
+      height: 100%;
+      background-color: #fff;
+      display: block;
+    }
   }
 `;

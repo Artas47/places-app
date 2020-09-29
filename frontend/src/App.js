@@ -71,7 +71,7 @@ function App() {
   }
 
   return (
-    <div style={{ position: "relative" }}>
+    <div>
       <GlobalStyles />
       <AuthContext.Provider
         value={{
@@ -86,7 +86,7 @@ function App() {
       >
         <Router>
           <Header />
-          <BackgroundVideo />
+          {/* <BackgroundVideo /> */}
           <main style={{ width: "100%", height: "100%" }}>{routes}</main>
         </Router>
       </AuthContext.Provider>

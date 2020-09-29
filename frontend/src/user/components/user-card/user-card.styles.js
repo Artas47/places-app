@@ -101,12 +101,26 @@ export const UserCardRatingsCount = styled.p`
 `;
 
 export const UserCardButton = styled(CustomButton)`
-  // position: absolute;
+  position: relative;
   width: 50%;
   border-radius: 0;
+  border: 0;
+  overflow: hidden;
   color: #fff;
-  background-color: rgba(255, 255, 255, 0.2);
+  background-color: #2b2b52;
   :hover {
     background-color: rgba(255, 255, 255, 0.3);
+  }
+  :not(:last-child) {
+    :after {
+      content: " ";
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 2px;
+      height: 100%;
+      background-color: #fff;
+      display: block;
+    }
   }
 `;
