@@ -106,6 +106,8 @@ export const UserCardButton = styled(CustomButton)`
   border-radius: 0;
   border: 0;
   overflow: hidden;
+  font-weight: 300;
+  letter-spacing: 0.6px;
   color: #fff;
   background-color: #2b2b52;
   :hover {

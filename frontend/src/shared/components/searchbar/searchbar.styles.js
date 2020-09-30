@@ -4,12 +4,13 @@ export const Searchbar = styled.div`
   display: flex;
   justify-content: center;
   padding: 1rem;
-  margin: 3rem 0 1rem 0;
+  width: 25%;
+  /* margin: 3rem 0 1rem 0; */
 `;
 
 export const SearchbarInput = styled.input`
   padding: 1.3rem 3rem;
-  width: 25%;
+  width: 100%;
   border-radius: 3rem;
   border: none;
   box-shadow: 0 2px 5px 1px rgba(0, 0, 0, 0.3);

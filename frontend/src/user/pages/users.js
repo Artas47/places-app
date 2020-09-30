@@ -4,6 +4,8 @@ import { useHttpClient } from "../../shared/hooks/http-hook";
 import Spinner from "../../shared/components/spinner/spinner";
 import Searchbar from "../../shared/components/searchbar/searchbar";
 import Fade from "../../shared/components/fade-animation/fade";
+import Footer from "../../shared/components/footer/footer";
+import HeaderSecondary from "../../shared/components/header-secondary/header-secondary";
 
 const Users = () => {
   const [users, setUsers] = useState([]);
@@ -46,7 +48,6 @@ const Users = () => {
     } else {
       return (
         <>
-          <Searchbar />
           <UsersList items={users} />
         </>
       );
@@ -55,44 +56,14 @@ const Users = () => {
 
   return (
     <div>
+      <HeaderSecondary />
       {renderUsersContent()}{" "}
-      <Fade in={true} classNames="fade">
-        <div
-          style={{
-            position: "fixed",
-            bottom: "0",
-            height: "5rem",
-            left: "50%",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            transform: "translate(-50%,0)",
-            fontSize: "2rem",
-            textAlign: "center",
-            margin: "0 auto",
-            width: "100%",
-            color: "#fff",
-            backgroundColor: "rgba(0,0,0,0.2)",
-          }}
-        >
-          {pagesArray.map((page) => (
-            <span
-              style={{
-                margin: "0 1rem",
-                color: "#fff",
-                fontSize: currentPage === page ? "2.5rem" : "2rem",
-                // color: currentPage === page ? "" : "#fff",
-                cursor: "pointer",
-                fontWeight: "bold",
-                padding: "1rem",
-              }}
-              onClick={() => setCurrentPage(page)}
-            >
-              {page}
-            </span>
-          ))}
-        </div>
-      </Fade>
+      <Footer
+        setCurrentPage={setCurrentPage}
+        pages={pagesArray}
+        currentPage={currentPage}
+        pageNumber={pageNumber}
+      />
     </div>
   );
 };
