@@ -62,7 +62,7 @@ const createPlace = async (req, res, next) => {
 
   try {
     user = await User.findById(creator);
-    console.log("user", user);
+    // console.log("user", user);
   } catch (err) {
     return next(new HttpError("Something went wrong. Try again later."));
   }

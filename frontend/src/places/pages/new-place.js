@@ -41,7 +41,7 @@ const NewPlace = () => {
   console.log("error", error);
 
   const onSubmit = async (data) => {
-    console.log("data", data);
+    // console.log("data", data);
     try {
       const formData = new FormData();
       formData.append("title", data.title);

@@ -21,7 +21,7 @@ const UsersPlaces = () => {
     };
     fetchPlaces();
   }, [sendRequest, userId, setPlaces]);
-  console.log("places", places);
+  // console.log("places", places);
   return <PlaceList places={places} />;
 };
 

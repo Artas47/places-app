@@ -4,10 +4,7 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
 const getUsers = async (req, res, next) => {
-  let users;
-  console.log("res", res.paginatedResults);
   try {
-    // users = await User.find({}, "-password");
     res.send({ ...res.paginatedResults });
   } catch (err) {
     return next(new HttpError("FAILED", 500));
@@ -15,7 +12,6 @@ const getUsers = async (req, res, next) => {
 };
 
 const signup = async (req, res, next) => {
-  console.log("req.body", req.body);
   const { name, email, password } = req.body;
   let existingUser;
   try {
