@@ -5,23 +5,23 @@ import { useParams } from "react-router-dom";
 import PlaceList from "../components/place-list";
 
 const UsersPlaces = () => {
-  const { sendRequest, isLoading } = useHttpClient();
-  const { userId, places, setPlaces } = useContext(AuthContext);
-  const params = useParams();
+  const { sendRequest } = useHttpClient();
+  const { places, setPlaces } = useContext(AuthContext);
+  const { userId } = useParams();
 
   useEffect(() => {
     const fetchPlaces = async () => {
       try {
         const responseData = await sendRequest(
-          `http://localhost:5000/api/places/user/${params.userId}`,
+          `http://localhost:5000/api/places/user/${userId}`,
           "GET"
         );
         setPlaces(responseData.places);
       } catch (err) {}
     };
     fetchPlaces();
-  }, [sendRequest, userId, setPlaces]);
-  // console.log("places", places);
+  }, [sendRequest, setPlaces, userId]);
+
   return <PlaceList places={places} />;
 };
 

@@ -33,7 +33,7 @@ const ErrorBox = styled.div`
 `;
 
 const NewPlace = () => {
-  const { register, handleSubmit, errors } = useForm(); // initialise the hook
+  const { register, handleSubmit } = useForm(); // initialise the hook
   const { isLoading, sendRequest, error } = useHttpClient();
   const { userId, token } = useContext(AuthContext);
   const history = useHistory();

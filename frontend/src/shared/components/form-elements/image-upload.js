@@ -1,11 +1,10 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import "./image-upload.css";
 
 const ImageUpload = (props) => {
   const [file, setFile] = useState(null);
   const [previewUrl, setPreviewUrl] = useState(null);
   const [isValid, setIsValid] = useState(false);
-  const inputRef = useRef();
 
   useEffect(() => {
     if (!file) {
@@ -17,10 +16,6 @@ const ImageUpload = (props) => {
     };
     fileReader.readAsDataURL(file);
   }, [file]);
-
-  const pickImageHandler = () => {
-    inputRef.current.click();
-  };
 
   const pickedHandler = (e) => {
     let pickedFile;

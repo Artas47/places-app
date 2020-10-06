@@ -1,42 +1,31 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import UsersList from "../components/users-list/users-list";
 import { useHttpClient } from "../../shared/hooks/http-hook";
 import Spinner from "../../shared/components/spinner/spinner";
-import Searchbar from "../../shared/components/searchbar/searchbar";
-import Fade from "../../shared/components/fade-animation/fade";
 import Footer from "../../shared/components/footer/footer";
 import HeaderSecondary from "../../shared/components/header-secondary/header-secondary";
+import { AuthContext } from "../../shared/context/auth-context";
 
 const Users = () => {
-  const [users, setUsers] = useState([]);
-  const [previousPage, setPreviousPage] = useState(null);
-  const [nextPage, setNextPage] = useState(null);
   const [pageNumber, setPageNumber] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const { sendRequest, isLoading } = useHttpClient();
+
+  const { setUsers, users, searchParam } = useContext(AuthContext);
+
   useEffect(() => {
     const fetchUsers = async () => {
       try {
         const responseData = await sendRequest(
-          `http://localhost:5000/api/users?page=${currentPage}&limit=6`,
+          `http://localhost:5000/api/users?page=${currentPage}&limit=6&search=${searchParam}`,
           "GET"
         );
-        if (responseData.next) {
-          setNextPage(responseData.next);
-        }
-        if (responseData.previous) {
-          setPreviousPage(responseData.previous);
-        }
-
         setPageNumber(responseData.pageNumber);
         setUsers(responseData.results);
       } catch (err) {}
     };
     fetchUsers();
-  }, [sendRequest, currentPage]);
-
-  // console.log("users", users);
-  // console.log("nextPage", nextPage);
+  }, [sendRequest, currentPage, searchParam, setUsers]);
 
   const pagesArray = Array.from({ length: pageNumber }, (_, i) => i + 1);
 

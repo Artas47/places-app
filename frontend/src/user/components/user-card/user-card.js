@@ -1,7 +1,6 @@
 import React from "react";
 import ProfilePic from "../../../resources/images/user.svg";
 import * as Styled from "./user-card.styles";
-import { useHttpClient } from "../../../shared/hooks/http-hook";
 import { useHistory } from "react-router-dom";
 
 const UserCard = ({

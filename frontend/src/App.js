@@ -7,7 +7,6 @@ import {
 } from "react-router-dom";
 import "./App.css";
 import Header from "./shared/components/navigation/header/header";
-import BackgroundVideo from "./shared/components/video/video";
 import { GlobalStyles } from "./globalStyles";
 import Users from "./user/pages/users";
 import Places from "./places/pages/places";
@@ -21,6 +20,8 @@ import UsersPlaces from "./places/pages/users-places";
 function App() {
   const [loading, setLoading] = useState(true);
   const [places, setPlaces] = useState([]);
+  const [users, setUsers] = useState([]);
+  const [searchParam, setSearchParam] = useState("");
 
   const { token, userId, login, logout } = useAuth();
 
@@ -69,7 +70,8 @@ function App() {
       </Switch>
     );
   }
-
+  console.log("places", places);
+  console.log("users", users);
   return (
     <div>
       <GlobalStyles />
@@ -82,6 +84,10 @@ function App() {
           logout,
           places,
           setPlaces,
+          setUsers,
+          users,
+          searchParam,
+          setSearchParam,
         }}
       >
         <Router>

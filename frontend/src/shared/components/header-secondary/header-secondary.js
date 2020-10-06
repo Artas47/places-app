@@ -2,16 +2,8 @@ import React from "react";
 import Searchbar from "../searchbar/searchbar";
 import AppsIcon from "@material-ui/icons/Apps";
 import ViewCarouselIcon from "@material-ui/icons/ViewCarousel";
-import InputLabel from "@material-ui/core/InputLabel";
-import MenuItem from "@material-ui/core/MenuItem";
-import FormHelperText from "@material-ui/core/FormHelperText";
-import FormControl from "@material-ui/core/FormControl";
-import Select from "@material-ui/core/Select";
 
 const HeaderSecondary = () => {
-  const handleChange = (event) => {
-    // setAge(event.target.value);
-  };
   return (
     <div
       style={{
