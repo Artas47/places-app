@@ -17,6 +17,15 @@ import Modal from "./shared/components/modal/modal";
 import { useAuth } from "./shared/hooks/auth-hook";
 import UsersPlaces from "./places/pages/users-places";
 
+/*
+TO DO
+refactor adding/editing places
+edit image of added place (or not)
+display loading spinner on edit place
+fix refreshing places when modal disappear
+refator modal to be generic
+*/
+
 function App() {
   const [loading, setLoading] = useState(true);
   const [places, setPlaces] = useState([]);

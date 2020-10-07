@@ -20,6 +20,11 @@ const UsersPlaces = () => {
       } catch (err) {}
     };
     fetchPlaces();
+
+    return () => {
+      console.log("I RUNNNNN2222");
+      setPlaces([]);
+    };
   }, [sendRequest, setPlaces, userId]);
 
   return <PlaceList places={places} />;
