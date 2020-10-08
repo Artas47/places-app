@@ -10,7 +10,7 @@ import { AuthContext } from "../../shared/context/auth-context";
 import Spinner from "../../shared/components/spinner/spinner";
 import { useHttpClient } from "../../shared/hooks/http-hook";
 import Fade from "../../shared/components/fade-animation/fade";
-import ImageUpload from "../../shared/components/form-elements/image-upload";
+import ImageUpload from "../../shared/components/form-elements/image-upload/image-upload";
 
 const FormWrapper = styled.div`
   width: 40rem;

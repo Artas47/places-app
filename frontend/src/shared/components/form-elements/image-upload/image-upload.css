@@ -1,0 +1,15 @@
+input[type="file"] {
+  display: none;
+}
+
+.img {
+  min-width: 15rem;
+  min-height: 15rem;
+  max-width: 15rem;
+  max-height: 15rem;
+  border-radius: 50%;
+}
+
+.upload-button:hover {
+  background-color: #373773;
+}

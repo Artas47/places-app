@@ -23,7 +23,9 @@ refactor adding/editing places
 edit image of added place (or not)
 display loading spinner on edit place
 fix refreshing places when modal disappear
-refator modal to be generic
+refator modal to be reusable
+fix error messages in sign up panel
+show spinner when deleting place
 */
 
 function App() {

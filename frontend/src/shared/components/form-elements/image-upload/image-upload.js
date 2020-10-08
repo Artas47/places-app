@@ -1,10 +1,14 @@
 import React, { useState, useEffect } from "react";
 import "./image-upload.css";
+import * as Styled from "./image-upload.styles";
+import ClearIcon from "@material-ui/icons/Clear";
 
 const ImageUpload = (props) => {
   const [file, setFile] = useState(null);
   const [previewUrl, setPreviewUrl] = useState(null);
   const [isValid, setIsValid] = useState(false);
+
+  console.log("file", file);
 
   useEffect(() => {
     if (!file) {
@@ -33,20 +37,23 @@ const ImageUpload = (props) => {
     }
     // props.onInput(props.id, pickedFile, fileIsValid);
   };
-
+  console.log("file", file);
   return (
-    <div
-      style={{
-        width: "100%",
-        height: "100%",
-        display: "flex",
-        flex: "1",
-        flexDirection: "column",
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
-      <label className="upload-button">
+    <Styled.ImageUpload>
+      <div style={{ width: "100%" }}>
+        {previewUrl && (
+          <Styled.ImagePreview
+            // style={{ width: "100%", height: "100%", margin: "2rem 0" }}Z
+            large={props.large}
+            src={previewUrl}
+            alt="Preview"
+          />
+        )}
+      </div>
+      <Styled.UploadButton
+        large={props.large}
+        style={{ display: file && "none" }}
+      >
         <input
           // ref={inputRef}
           ref={props.register}
@@ -60,24 +67,28 @@ const ImageUpload = (props) => {
           onChange={pickedHandler}
         />
         {props.buttonText}
-      </label>
+        {props.large && (
+          <>
+            <Styled.UploadIcon style={{ width: "6rem", height: "6rem" }} />
+          </>
+        )}
+      </Styled.UploadButton>
+      {file && (
+        <Styled.Clear
+          onClick={() => {
+            setFile(null);
+            setPreviewUrl(null);
+          }}
+          style={{ width: "3rem", height: "3rem" }}
+        />
+      )}
       <div>
-        <div>
-          {previewUrl && (
-            <img
-              className="img"
-              style={{ width: "100%", height: "100%", margin: "2rem 0" }}
-              src={previewUrl}
-              alt="Preview"
-            />
-          )}
-        </div>
         {/* <button stype='button' onClick={pickImageHandler}>
           Pick image
         </button> */}
       </div>
       {/* {!isValid && 'error kurwaa'} */}
-    </div>
+    </Styled.ImageUpload>
   );
 };
 
