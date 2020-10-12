@@ -19,13 +19,13 @@ import UsersPlaces from "./places/pages/users-places";
 
 /*
 TO DO
-refactor adding/editing places
-edit image of added place (or not)
+refactor adding/editing places - done
+edit image of added place (or not) - done
 display loading spinner on edit place
 fix refreshing places when modal disappear
 refator modal to be reusable
 fix error messages in sign up panel
-show spinner when deleting place
+show spinner when deleting place - done
 */
 
 function App() {
@@ -81,8 +81,7 @@ function App() {
       </Switch>
     );
   }
-  console.log("places", places);
-  console.log("users", users);
+
   return (
     <div>
       <GlobalStyles />

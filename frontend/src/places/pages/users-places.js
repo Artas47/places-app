@@ -22,7 +22,6 @@ const UsersPlaces = () => {
     fetchPlaces();
 
     return () => {
-      console.log("I RUNNNNN2222");
       setPlaces([]);
     };
   }, [sendRequest, setPlaces, userId]);

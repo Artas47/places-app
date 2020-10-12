@@ -40,7 +40,7 @@ const ImageUpload = (props) => {
   console.log("file", file);
   return (
     <Styled.ImageUpload>
-      <div style={{ width: "100%" }}>
+      <div style={{ width: "100%", display: "flex", justifyContent: "center" }}>
         {previewUrl && (
           <Styled.ImagePreview
             // style={{ width: "100%", height: "100%", margin: "2rem 0" }}Z
