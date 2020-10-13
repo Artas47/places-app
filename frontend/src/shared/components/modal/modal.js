@@ -5,14 +5,12 @@ import { useHistory } from "react-router-dom";
 import UpdatePlace from "../../../places/pages/update-place";
 import Fade from "../fade-animation/fade";
 
-const Modal = (e) => {
-  const history = useHistory();
-
+const Modal = ({ closeModal, Component }) => {
   return ReactDOM.createPortal(
     <Fade in={true} classNames="fadeModal">
-      <Styled.ModalWrapper onClick={() => history.goBack()}>
+      <Styled.ModalWrapper onClick={closeModal}>
         <Styled.ModalContent onClick={(e) => e.stopPropagation()}>
-          <UpdatePlace />
+          <Component />
         </Styled.ModalContent>
       </Styled.ModalWrapper>
     </Fade>,

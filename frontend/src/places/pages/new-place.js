@@ -24,12 +24,14 @@ const FormWrapper = styled.div`
 `;
 
 const ErrorBox = styled.div`
-  height: auto;
-  width: 80%;
-  color: red;
+  width: 100%;
+  margin-bottom: 2rem;
+  font-size: 18px;
+  display: flex;
+  flex-direction: column;
+
   text-align: center;
-  font-size: 1.6rem;
-  margin: 2rem 0;
+  color: #c70014;
 `;
 
 const NewPlace = () => {

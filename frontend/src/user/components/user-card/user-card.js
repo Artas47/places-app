@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useContext } from "react";
 import ProfilePic from "../../../resources/images/user.svg";
 import * as Styled from "./user-card.styles";
 import { useHistory } from "react-router-dom";
+import { AuthContext } from "../../../shared/context/auth-context";
 
 const UserCard = ({
   name,
@@ -13,6 +14,8 @@ const UserCard = ({
   id,
 }) => {
   const history = useHistory();
+  const { userId } = useContext(AuthContext);
+  console.log("userId", userId);
   return (
     <Styled.UserCard>
       <Styled.UserCardHeader>
@@ -28,7 +31,13 @@ const UserCard = ({
         <div style={{ display: "flex" }}>
           <Styled.UserCardButton>Follow</Styled.UserCardButton>
           <Styled.UserCardButton
-            onClick={() => history.push(`/places/user/${id}`)}
+            onClick={() => {
+              if (userId === id) {
+                history.push(`/places`);
+                return;
+              }
+              history.push(`/places/user/${id}`);
+            }}
           >
             View places
           </Styled.UserCardButton>

@@ -35,6 +35,7 @@ export const PlaceItemDescription = styled.div`
   width: 100%;
   height: 30%;
   display: flex;
+  background-color: #fff;
   flex-direction: column;
   justify-content: center;
   align-items: center;

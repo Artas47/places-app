@@ -16,15 +16,16 @@ import { AuthContext } from "./shared/context/auth-context";
 import Modal from "./shared/components/modal/modal";
 import { useAuth } from "./shared/hooks/auth-hook";
 import UsersPlaces from "./places/pages/users-places";
+import UpdatePlace from "./places/pages/update-place";
 
 /*
 TO DO
 refactor adding/editing places - done
 edit image of added place (or not) - done
-display loading spinner on edit place
-fix refreshing places when modal disappear
-refator modal to be reusable
-fix error messages in sign up panel
+display loading spinner on edit place - kepp in mind
+fix refreshing places when modal disappear - done
+refator modal to be reusable - done
+fix error messages in sign up panel - done
 show spinner when deleting place - done
 */
 
@@ -60,7 +61,7 @@ function App() {
         </Route>
         <Route path="/places/edit/:placeId" exact>
           <Places />
-          <Modal />
+          <Modal Component={UpdatePlace} />
         </Route>
         <Route path="/places/user/:userId" exact>
           <UsersPlaces />
