@@ -6,9 +6,10 @@ import { AuthContext } from "../../context/auth-context";
 const Searchbar = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const debouncedSearchTerm = useDebounce(searchTerm, 600);
-  const { setSearchParam } = useContext(AuthContext);
+  const { setSearchParam, setCurrentPage } = useContext(AuthContext);
   useEffect(() => {
     setSearchParam(debouncedSearchTerm);
+    setCurrentPage(1);
   }, [debouncedSearchTerm, setSearchParam]);
   return (
     <Styled.Searchbar>

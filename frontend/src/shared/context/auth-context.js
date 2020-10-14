@@ -12,4 +12,6 @@ export const AuthContext = createContext({
   setUsers: () => {},
   searchParam: "",
   setSearchParam: () => {},
+  currentPage: 1,
+  setCurrentPage: () => {},
 });

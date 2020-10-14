@@ -8,10 +8,15 @@ import { AuthContext } from "../../shared/context/auth-context";
 
 const Users = () => {
   const [pageNumber, setPageNumber] = useState(null);
-  const [currentPage, setCurrentPage] = useState(1);
   const { sendRequest, isLoading } = useHttpClient();
 
-  const { setUsers, users, searchParam } = useContext(AuthContext);
+  const {
+    setUsers,
+    users,
+    searchParam,
+    currentPage,
+    setCurrentPage,
+  } = useContext(AuthContext);
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -45,7 +50,7 @@ const Users = () => {
 
   return (
     <div>
-      <HeaderSecondary />
+      <HeaderSecondary setCurrentPage={setCurrentPage} />
       {renderUsersContent()}{" "}
       <Footer
         setCurrentPage={setCurrentPage}

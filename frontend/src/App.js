@@ -34,6 +34,7 @@ function App() {
   const [places, setPlaces] = useState([]);
   const [users, setUsers] = useState([]);
   const [searchParam, setSearchParam] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
   const { RenderModal } = useModal();
 
   const { token, userId, login, logout } = useAuth();
@@ -100,6 +101,8 @@ function App() {
           users,
           searchParam,
           setSearchParam,
+          setCurrentPage,
+          currentPage,
         }}
       >
         <Router>
