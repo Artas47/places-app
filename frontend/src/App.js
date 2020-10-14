@@ -13,10 +13,10 @@ import Places from "./places/pages/places";
 import NewPlace from "./places/pages/new-place";
 import Auth from "./user/pages/auth";
 import { AuthContext } from "./shared/context/auth-context";
-import Modal from "./shared/components/modal/modal";
 import { useAuth } from "./shared/hooks/auth-hook";
 import UsersPlaces from "./places/pages/users-places";
 import UpdatePlace from "./places/pages/update-place";
+import useModal from "./shared/hooks/useModal";
 
 /*
 TO DO
@@ -34,6 +34,7 @@ function App() {
   const [places, setPlaces] = useState([]);
   const [users, setUsers] = useState([]);
   const [searchParam, setSearchParam] = useState("");
+  const { RenderModal } = useModal();
 
   const { token, userId, login, logout } = useAuth();
 
@@ -61,7 +62,7 @@ function App() {
         </Route>
         <Route path="/places/edit/:placeId" exact>
           <Places />
-          <Modal Component={UpdatePlace} />
+          <RenderModal Component={UpdatePlace} goBack />
         </Route>
         <Route path="/places/user/:userId" exact>
           <UsersPlaces />

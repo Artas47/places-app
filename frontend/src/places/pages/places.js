@@ -20,7 +20,6 @@ const Places = () => {
     };
     fetchPlaces();
     return () => {
-      console.log("I RUNNNNN111");
       setPlaces([]);
     };
   }, [sendRequest, userId, setPlaces]);
