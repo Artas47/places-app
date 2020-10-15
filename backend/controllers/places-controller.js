@@ -84,6 +84,11 @@ const createPlace = async (req, res, next) => {
   }
 };
 
+const getRandomPlaces = async (req, res, next) => {
+  const randomPlaces = await Place.find({});
+  res.send({ randomPlaces });
+};
+
 const updatePlace = async (req, res, next) => {
   const updates = Object.keys(req.body);
   const allowedUpdates = ["title", "description"];
@@ -155,3 +160,4 @@ exports.getPlacesByUserId = getPlacesByUserId;
 exports.createPlace = createPlace;
 exports.updatePlace = updatePlace;
 exports.deletePlace = deletePlace;
+exports.getRandomPlaces = getRandomPlaces;

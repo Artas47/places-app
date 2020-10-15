@@ -6,7 +6,7 @@ const paginatedResults = (model) => {
 
     const startIndex = (page - 1) * limit;
     const endIndex = page * limit;
-    console.log("search", search);
+
     const results = {};
 
     const regex = new RegExp(search);
