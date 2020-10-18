@@ -2,6 +2,17 @@
   opacity: 0;
 }
 
+.fade-enter {
+  opacity: 0;
+  transform: scale(0.9) translateY(100px);
+  /* filter: brightness(0.8); */
+}
+.fade-enter-active {
+  opacity: 1;
+  transform: translate(0);
+  transition: opacity 0.4s, transform 0.4s, filter 0.4s;
+}
+
 .fade-appear.fade-appear-active {
   opacity: 1;
   transition: all 0.3s ease-out;

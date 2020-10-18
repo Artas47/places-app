@@ -17,7 +17,7 @@ import { useAuth } from "./shared/hooks/auth-hook";
 import UsersPlaces from "./places/pages/users-places";
 import UpdatePlace from "./places/pages/update-place";
 import useModal from "./shared/hooks/useModal";
-import Gallery from "./shared/components/gallery/gallery";
+import ImageGallery from "./gallery/pages/image-gallery/image-gallery";
 
 /*
 TO DO
@@ -56,6 +56,9 @@ function App() {
         <Route path="/" exact>
           <Users />
         </Route>
+        <Route path="/gallery" exact>
+          <ImageGallery />
+        </Route>
         <Route path="/places" exact>
           <Places />
         </Route>
@@ -79,8 +82,7 @@ function App() {
           <Users />
         </Route>
         <Route path="/gallery" exact>
-          {/* <Gallery1 /> */}
-          <Gallery />
+          <ImageGallery />
         </Route>
         <Route path="/auth" exact>
           <Auth />
