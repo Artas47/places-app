@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useRef } from "react";
 import { useForm } from "react-hook-form";
 import Input from "../../shared/components/form-elements/input";
 import Form from "../../shared/components/form-elements/form";
@@ -37,17 +37,18 @@ const ErrorBox = styled.div`
 const NewPlace = () => {
   const { register, handleSubmit } = useForm(); // initialise the hook
   const { isLoading, sendRequest, error } = useHttpClient();
-  const { userId, token } = useContext(AuthContext);
+  const { userId, token, imgDiemensions } = useContext(AuthContext);
   const history = useHistory();
-
+  console.log("imgDiemensions", imgDiemensions);
   const onSubmit = async (data) => {
-    console.log("fgdgfdssgfdgfdgsfdsgfddfgds");
     try {
       console.log("data", data);
       const formData = new FormData();
       formData.append("title", data.title);
       formData.append("description", data.description);
       formData.append("image", data.image[0]);
+      formData.append("imageWidth", imgDiemensions.width);
+      formData.append("imageHeight", imgDiemensions.height);
       formData.append("creator", userId);
       formData.append("address", "warsaw");
       await sendRequest("http://localhost:5000/api/places", "POST", formData, {

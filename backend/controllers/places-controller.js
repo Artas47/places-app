@@ -42,12 +42,21 @@ const createPlace = async (req, res, next) => {
       new HttpError("Invalid inputs passed, please check your data.", 422)
     );
   }
-  const { title, description, address, creator } = req.body;
+  const {
+    title,
+    description,
+    address,
+    creator,
+    imageWidth,
+    imageHeight,
+  } = req.body;
   const coordinates = await getCoordsForAdress(address);
-
+  console.log("req", req);
   if (!req?.file?.path) {
     return next(new HttpError("Image is required"));
   }
+
+  console.log("req.file", req.file);
 
   const place = new Place({
     title,
@@ -55,14 +64,17 @@ const createPlace = async (req, res, next) => {
     location: coordinates,
     address,
     creator,
-    image: req.file.path,
+    image: {
+      imageUrl: req.file.path,
+      width: imageWidth,
+      height: imageHeight,
+    },
   });
 
   let user;
 
   try {
     user = await User.findById(creator);
-    // console.log("user", user);
   } catch (err) {
     return next(new HttpError("Something went wrong. Try again later."));
   }
@@ -70,7 +82,7 @@ const createPlace = async (req, res, next) => {
   if (!user) {
     return next(new HttpError("User not found"));
   }
-  // console.log('user', user)
+
   try {
     const session = await mongoose.startSession();
     session.startTransaction();

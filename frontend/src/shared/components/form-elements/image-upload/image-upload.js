@@ -1,11 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import "./image-upload.css";
 import * as Styled from "./image-upload.styles";
+import { AuthContext } from "../../../context/auth-context";
 
 const ImageUpload = (props) => {
   const [file, setFile] = useState(null);
   const [previewUrl, setPreviewUrl] = useState(null);
   const [isValid, setIsValid] = useState(false);
+  const { setImgDiemensions } = useContext(AuthContext);
 
   useEffect(() => {
     if (!file) {
@@ -41,6 +43,12 @@ const ImageUpload = (props) => {
           <Styled.ImagePreview
             large={props.large}
             src={previewUrl}
+            onLoad={({ target: img }) => {
+              setImgDiemensions({
+                height: img.naturalHeight,
+                width: img.naturalWidth,
+              });
+            }}
             alt="Preview"
           />
         )}

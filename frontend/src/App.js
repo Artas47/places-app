@@ -36,6 +36,7 @@ function App() {
   const [users, setUsers] = useState([]);
   const [searchParam, setSearchParam] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
+  const [imgDiemensions, setImgDiemensions] = useState({ height: 0, width: 0 });
   const { RenderModal } = useModal();
 
   const { token, userId, login, logout } = useAuth();
@@ -110,6 +111,8 @@ function App() {
           setSearchParam,
           setCurrentPage,
           currentPage,
+          imgDiemensions,
+          setImgDiemensions,
         }}
       >
         <Router>

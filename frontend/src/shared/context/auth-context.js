@@ -14,4 +14,6 @@ export const AuthContext = createContext({
   setSearchParam: () => {},
   currentPage: 1,
   setCurrentPage: () => {},
+  imgDiemensions: { height: 0, width: 0 },
+  setImgDiemensions: () => {},
 });
