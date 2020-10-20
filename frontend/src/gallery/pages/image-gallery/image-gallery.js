@@ -4,12 +4,9 @@ import * as S from "./image-gallery.styles";
 import LazyLoad from "react-lazyload";
 import GalleryItem from "../../components/gallery-item/item";
 
-function getRandomArbitrary(min, max) {
-  return Math.ceil(Math.random() * (max - min) + min);
-}
-
 const ImageGallery = () => {
   const [randomPlaces, setRandomPlaces] = useState([]);
+  console.log("randomPlaces", randomPlaces);
   useEffect(() => {
     const fetchRandomPlaces = async () => {
       const response = await axios.get(
@@ -18,7 +15,9 @@ const ImageGallery = () => {
       let places = [];
       response.data.randomPlaces.forEach((place) => {
         places.push({
-          src: `http://localhost:5000/${place.image}`,
+          src: `http://localhost:5000/${place.image.imageUrl}`,
+          width: place.image.width,
+          height: place.image.height,
         });
       });
       setRandomPlaces(places);
@@ -40,7 +39,11 @@ const ImageGallery = () => {
         {randomPlaces.map((place, i) => {
           return (
             <LazyLoad key={i} height={200}>
-              <GalleryItem imgUrl={place.src} />
+              <GalleryItem
+                imgUrl={place.src}
+                imageWidth={place.width}
+                imageHeight={place.height}
+              />
             </LazyLoad>
           );
         })}

@@ -3,35 +3,21 @@ import * as S from "./item.styles";
 import Fade from "../../../shared/components/fade-animation/fade";
 import Spinner from "../../../shared/components/spinner/spinner";
 
-const GalleryItem = ({ imgUrl }) => {
-  const [imgWidth, setImgWidth] = useState(0);
-  const [imgHeight, setImgHeight] = useState(0);
+const GalleryItem = ({ imgUrl, imageWidth, imageHeight }) => {
   const [isLoaded, setIsLoaded] = useState("loading");
   const [isAnimationLoading, setIsAnimationLoading] = useState(false);
   const ref = useRef();
+
   const handleImageLoaded = () => {
     setIsLoaded("loaded");
     setIsAnimationLoading(true);
   };
 
-  useEffect(() => {
-    const getImgHeightAndWidth = () => {
-      try {
-        const width = ref.current.naturalWidth;
-        const height = ref.current.naturalHeight;
-        setImgWidth(width);
-        setImgHeight(height);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    ref.current.addEventListener("load", getImgHeightAndWidth);
-  }, [setImgWidth, setImgHeight]);
   return (
     <S.GalleryItem
       background={isLoaded === "error"}
-      height={imgHeight}
-      width={imgWidth}
+      height={imageHeight}
+      width={imageWidth}
     >
       <S.ImageNotLoaded>
         {isLoaded === "loading" ? <Spinner /> : ""}

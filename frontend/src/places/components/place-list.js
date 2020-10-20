@@ -47,13 +47,12 @@ const PlaceList = ({ places }) => {
       <div>
         {!places.length && renderNoPlaces()}
         {places.map((place) => {
-          // console.log("place", place);
           return (
             <PlaceItem
               title={place.title}
               description={place.description}
               id={place._id}
-              image={place.image}
+              image={place.image.imageUrl}
               creatorId={place.creator}
             />
           );

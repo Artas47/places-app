@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { Link } from "react-router-dom";
 
 export const GalleryItem = styled(Link)`
@@ -8,10 +8,30 @@ export const GalleryItem = styled(Link)`
   border-radius: 0.7rem;
   overflow: hidden;
   ${(props) => {
-    console.log("props", props);
+    // console.log("props", props);
+    const width = props.width;
+    const height = props.height;
+    console.log("width", width);
+    console.log("height", height);
+    if (width > 2000 && height > 1000) {
+      return css`
+        grid-row: span 2;
+        grid-column: span 4;
+      `;
+    }
+    if (width > 1200 && height > 800) {
+      return css`
+        grid-row: span 2;
+        grid-column: span 2;
+      `;
+    } else if (width > 1200 && height < 800) {
+      return css`
+        grid-row: span 1;
+        grid-column: span 1;
+      `;
+    }
   }}
-  grid-row: ${(props) => (props.width > 1200 ? "span 2" : "")};
-  grid-column: ${(props) => (props.width > 1200 ? "span 2" : "")};
+
   /* box-shadow: 0 2rem 2rem rgb(0, 0, 0, 0.6); */
   align-self: start;
   justify-self: start;
