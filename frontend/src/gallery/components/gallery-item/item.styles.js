@@ -13,6 +13,12 @@ export const GalleryItem = styled(Link)`
     const height = props.height;
     console.log("width", width);
     console.log("height", height);
+    if (height > width) {
+      return css`
+        grid-row: span 2;
+        grid-column: span 1;
+      `;
+    }
     if (width > 2000 && height > 1000) {
       return css`
         grid-row: span 2;
@@ -50,9 +56,13 @@ export const GalleryItem = styled(Link)`
 `;
 
 export const GalleryItemImg = styled.img`
-  position: relative;
+  position: absolute;
   width: 100%;
   height: 100%;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
   /* filter: brightness(0.4); */
   visibility: ${(props) => (props.visible ? "visible" : "hidden")};
 `;

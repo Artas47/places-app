@@ -21,13 +21,13 @@ import ImageGallery from "./gallery/pages/image-gallery/image-gallery";
 
 /*
 TO DO
-refactor adding/editing places - done
-edit image of added place (or not) - done
+limit number of pages
+make an option to display one sized images
+on hover or smth view place creator
+make gallery items random
+make possibility to view place on google maps (in modal)
+adjust gallery images to css grid better
 display loading spinner on edit place - kepp in mind
-fix refreshing places when modal disappear - done
-refator modal to be reusable - done
-fix error messages in sign up panel - done
-show spinner when deleting place - done
 */
 
 function App() {

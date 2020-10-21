@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const GalleryList = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(35rem, 1fr));
-  grid-auto-rows: 28rem;
+  grid-auto-rows: 30rem;
   grid-auto-flow: dense;
   grid-gap: 3rem;
   padding: 2rem 2rem;
