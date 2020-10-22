@@ -27,6 +27,7 @@ on hover or smth view place creator
 make gallery items random
 make possibility to view place on google maps (in modal)
 adjust gallery images to css grid better
+view gallery image modal on click
 display loading spinner on edit place - kepp in mind
 */
 
