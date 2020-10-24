@@ -1,5 +1,6 @@
 .fade-appear {
   opacity: 0;
+  overflow: hidden;
 }
 
 .fade-enter {

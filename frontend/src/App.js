@@ -119,7 +119,15 @@ function App() {
         <Router>
           <Header />
           {/* <BackgroundVideo /> */}
-          <main style={{ width: "100%", height: "100%" }}>{routes}</main>
+          <main
+            style={{
+              maxWidth: "100%",
+              maxHeight: "100%",
+              position: "relative",
+            }}
+          >
+            {routes}
+          </main>
         </Router>
       </AuthContext.Provider>
     </div>
