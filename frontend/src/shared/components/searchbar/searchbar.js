@@ -10,7 +10,7 @@ const Searchbar = () => {
   useEffect(() => {
     setSearchParam(debouncedSearchTerm);
     setCurrentPage(1);
-  }, [debouncedSearchTerm, setSearchParam]);
+  }, [debouncedSearchTerm, setSearchParam, setCurrentPage]);
   return (
     <Styled.Searchbar>
       <Styled.SearchbarInput

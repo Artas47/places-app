@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from "react";
-import Fade from "../../shared/components/fade-animation/fade";
+import React, { useState } from "react";
 import Spinner from "../../shared/components/spinner/spinner";
 import * as Styled from "./image.styles";
 

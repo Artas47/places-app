@@ -32,7 +32,7 @@ const ImageGallery = () => {
         openLightbox={openLightbox}
       />
     ),
-    []
+    [openLightbox]
   );
 
   useEffect(() => {

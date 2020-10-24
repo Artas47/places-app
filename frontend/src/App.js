@@ -26,8 +26,13 @@ make an option to display one sized images
 on hover or smth view place creator
 make gallery items random
 make possibility to view place on google maps (in modal)
-adjust gallery images to css grid better
-view gallery image modal on click
+front-end forms validation
+back-end forms validation
+modal when trying to delete a place
+add possibility to show gallery places or admin places in my places page
+some effect on image hover
+lazy loading images when beeing at the bottom of page
+image compess on save
 display loading spinner on edit place - kepp in mind
 */
 
