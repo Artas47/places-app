@@ -9,13 +9,13 @@ import "./App.css";
 import Header from "./shared/components/navigation/header/header";
 import { GlobalStyles } from "./globalStyles";
 import Users from "./user/pages/users";
-import Places from "./places/pages/places";
-import NewPlace from "./places/pages/new-place";
+import Places from "./places/pages/places/places";
+import NewPlace from "./places/pages/new-place/new-place";
 import Auth from "./user/pages/auth";
 import { AuthContext } from "./shared/context/auth-context";
 import { useAuth } from "./shared/hooks/auth-hook";
-import UsersPlaces from "./places/pages/users-places";
-import UpdatePlace from "./places/pages/update-place";
+import UsersPlaces from "./places/pages/users-places/users-places";
+import UpdatePlace from "./places/pages/update-place/update-place";
 import useModal from "./shared/hooks/useModal";
 import ImageGallery from "./gallery/pages/image-gallery/image-gallery";
 
@@ -33,6 +33,7 @@ add possibility to show gallery places or admin places in my places page
 some effect on image hover
 lazy loading images when beeing at the bottom of page
 image compess on save
+refactor front-end project structure - done
 display loading spinner on edit place - kepp in mind
 */
 

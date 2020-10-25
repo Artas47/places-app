@@ -1,8 +1,8 @@
 import React from "react";
-import PlaceItem from "./place-item";
+import PlaceItem from "../place-item/place-item";
 import * as Styled from "./place-list.styles";
-import Fade from "../../shared/components/fade-animation/fade";
-import CustomButton from "../../shared/components/button/button";
+import Fade from "../../../shared/components/fade-animation/fade";
+import CustomButton from "../../../shared/components/button/button";
 import { useHistory, useParams } from "react-router-dom";
 
 const PlaceList = ({ places }) => {

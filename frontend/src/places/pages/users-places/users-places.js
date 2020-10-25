@@ -1,8 +1,8 @@
 import React, { useContext, useEffect } from "react";
-import { useHttpClient } from "../../shared/hooks/http-hook";
-import { AuthContext } from "../../shared/context/auth-context";
+import { useHttpClient } from "../../../shared/hooks/http-hook";
+import { AuthContext } from "../../../shared/context/auth-context";
 import { useParams } from "react-router-dom";
-import PlaceList from "../components/place-list";
+import PlaceList from "../../components/place-list/place-list";
 
 const UsersPlaces = () => {
   const { sendRequest } = useHttpClient();

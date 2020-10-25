@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import Spinner from "../../shared/components/spinner/spinner";
-import * as Styled from "./image.styles";
+import Spinner from "../../../shared/components/spinner/spinner";
+import * as Styled from "./gallery-image-item.styles";
 
 const cont = {
   backgroundColor: "#eee",
@@ -9,7 +9,7 @@ const cont = {
   position: "relative",
 };
 
-const SelectedImage = ({
+const GalleryImageItem = ({
   index,
   photo,
   margin,
@@ -71,4 +71,4 @@ const SelectedImage = ({
   );
 };
 
-export default SelectedImage;
+export default GalleryImageItem;

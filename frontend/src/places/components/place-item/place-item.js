@@ -1,9 +1,9 @@
 import React, { useContext } from "react";
 import * as Styled from "./place-item.styles";
 import { useHistory } from "react-router-dom";
-import { useHttpClient } from "../../shared/hooks/http-hook";
-import { AuthContext } from "../../shared/context/auth-context";
-import Spinner from "../../shared/components/spinner/spinner";
+import { useHttpClient } from "../../../shared/hooks/http-hook";
+import { AuthContext } from "../../../shared/context/auth-context";
+import Spinner from "../../../shared/components/spinner/spinner";
 
 const PlaceItem = ({ name, description, id, image, creatorId }) => {
   const history = useHistory();

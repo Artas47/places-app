@@ -1,13 +1,13 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { useForm } from 'react-hook-form';
-import Input from '../../shared/components/form-elements/input';
-import Form from '../../shared/components/form-elements/form';
-import Label from '../../shared/components/form-elements/label';
-import styled from 'styled-components';
-import Button from '../../shared/components/button/button';
-import { AuthContext } from '../../shared/context/auth-context';
-import { useHttpClient } from '../../shared/hooks/http-hook';
-import { useHistory, useParams } from 'react-router-dom';
+import React, { useContext, useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
+import Input from "../../../shared/components/form-elements/input";
+import Form from "../../../shared/components/form-elements/form";
+import Label from "../../../shared/components/form-elements/label";
+import styled from "styled-components";
+import Button from "../../../shared/components/button/button";
+import { AuthContext } from "../../../shared/context/auth-context";
+import { useHttpClient } from "../../../shared/hooks/http-hook";
+import { useHistory, useParams } from "react-router-dom";
 
 const FormWrapper = styled.div`
   width: 40rem;
@@ -43,28 +43,28 @@ const UpdatePlace = () => {
     try {
       await sendRequest(
         `http://localhost:5000/api/places/${loadedPlace._id}`,
-        'PATCH',
+        "PATCH",
         JSON.stringify({
           title: data.title,
           description: data.description,
         }),
         {
-          Authorization: 'Bearer ' + token,
-          'Content-Type': 'application/json',
+          Authorization: "Bearer " + token,
+          "Content-Type": "application/json",
         }
       );
       const responseData = await sendRequest(
         `http://localhost:5000/api/places/user/${userId}`,
-        'GET'
+        "GET"
       );
       setPlaces(responseData.places);
-      history.push('/places');
+      history.push("/places");
     } catch (err) {}
   };
 
   return (
     <FormWrapper>
-      <fieldset disabled={isLoading} style={{ border: '0' }}>
+      <fieldset disabled={isLoading} style={{ border: "0" }}>
         {/* {isLoading ? (
           <div
             style={{
@@ -80,19 +80,19 @@ const UpdatePlace = () => {
           ''
         )} */}
         <Form onSubmit={handleSubmit(onSubmit)}>
-          <Label htmlFor='title'>Title</Label>
-          <Input id='title' name='title' register={register} />
-          <Label htmlFor='description'>Description</Label>
+          <Label htmlFor="title">Title</Label>
+          <Input id="title" name="title" register={register} />
+          <Label htmlFor="description">Description</Label>
           <Input
-            id='description'
-            name='description'
-            type='description'
+            id="description"
+            name="description"
+            type="description"
             register={register}
           />
           {errors.password && errors.password.message}
           <br />
           {errors.email && errors.email.message}
-          <Button type='submit'>Submit</Button>
+          <Button type="submit">Submit</Button>
         </Form>
       </fieldset>
     </FormWrapper>

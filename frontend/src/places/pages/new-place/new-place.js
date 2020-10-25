@@ -1,16 +1,16 @@
 import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
-import Input from "../../shared/components/form-elements/input";
-import Form from "../../shared/components/form-elements/form";
-import Label from "../../shared/components/form-elements/label";
+import Input from "../../../shared/components/form-elements/input";
+import Form from "../../../shared/components/form-elements/form";
+import Label from "../../../shared/components/form-elements/label";
 import styled from "styled-components";
-import Button from "../../shared/components/button/button";
-import { AuthContext } from "../../shared/context/auth-context";
-import { useHttpClient } from "../../shared/hooks/http-hook";
-import Spinner from "../../shared/components/spinner/spinner";
+import Button from "../../../shared/components/button/button";
+import { AuthContext } from "../../../shared/context/auth-context";
+import { useHttpClient } from "../../../shared/hooks/http-hook";
+import Spinner from "../../../shared/components/spinner/spinner";
 import { useHistory } from "react-router-dom";
-import Fade from "../../shared/components/fade-animation/fade";
-import ImageUpload from "../../shared/components/form-elements/image-upload/image-upload";
+import Fade from "../../../shared/components/fade-animation/fade";
+import ImageUpload from "../../../shared/components/form-elements/image-upload/image-upload";
 
 const FormWrapper = styled.div`
   width: 60rem;

@@ -1,5 +1,5 @@
 import styled, { css } from "styled-components";
-import CustomButton from "../../shared/components/button/button";
+import CustomButton from "../../../shared/components/button/button";
 
 export const PlaceItem = styled.div`
   height: 60rem;

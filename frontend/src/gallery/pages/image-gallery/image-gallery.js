@@ -4,7 +4,7 @@ import Gallery from "react-photo-gallery";
 import Lightbox from "react-image-lightbox";
 import "react-image-lightbox/style.css";
 import Spinner from "../../../shared/components/spinner/spinner";
-import SelectedImage from "../../components/image";
+import GalleryImageItem from "../../components/gallery-image-item/gallery-image-item";
 
 const ImageGallery = () => {
   const [randomPlaces, setRandomPlaces] = useState({
@@ -22,7 +22,7 @@ const ImageGallery = () => {
 
   const imageRenderer = useCallback(
     ({ index, left, top, key, photo }) => (
-      <SelectedImage
+      <GalleryImageItem
         key={key}
         margin={"2px"}
         index={index}
