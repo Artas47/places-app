@@ -5,6 +5,7 @@ import Lightbox from "react-image-lightbox";
 import "react-image-lightbox/style.css";
 import Spinner from "../../../shared/components/spinner/spinner";
 import GalleryImageItem from "../../components/gallery-image-item/gallery-image-item";
+import useScroll from "../../../shared/hooks/useScroll";
 
 const ImageGallery = () => {
   const [randomPlaces, setRandomPlaces] = useState({
@@ -14,7 +15,7 @@ const ImageGallery = () => {
   const [photoIndex, setPhotoIndex] = useState(0);
   const [isOpen, setIsOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
-
+  useScroll("image-gallery");
   const openLightbox = useCallback((event, { photo, index }) => {
     setPhotoIndex(index);
     setIsOpen(true);
@@ -69,6 +70,7 @@ const ImageGallery = () => {
         position: "relative",
         margin: "0 auto",
       }}
+      id="image-gallery"
     >
       {isLoading ? (
         <Spinner

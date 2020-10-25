@@ -33,6 +33,7 @@ add possibility to show gallery places or admin places in my places page
 some effect on image hover
 lazy loading images when beeing at the bottom of page
 image compess on save
+add proptypes
 refactor front-end project structure - done
 display loading spinner on edit place - kepp in mind
 */
