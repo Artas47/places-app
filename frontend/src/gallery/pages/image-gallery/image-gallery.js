@@ -42,6 +42,7 @@ const ImageGallery = () => {
       const response = await axios.get(
         "http://localhost:5000/api/places/random"
       );
+      console.log("response.data", response.data);
       let placesGallery = [];
       let placesModal = [];
       response.data.randomPlaces.forEach((place) => {

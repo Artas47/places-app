@@ -32,8 +32,9 @@ modal when trying to delete a place
 add possibility to show gallery places or admin places in my places page
 some effect on image hover
 lazy loading images when beeing at the bottom of page
-image compess on save
+image compress on save
 add proptypes
+paginate gallery images
 refactor front-end project structure - done
 display loading spinner on edit place - kepp in mind
 */
