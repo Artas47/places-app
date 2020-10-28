@@ -40,12 +40,12 @@ const ImageGallery = () => {
     const fetchRandomPlaces = async () => {
       setIsLoading(true);
       const response = await axios.get(
-        "http://localhost:5000/api/places/random"
+        "http://localhost:5000/api/places/random?page=2&limit=6"
       );
       console.log("response.data", response.data);
       let placesGallery = [];
       let placesModal = [];
-      response.data.randomPlaces.forEach((place) => {
+      response.data.results.forEach((place) => {
         placesGallery.push({
           src: `http://localhost:5000/${place.image.imageUrl}`,
           width: place.image.width,

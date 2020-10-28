@@ -11,7 +11,7 @@ const router = new express.Router();
 router.get(
   "/",
   searchMiddleware(),
-  paginatedResults(User),
+  paginatedResults(User, "User"),
   usersController.getUsers
 );
 

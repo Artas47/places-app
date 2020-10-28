@@ -95,8 +95,7 @@ const createPlace = async (req, res, next) => {
 };
 
 const getRandomPlaces = async (req, res, next) => {
-  const randomPlaces = await Place.find({});
-  res.send({ randomPlaces });
+  res.send({ ...res.paginatedResults });
 };
 
 const updatePlace = async (req, res, next) => {
