@@ -15,20 +15,27 @@ const ImageGallery = () => {
   const [photoIndex, setPhotoIndex] = useState(0);
   const [isOpen, setIsOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [rowHeight, setRowHeight] = useState(300);
+  const increaseRowHeight = () => {
+    setRowHeight(rowHeight + 150);
+  };
   useScroll("image-gallery");
   const openLightbox = useCallback((event, { photo, index }) => {
     setPhotoIndex(index);
     setIsOpen(true);
   }, []);
 
+  console.log("randomPlaces", randomPlaces);
+
   const imageRenderer = useCallback(
     ({ index, left, top, key, photo }) => (
       <GalleryImageItem
         key={key}
-        margin={"2px"}
         index={index}
         photo={photo}
+        margin={8}
         left={left}
+        // direction="column"
         top={top}
         openLightbox={openLightbox}
       />
@@ -40,7 +47,7 @@ const ImageGallery = () => {
     const fetchRandomPlaces = async () => {
       setIsLoading(true);
       const response = await axios.get(
-        "http://localhost:5000/api/places/random?page=2&limit=6"
+        "http://localhost:5000/api/places/random"
       );
       console.log("response.data", response.data);
       let placesGallery = [];
@@ -73,6 +80,7 @@ const ImageGallery = () => {
       }}
       id="image-gallery"
     >
+      <button onClick={increaseRowHeight}>ASDASD</button>
       {isLoading ? (
         <Spinner
           style={{
@@ -89,6 +97,9 @@ const ImageGallery = () => {
           renderImage={imageRenderer}
           photos={randomPlaces.placesForGallery}
           onClick={openLightbox}
+          margin={8}
+          targetRowHeight={rowHeight}
+          // direction={"column"}
         />
       )}
       {isOpen && (

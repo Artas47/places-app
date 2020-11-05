@@ -42,7 +42,7 @@ const GalleryImageItem = ({
         height: photo.height,
         width: photo.width,
         ...cont,
-        backgroundColor: "red !important",
+        backgroundColor: "transparent !important",
       }}
     >
       {isLoaded === "loading" ? (
@@ -57,16 +57,18 @@ const GalleryImageItem = ({
       ) : (
         ""
       )}
-      <Styled.Image
-        visible={isLoaded === "loaded"}
-        onLoad={handleImageLoaded}
-        alt={photo.title}
-        style={{
-          opacity: isLoaded === "loaded" && "1",
-        }}
-        {...photo}
-        onClick={(e) => handleOnClick(e, { photo, index })}
-      />
+      <Styled.ImageWrapper>
+        <Styled.Image
+          visible={isLoaded === "loaded"}
+          onLoad={handleImageLoaded}
+          alt={photo.title}
+          style={{
+            opacity: isLoaded === "loaded" && "1",
+          }}
+          {...photo}
+          onClick={(e) => handleOnClick(e, { photo, index })}
+        />
+      </Styled.ImageWrapper>
     </div>
   );
 };
