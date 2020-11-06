@@ -24,7 +24,7 @@ const getPlacesByUserId = async (req, res, next) => {
   let places;
   try {
     places = await Place.find({ creator: req.params.uid });
-    res.send({ places });
+    res.send({ results: places });
   } catch (err) {
     return next(
       new HttpError("Fetching places failed, please try again later", 500)

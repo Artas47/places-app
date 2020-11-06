@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useEffect, useState, useCallback, useContext } from "react";
 import axios from "axios";
 import Gallery from "react-photo-gallery";
 import Lightbox from "react-image-lightbox";
@@ -6,6 +6,8 @@ import "react-image-lightbox/style.css";
 import Spinner from "../../../shared/components/spinner/spinner";
 import GalleryImageItem from "../../components/gallery-image-item/gallery-image-item";
 import useScroll from "../../../shared/hooks/useScroll";
+import { useLocation, useParams } from "react-router-dom";
+import { AuthContext } from "../../../shared/context/auth-context";
 
 const ImageGallery = () => {
   const [randomPlaces, setRandomPlaces] = useState({
@@ -16,6 +18,9 @@ const ImageGallery = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [rowHeight, setRowHeight] = useState(300);
+  const { userId } = useContext(AuthContext);
+  const location = useLocation();
+  console.log("loca", location);
   const increaseRowHeight = () => {
     setRowHeight(rowHeight + 150);
   };
@@ -24,8 +29,6 @@ const ImageGallery = () => {
     setPhotoIndex(index);
     setIsOpen(true);
   }, []);
-
-  console.log("randomPlaces", randomPlaces);
 
   const imageRenderer = useCallback(
     ({ index, left, top, key, photo }) => (
@@ -46,10 +49,16 @@ const ImageGallery = () => {
   useEffect(() => {
     const fetchRandomPlaces = async () => {
       setIsLoading(true);
-      const response = await axios.get(
-        "http://localhost:5000/api/places/random"
-      );
-      console.log("response.data", response.data);
+      let response;
+      if (location.pathname === "/gallery") {
+        response = await axios.get("http://localhost:5000/api/places/random");
+      }
+      if (location.pathname === "/places" && userId) {
+        response = await axios.get(
+          `http://localhost:5000/api/places/user/${userId}`
+        );
+      }
+      console.log("response", response);
       let placesGallery = [];
       let placesModal = [];
       response.data.results.forEach((place) => {
@@ -68,6 +77,9 @@ const ImageGallery = () => {
       setIsLoading(false);
     };
     fetchRandomPlaces();
+    return () => {
+      console.log("I RUN");
+    };
   }, []);
 
   return (

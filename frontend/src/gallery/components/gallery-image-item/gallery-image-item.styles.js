@@ -20,7 +20,7 @@ export const ImageWrapper = styled.div`
   :after {
     content: "View on map";
     font-size: 1.7rem;
-    font-weight: 300;
+    font-weight: 500;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -30,12 +30,7 @@ export const ImageWrapper = styled.div`
     bottom: 0;
     width: 100%;
     height: 5rem;
-    background: rgb(0, 0, 0);
-    background: linear-gradient(
-      0deg,
-      rgba(0, 0, 0, 0.8687850140056023) 65%,
-      rgba(0, 0, 0, 0.6082808123249299) 100%
-    );
+    background-color: rgba(0, 0, 0, 0.8);
     opacity: 0;
   }
   :hover {
