@@ -158,8 +158,7 @@ const deletePlace = async (req, res, next) => {
   } catch (err) {
     return next(new HttpError("Could not delete place", 400));
   }
-
-  fs.unlink(imagePath, (err) => {
+  fs.unlink(imagePath.imageUrl, (err) => {
     console.log(err);
   });
 };
