@@ -6,7 +6,7 @@ import ImageGallery from "../../../shared/components/image-gallery/image-gallery
 const Gallery = () => {
   const location = useLocation();
   const [places, setPlaces] = useState(null);
-  console.log("location", location);
+
   useEffect(() => {
     const fetch = async () => {
       if (location.pathname === "/gallery") {

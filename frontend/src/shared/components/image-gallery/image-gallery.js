@@ -1,34 +1,27 @@
-import React, { useEffect, useState, useCallback, useContext } from "react";
-import axios from "axios";
+import React, { useEffect, useState, useCallback } from "react";
 import Gallery from "react-photo-gallery";
 import Lightbox from "react-image-lightbox";
 import "react-image-lightbox/style.css";
 import Spinner from "../spinner/spinner";
 import GalleryImageItem from "../gallery-image-item/gallery-image-item";
 import useScroll from "../../hooks/useScroll";
-import { useLocation, useParams } from "react-router-dom";
-import { AuthContext } from "../../context/auth-context";
 
 const ImageGallery = ({ places }) => {
-  console.log(";fsdfsdfsdsdf");
   const [randomPlaces, setRandomPlaces] = useState({
     placesForGallery: [],
     placesForModal: [],
   });
-  console.log("places", places);
   const [photoIndex, setPhotoIndex] = useState(0);
   const [isOpen, setIsOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [rowHeight, setRowHeight] = useState(300);
-  const { userId } = useContext(AuthContext);
-  const params = useParams();
-  console.log("params", params);
-  const location = useLocation();
 
   const increaseRowHeight = () => {
     setRowHeight(rowHeight + 150);
   };
+
   useScroll("image-gallery");
+
   const openLightbox = useCallback((event, { photo, index }) => {
     setPhotoIndex(index);
     setIsOpen(true);

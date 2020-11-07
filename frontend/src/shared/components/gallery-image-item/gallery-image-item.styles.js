@@ -1,16 +1,12 @@
 import styled from "styled-components";
-import CustomButton from "../../../shared/components/button/button";
 
 export const Image = styled.img`
   position: relative;
   width: 100%;
   height: 100%;
-  /* filter: brightness(0.4); */
   visibility: ${(props) => (props.visible ? "visible" : "hidden")};
-  /* background-color: red !important; */
   opacity: 0;
   transition: opacity 0.7s;
-  /* outline: 2px solid red; */
 `;
 
 export const ImageFooter = styled.div`
@@ -26,8 +22,6 @@ export const ImageFooter = styled.div`
   opacity: 0;
   transition: all 0.2s;
   font-size: 1.5rem;
-  /* border-top-left-radius: 1rem;
-  border-top-right-radius: 1rem; */
 `;
 
 export const ImageWrapper = styled.div`

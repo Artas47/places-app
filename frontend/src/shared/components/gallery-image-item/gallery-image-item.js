@@ -72,7 +72,7 @@ const GalleryImageItem = ({
         />
         <Styled.ImageFooter>
           <Styled.GalleryImageButton>View on map</Styled.GalleryImageButton>
-          {photo.creatorId === userId && location.pathname !== "/gallery" && (
+          {photo.creatorId === userId && location.pathname === "/places" && (
             <>
               <Styled.GalleryImageButton>Delete</Styled.GalleryImageButton>
               <Styled.GalleryImageButton>Edit</Styled.GalleryImageButton>
