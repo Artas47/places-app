@@ -3,11 +3,31 @@ import ImageGallery from "../../../shared/components/image-gallery/image-gallery
 import { useLocation } from "react-router-dom";
 import axios from "axios";
 import { AuthContext } from "../../../shared/context/auth-context";
+import { useHttpClient } from "../../../shared/hooks/http-hook";
 
 const Places = () => {
   const location = useLocation();
   const [places, setPlaces] = useState(null);
-  const { userId } = useContext(AuthContext);
+  const { userId, token } = useContext(AuthContext);
+
+  const { sendRequest, isLoading } = useHttpClient();
+
+  const onDeletePlace = async (id) => {
+    await sendRequest(
+      `http://localhost:5000/api/places/${id}`,
+      "DELETE",
+      null,
+      {
+        Authorization: "Bearer " + token,
+      }
+    );
+    const responseData = await sendRequest(
+      `http://localhost:5000/api/places/user/${userId}`,
+      "GET"
+    );
+    // console.log("responseData", responseData);
+    setPlaces(responseData.results);
+  };
 
   useEffect(() => {
     const fetch = async () => {
@@ -21,7 +41,13 @@ const Places = () => {
     fetch();
   }, [userId]);
 
-  return <ImageGallery path="/places" places={places} />;
+  return (
+    <ImageGallery
+      path="/places"
+      places={places}
+      onDeletePlace={onDeletePlace}
+    />
+  );
 };
 
 export default Places;

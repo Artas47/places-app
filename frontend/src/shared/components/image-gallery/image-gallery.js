@@ -6,7 +6,7 @@ import Spinner from "../spinner/spinner";
 import GalleryImageItem from "../gallery-image-item/gallery-image-item";
 import useScroll from "../../hooks/useScroll";
 
-const ImageGallery = ({ places }) => {
+const ImageGallery = ({ places, onDeletePlace }) => {
   const [randomPlaces, setRandomPlaces] = useState({
     placesForGallery: [],
     placesForModal: [],
@@ -15,7 +15,7 @@ const ImageGallery = ({ places }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [rowHeight, setRowHeight] = useState(300);
-
+  console.log("places", places);
   const increaseRowHeight = () => {
     setRowHeight(rowHeight + 150);
   };
@@ -35,6 +35,7 @@ const ImageGallery = ({ places }) => {
         photo={photo}
         margin={8}
         left={left}
+        onDeletePlace={onDeletePlace}
         // direction="column"
         top={top}
         openLightbox={openLightbox}
@@ -57,6 +58,7 @@ const ImageGallery = ({ places }) => {
             width: place.image.width,
             height: place.image.height,
             creatorId: place.creator,
+            id: place._id,
           });
           placesModal.push(`http://localhost:5000/${place.image.imageUrl}`);
         });

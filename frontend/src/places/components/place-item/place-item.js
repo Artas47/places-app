@@ -7,8 +7,8 @@ import Spinner from "../../../shared/components/spinner/spinner";
 
 const PlaceItem = ({ name, description, id, image, creatorId }) => {
   const history = useHistory();
-  const { setPlaces, userId, token } = useContext(AuthContext);
   const { sendRequest, isLoading } = useHttpClient();
+  const { setPlaces, userId, token } = useContext(AuthContext);
 
   const onDeletePlace = async () => {
     await sendRequest(

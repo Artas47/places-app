@@ -20,6 +20,7 @@ const GalleryImageItem = ({
   left,
   selected,
   openLightbox,
+  onDeletePlace,
 }) => {
   const [isLoaded, setIsLoaded] = useState("loading");
   const location = useLocation();
@@ -36,7 +37,7 @@ const GalleryImageItem = ({
   const handleOnClick = (e, { photo, index }) => {
     openLightbox(e, { photo, index });
   };
-
+  console.log("photo", photo);
   return (
     <div
       style={{
@@ -74,7 +75,11 @@ const GalleryImageItem = ({
           <Styled.GalleryImageButton>View on map</Styled.GalleryImageButton>
           {photo.creatorId === userId && location.pathname === "/places" && (
             <>
-              <Styled.GalleryImageButton>Delete</Styled.GalleryImageButton>
+              <Styled.GalleryImageButton
+                onClick={() => onDeletePlace(photo.id)}
+              >
+                Delete
+              </Styled.GalleryImageButton>
               <Styled.GalleryImageButton>Edit</Styled.GalleryImageButton>
             </>
           )}
