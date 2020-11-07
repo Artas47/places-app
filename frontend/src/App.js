@@ -4,6 +4,7 @@ import {
   Route,
   Redirect,
   Switch,
+  useLocation,
 } from "react-router-dom";
 import "./App.css";
 import Header from "./shared/components/navigation/header/header";
@@ -46,6 +47,7 @@ function App() {
   const [searchParam, setSearchParam] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [imgDiemensions, setImgDiemensions] = useState({ height: 0, width: 0 });
+
   const { RenderModal } = useModal();
 
   const { token, userId, login, logout } = useAuth();

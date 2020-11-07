@@ -2,6 +2,7 @@ import React, { useState, useContext } from "react";
 import Spinner from "../../../shared/components/spinner/spinner";
 import * as Styled from "./gallery-image-item.styles";
 import { AuthContext } from "../../../shared/context/auth-context";
+import { useLocation } from "react-router-dom";
 
 const cont = {
   backgroundColor: "#eee",
@@ -21,8 +22,8 @@ const GalleryImageItem = ({
   openLightbox,
 }) => {
   const [isLoaded, setIsLoaded] = useState("loading");
-  console.log("photo", photo);
-  const { setPlaces, userId, token } = useContext(AuthContext);
+  const location = useLocation();
+  const { userId } = useContext(AuthContext);
   const handleImageLoaded = () => {
     setIsLoaded("loaded");
   };
@@ -71,7 +72,7 @@ const GalleryImageItem = ({
         />
         <Styled.ImageFooter>
           <Styled.GalleryImageButton>View on map</Styled.GalleryImageButton>
-          {photo.creatorId === userId && (
+          {photo.creatorId === userId && location.pathname !== "/gallery" && (
             <>
               <Styled.GalleryImageButton>Delete</Styled.GalleryImageButton>
               <Styled.GalleryImageButton>Edit</Styled.GalleryImageButton>

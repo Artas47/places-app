@@ -19,6 +19,8 @@ const ImageGallery = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [rowHeight, setRowHeight] = useState(300);
   const { userId } = useContext(AuthContext);
+  const params = useParams();
+  console.log("params", params);
   const location = useLocation();
 
   const increaseRowHeight = () => {
@@ -58,6 +60,17 @@ const ImageGallery = () => {
           `http://localhost:5000/api/places/user/${userId}`
         );
       }
+      if (location.pathname.startsWith("/places/user/") && params.userId) {
+        response = await axios.get(
+          `http://localhost:5000/api/places/user/${params.userId}`
+        );
+      }
+      // if (location.pathname.startsWith === "/places/user") {
+      //   await sendRequest(
+      //     `http://localhost:5000/api/places/user/${userId}`,
+      //     "GET"
+      //   );
+      // }
       console.log("response", response);
       let placesGallery = [];
       let placesModal = [];
