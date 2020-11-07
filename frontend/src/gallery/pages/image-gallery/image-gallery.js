@@ -20,7 +20,7 @@ const ImageGallery = () => {
   const [rowHeight, setRowHeight] = useState(300);
   const { userId } = useContext(AuthContext);
   const location = useLocation();
-  console.log("loca", location);
+
   const increaseRowHeight = () => {
     setRowHeight(rowHeight + 150);
   };
@@ -66,6 +66,7 @@ const ImageGallery = () => {
           src: `http://localhost:5000/${place.image.imageUrl}`,
           width: place.image.width,
           height: place.image.height,
+          creatorId: place.creator,
         });
         placesModal.push(`http://localhost:5000/${place.image.imageUrl}`);
       });
