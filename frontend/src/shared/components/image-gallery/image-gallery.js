@@ -3,17 +3,19 @@ import axios from "axios";
 import Gallery from "react-photo-gallery";
 import Lightbox from "react-image-lightbox";
 import "react-image-lightbox/style.css";
-import Spinner from "../../../shared/components/spinner/spinner";
-import GalleryImageItem from "../../components/gallery-image-item/gallery-image-item";
-import useScroll from "../../../shared/hooks/useScroll";
+import Spinner from "../spinner/spinner";
+import GalleryImageItem from "../gallery-image-item/gallery-image-item";
+import useScroll from "../../hooks/useScroll";
 import { useLocation, useParams } from "react-router-dom";
-import { AuthContext } from "../../../shared/context/auth-context";
+import { AuthContext } from "../../context/auth-context";
 
-const ImageGallery = () => {
+const ImageGallery = ({ places }) => {
+  console.log(";fsdfsdfsdsdf");
   const [randomPlaces, setRandomPlaces] = useState({
     placesForGallery: [],
     placesForModal: [],
   });
+  console.log("places", places);
   const [photoIndex, setPhotoIndex] = useState(0);
   const [isOpen, setIsOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
@@ -51,38 +53,21 @@ const ImageGallery = () => {
   useEffect(() => {
     const fetchRandomPlaces = async () => {
       setIsLoading(true);
-      let response;
-      if (location.pathname === "/gallery") {
-        response = await axios.get("http://localhost:5000/api/places/random");
-      }
-      if (location.pathname === "/places" && userId) {
-        response = await axios.get(
-          `http://localhost:5000/api/places/user/${userId}`
-        );
-      }
-      if (location.pathname.startsWith("/places/user/") && params.userId) {
-        response = await axios.get(
-          `http://localhost:5000/api/places/user/${params.userId}`
-        );
-      }
-      // if (location.pathname.startsWith === "/places/user") {
-      //   await sendRequest(
-      //     `http://localhost:5000/api/places/user/${userId}`,
-      //     "GET"
-      //   );
-      // }
-      console.log("response", response);
+
       let placesGallery = [];
       let placesModal = [];
-      response.data.results.forEach((place) => {
-        placesGallery.push({
-          src: `http://localhost:5000/${place.image.imageUrl}`,
-          width: place.image.width,
-          height: place.image.height,
-          creatorId: place.creator,
+
+      if (places?.length) {
+        places.forEach((place) => {
+          placesGallery.push({
+            src: `http://localhost:5000/${place.image.imageUrl}`,
+            width: place.image.width,
+            height: place.image.height,
+            creatorId: place.creator,
+          });
+          placesModal.push(`http://localhost:5000/${place.image.imageUrl}`);
         });
-        placesModal.push(`http://localhost:5000/${place.image.imageUrl}`);
-      });
+      }
       setRandomPlaces((places) => ({
         ...places,
         placesForGallery: placesGallery,
@@ -94,7 +79,7 @@ const ImageGallery = () => {
     return () => {
       console.log("I RUN");
     };
-  }, []);
+  }, [places]);
 
   return (
     <div

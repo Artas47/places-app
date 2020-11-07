@@ -4,7 +4,6 @@ import {
   Route,
   Redirect,
   Switch,
-  useLocation,
 } from "react-router-dom";
 import "./App.css";
 import Header from "./shared/components/navigation/header/header";
@@ -18,8 +17,7 @@ import { useAuth } from "./shared/hooks/auth-hook";
 import UsersPlaces from "./places/pages/users-places/users-places";
 import UpdatePlace from "./places/pages/update-place/update-place";
 import useModal from "./shared/hooks/useModal";
-import ImageGallery from "./gallery/pages/image-gallery/image-gallery";
-
+import Gallery from "./gallery/pages/gallery/gallery";
 /*
 TO DO
 limit number of pages
@@ -69,7 +67,7 @@ function App() {
           <Users />
         </Route>
         <Route path="/gallery" exact>
-          <ImageGallery />
+          <Gallery />
         </Route>
         <Route path="/places" exact>
           <Places />
@@ -94,7 +92,7 @@ function App() {
           <Users />
         </Route>
         <Route path="/gallery" exact>
-          <ImageGallery />
+          <Gallery />
         </Route>
         <Route path="/auth" exact>
           <Auth />
