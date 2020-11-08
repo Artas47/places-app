@@ -4,9 +4,6 @@ const paginatedResults = (model, modelName) => {
     const limit = parseInt(req.query.limit);
     const search = req.query.search;
 
-    console.log("limit", limit);
-    console.log("page", page);
-
     const startIndex = (page - 1) * limit;
     const endIndex = page * limit;
 
@@ -25,8 +22,6 @@ const paginatedResults = (model, modelName) => {
     } else if (modelName === "Place") {
       data = await model.find({}).limit(limit).skip(startIndex).exec();
     }
-
-    // console.log("data", data);
 
     let fullData;
 
@@ -51,9 +46,7 @@ const paginatedResults = (model, modelName) => {
         limit,
       };
     }
-    // console.log("data", data);
     try {
-      // console.log("data", data);
       results.results = data;
       res.paginatedResults = results;
       next();

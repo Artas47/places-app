@@ -39,10 +39,8 @@ const NewPlace = () => {
   const { isLoading, sendRequest, error } = useHttpClient();
   const { userId, token, imgDiemensions } = useContext(AuthContext);
   const history = useHistory();
-  // console.log("imgDiemensions", imgDiemensions);
   const onSubmit = async (data) => {
     try {
-      // console.log("data", data);
       const formData = new FormData();
       formData.append("title", data.title);
       formData.append("description", data.description);

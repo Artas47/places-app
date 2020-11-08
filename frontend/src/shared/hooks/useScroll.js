@@ -17,7 +17,7 @@ const useScrollEvent = (domElement) => {
   }, [element]);
   const trackScrolling = () => {
     if (isBottom(element)) {
-      console.log("RUN");
+      console.log("SCROLL DOWn");
       document.removeEventListener("scroll", throttledFunction);
     }
   };

@@ -15,7 +15,6 @@ const UserCard = ({
 }) => {
   const history = useHistory();
   const { userId } = useContext(AuthContext);
-  // console.log("userId", userId);
   return (
     <Styled.UserCard>
       <Styled.UserCardHeader>

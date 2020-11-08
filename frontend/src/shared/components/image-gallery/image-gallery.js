@@ -15,7 +15,7 @@ const ImageGallery = ({ places, onDeletePlace }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [rowHeight, setRowHeight] = useState(300);
-  console.log("places", places);
+
   const increaseRowHeight = () => {
     setRowHeight(rowHeight + 150);
   };

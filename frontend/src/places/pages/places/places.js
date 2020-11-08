@@ -25,7 +25,6 @@ const Places = () => {
       `http://localhost:5000/api/places/user/${userId}`,
       "GET"
     );
-    // console.log("responseData", responseData);
     setPlaces(responseData.results);
   };
 

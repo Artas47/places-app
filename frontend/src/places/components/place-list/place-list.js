@@ -8,7 +8,6 @@ import { useHistory, useParams } from "react-router-dom";
 const PlaceList = ({ places }) => {
   const history = useHistory();
   const params = useParams();
-  // console.log("params", params);
 
   const renderNoPlaces = () => {
     return (

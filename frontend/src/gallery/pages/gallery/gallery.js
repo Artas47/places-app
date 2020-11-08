@@ -13,7 +13,6 @@ const Gallery = () => {
         const response = await axios.get(
           "http://localhost:5000/api/places/random"
         );
-        console.log("response", response);
         setPlaces(response.data.results);
       }
     };
