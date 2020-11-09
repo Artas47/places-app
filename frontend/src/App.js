@@ -17,7 +17,7 @@ import { useAuth } from "./shared/hooks/auth-hook";
 import UsersPlaces from "./places/pages/users-places/users-places";
 import UpdatePlace from "./places/pages/update-place/update-place";
 import useModal from "./shared/hooks/useModal";
-import Gallery from "./gallery/pages/gallery/gallery";
+import RandomPlaces from "./places/pages/random-places/random-places";
 /*
 TO DO
 limit number of pages
@@ -68,7 +68,7 @@ function App() {
           <Users />
         </Route>
         <Route path="/gallery" exact>
-          <Gallery />
+          <RandomPlaces />
         </Route>
         <Route path="/places" exact>
           <Places />
@@ -93,7 +93,7 @@ function App() {
           <Users />
         </Route>
         <Route path="/gallery" exact>
-          <Gallery />
+          <RandomPlaces />
         </Route>
         <Route path="/auth" exact>
           <Auth />

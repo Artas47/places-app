@@ -3,7 +3,7 @@ import { useLocation } from "react-router-dom";
 import axios from "axios";
 import ImageGallery from "../../../shared/components/image-gallery/image-gallery";
 
-const Gallery = () => {
+const RandomPlaces = () => {
   const location = useLocation();
   const [places, setPlaces] = useState(null);
 
@@ -22,4 +22,4 @@ const Gallery = () => {
   return <ImageGallery path="/places" places={places} />;
 };
 
-export default Gallery;
+export default RandomPlaces;
