@@ -24,11 +24,10 @@ limit number of pages
 make an option to display one sized images
 on hover or smth view place creator
 make gallery items random
-make possibility to view place on google maps (in modal)
+make possibility to view place on google maps (in modal propably)
 front-end forms validation
 back-end forms validation
 modal when trying to delete a place
-add possibility to show gallery places or admin places in my places page
 some effect on image hover
 lazy loading images when beeing at the bottom of page
 image compress on save
@@ -49,6 +48,8 @@ function App() {
   const { RenderModal } = useModal();
 
   const { token, userId, login, logout } = useAuth();
+
+  console.log("token", token);
 
   useLayoutEffect(() => {
     setLoading(false);

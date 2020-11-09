@@ -4,6 +4,7 @@ import { useLocation } from "react-router-dom";
 import axios from "axios";
 import { AuthContext } from "../../../shared/context/auth-context";
 import { useHttpClient } from "../../../shared/hooks/http-hook";
+import InfoBox from "../../../shared/components/info-box/info-box";
 
 const Places = () => {
   const location = useLocation();
@@ -39,6 +40,10 @@ const Places = () => {
     };
     fetch();
   }, [userId]);
+
+  if (!places || !places.length) {
+    return <InfoBox label="Looks like you have no places added" />;
+  }
 
   return (
     <ImageGallery

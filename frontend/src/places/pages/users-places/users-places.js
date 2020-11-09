@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useParams, useLocation } from "react-router-dom";
 import axios from "axios";
 import ImageGallery from "../../../shared/components/image-gallery/image-gallery";
+import Fade from "../../../shared/components/fade-animation/fade";
+import InfoBox from "../../../shared/components/info-box/info-box";
 
 const UsersPlaces = () => {
   const location = useLocation();
@@ -18,6 +20,11 @@ const UsersPlaces = () => {
     };
     fetch();
   }, []);
+
+  if (!places || !places.length) {
+    return <InfoBox label="This user doesn't have any places added" />;
+  }
+
   return <ImageGallery path="/places" places={places} />;
 };
 
