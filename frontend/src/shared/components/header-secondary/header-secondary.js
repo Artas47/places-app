@@ -1,7 +1,5 @@
 import React from "react";
 import Searchbar from "../searchbar/searchbar";
-import AppsIcon from "@material-ui/icons/Apps";
-import ViewCarouselIcon from "@material-ui/icons/ViewCarousel";
 
 const HeaderSecondary = () => {
   return (
