@@ -5,6 +5,7 @@ const User = require("../models/user");
 const mongoose = require("mongoose");
 const { validationResult } = require("express-validator");
 const fs = require("fs");
+const _ = require("lodash");
 
 const getPlaceById = async (req, res, next) => {
   const _id = req.params.pid;
@@ -95,6 +96,7 @@ const createPlace = async (req, res, next) => {
 };
 
 const getRandomPlaces = async (req, res, next) => {
+  //shuffle lodash to make random arr
   res.send({ ...res.paginatedResults });
 };
 
