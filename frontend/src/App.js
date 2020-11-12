@@ -35,6 +35,7 @@ add proptypes
 paginate gallery images
 refactor front-end project structure - done
 display loading spinner on edit place - kepp in mind
+loading spinner when loading whole gallery
 */
 
 function App() {
