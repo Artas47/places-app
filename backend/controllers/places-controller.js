@@ -96,8 +96,8 @@ const createPlace = async (req, res, next) => {
 };
 
 const getRandomPlaces = async (req, res, next) => {
-  //shuffle lodash to make random arr
-  res.send({ ...res.paginatedResults });
+  const shuffledPlaces = _.shuffle(res.paginatedResults.results);
+  res.send({ ...res.paginatedResults, results: shuffledPlaces });
 };
 
 const updatePlace = async (req, res, next) => {
