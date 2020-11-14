@@ -66,7 +66,7 @@ function App() {
     routes = (
       <Switch>
         <Route path="/" exact>
-          <Users />
+          <RandomPlaces />
         </Route>
         <Route path="/gallery" exact>
           <RandomPlaces />
@@ -91,7 +91,7 @@ function App() {
     routes = (
       <Switch>
         <Route path="/" exact>
-          <Users />
+          <RandomPlaces />
         </Route>
         <Route path="/gallery" exact>
           <RandomPlaces />

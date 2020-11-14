@@ -6,10 +6,10 @@ import ImageGallery from "../../../shared/components/image-gallery/image-gallery
 const RandomPlaces = () => {
   const location = useLocation();
   const [places, setPlaces] = useState(null);
-
+  console.log("fdsds", "fdsds");
   useEffect(() => {
     const fetch = async () => {
-      if (location.pathname === "/gallery") {
+      if (location.pathname === "/" || location.pathname === "/gallery") {
         const response = await axios.get(
           "http://localhost:5000/api/places/random"
         );

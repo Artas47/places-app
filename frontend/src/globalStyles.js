@@ -30,15 +30,15 @@ export const GlobalStyles = createGlobalStyle`
   }
   body {
     font-family: 'Roboto', sans-serif;
-    // background-color: #d1d8e0;
+    /* background-color: #d1d8e0;
     background-color: #000;
-    // background-image: url(${img});
+    background-image: url(${img});
     background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url(${img});
     background-size: cover;
-    background-attachment: fixed;
+    background-attachment: fixed; */
+    background-color: #F3F5F6;
     height: 100%;
     width: 100vw;
     overflow-x: hidden;
-    // margin-right: -16px;
   }
 `;

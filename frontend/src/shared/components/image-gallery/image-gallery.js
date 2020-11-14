@@ -11,6 +11,7 @@ const ImageGallery = ({ places, onDeletePlace }) => {
     placesForGallery: [],
     placesForModal: [],
   });
+  console.log("places", places);
   const [photoIndex, setPhotoIndex] = useState(0);
   const [isOpen, setIsOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
@@ -39,7 +40,7 @@ const ImageGallery = ({ places, onDeletePlace }) => {
         key={key}
         index={index}
         photo={photo}
-        margin={8}
+        margin={4}
         left={left}
         onDeletePlace={onDeletePlace}
         // direction="column"
@@ -121,7 +122,7 @@ const ImageGallery = ({ places, onDeletePlace }) => {
           renderImage={imageRenderer}
           photos={randomPlaces.placesForGallery}
           onClick={openLightbox}
-          margin={8}
+          margin={4}
           targetRowHeight={rowHeight}
           // direction={"column"}
         />

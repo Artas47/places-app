@@ -9,7 +9,9 @@ export const Header = styled.header`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  background-color: #1f1f22;
   box-shadow: 1px 1px 20px rgba(0, 0, 0, 0.2);
+  padding: 0 6rem;
 `;
 
 export const Logo = styled.h2`
@@ -32,8 +34,9 @@ export const NavLinkItem = styled(NavLink)`
   width: 10rem; */
   font-size: 1.6rem;
   letter-spacing: 0.7px;
-  color: rgba(0, 0, 0, 0.6);
+  /* color: rgba(0, 0, 0, 0.9); */
+  /* color: 'red' */
   text-decoration: none;
   // font-weight: 500;
-  color: #fff;
+  color: rgba(255, 255, 255, 0.9);
 `;

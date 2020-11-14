@@ -10,7 +10,7 @@ const Header = () => {
     <Styles.Header>
       <Styles.Logo onClick={() => history.push("/")}>Places_</Styles.Logo>
       <Styles.Nav>
-        <Styles.NavLinkItem to={"/"}>All users</Styles.NavLinkItem>
+        {/* <Styles.NavLinkItem to={"/"}>All users</Styles.NavLinkItem> */}
         <Styles.NavLinkItem to={"/gallery"}>Gallery</Styles.NavLinkItem>
         {isLoggedIn ? (
           <>
