@@ -70,12 +70,14 @@ const ImageGallery = ({ places, onDeletePlace }) => {
         });
       } else if (places?.length) {
         places.forEach((place) => {
+          console.log("place", place);
           placesGallery.push({
             src: `http://localhost:5000/${place.image.imageUrl}`,
             width: place.image.width,
             height: place.image.height,
-            creatorId: place.creator,
+            creator: place.creator,
             id: place._id,
+            title: place.title,
           });
           placesModal.push(`http://localhost:5000/${place.image.imageUrl}`);
         });

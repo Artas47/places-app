@@ -20,7 +20,12 @@ const paginatedResults = (model, modelName) => {
         .skip(startIndex)
         .exec();
     } else if (modelName === "Place") {
-      data = await model.find({}).limit(limit).skip(startIndex).exec();
+      data = await model
+        .find({})
+        .populate("creator")
+        .limit(limit)
+        .skip(startIndex)
+        .exec();
     }
 
     let fullData;

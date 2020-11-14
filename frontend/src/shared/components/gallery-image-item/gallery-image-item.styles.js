@@ -14,11 +14,12 @@ export const ImageFooter = styled.div`
   bottom: 0;
   width: 100%;
   color: #fff;
-  height: 4.5rem;
+  height: 20%;
+  overflow: hidden;
   display: flex;
   justify-content: space-around;
   align-items: center;
-  background-color: #718093;
+  box-shadow: inset 0px -6rem 28px -9px rgba(0, 0, 0, 0.35);
   opacity: 0;
   transition: all 0.2s;
   font-size: 1.5rem;
@@ -66,4 +67,21 @@ export const GalleryImageButton = styled.div`
   :hover {
     background-color: rgba(0, 0, 0, 0.15);
   }
+`;
+
+export const ImageDescriptionWrapper = styled.div`
+  position: absolute;
+  bottom: 1rem;
+  left: 1rem;
+  display: flex;
+  flex-direction: column;
+`;
+
+export const ImageTitle = styled.p`
+  color: #fff;
+`;
+
+export const ImageAuthor = styled.p`
+  color: #fff;
+  font-weight: 300;
 `;
