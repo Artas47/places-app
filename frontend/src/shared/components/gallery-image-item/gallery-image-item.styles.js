@@ -14,12 +14,12 @@ export const ImageFooter = styled.div`
   bottom: 0;
   width: 100%;
   color: #fff;
-  /* height: 15%; */
+  height: 10rem;
   overflow: hidden;
   display: flex;
   justify-content: space-around;
   align-items: center;
-  box-shadow: inset 0px -6rem 28px -9px rgba(0, 0, 0, 0.35);
+  box-shadow: inset 0px -5rem 28px -9px rgba(0, 0, 0, 0.35);
   opacity: 0;
   transition: all 0.2s;
   font-size: 1.5rem;
@@ -72,14 +72,11 @@ export const GalleryImageButton = styled.div`
 export const ImageDescriptionWrapper = styled.div`
   display: flex;
   flex-direction: column;
+  justify-content: flex-end;
   align-items: flex-start;
+  height: 100%;
   width: 100%;
-  margin: 0.5rem 0 0.5rem 1rem;
-  /* position: absolute;
-  bottom: 1rem;
-  left: 1rem;
-  display: flex;
-  flex-direction: column; */
+  margin: 0.5rem 0 2rem 1rem;
 `;
 
 export const ImageTitle = styled.p`
