@@ -37,7 +37,7 @@ const GalleryImageItem = ({
   const handleOnClick = (e, { photo, index }) => {
     openLightbox(e, { photo, index });
   };
-  console.log("photo", photo);
+
   return (
     <div
       style={{

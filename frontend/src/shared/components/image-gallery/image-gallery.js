@@ -11,7 +11,7 @@ const ImageGallery = ({ places, onDeletePlace }) => {
     placesForGallery: [],
     placesForModal: [],
   });
-  console.log("places", places);
+
   const [photoIndex, setPhotoIndex] = useState(0);
   const [isOpen, setIsOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
@@ -65,12 +65,12 @@ const ImageGallery = ({ places, onDeletePlace }) => {
             height: 0,
             creator: place.creator,
             id: place._id,
+            title: place.title,
           });
           placesModal.push(`http://localhost:5000/${place.image.imageUrl}`);
         });
-      } else if (places?.length) {
+      } else if (places?.length > 3) {
         places.forEach((place) => {
-          console.log("place", place);
           placesGallery.push({
             src: `http://localhost:5000/${place.image.imageUrl}`,
             width: place.image.width,
@@ -82,6 +82,7 @@ const ImageGallery = ({ places, onDeletePlace }) => {
           placesModal.push(`http://localhost:5000/${place.image.imageUrl}`);
         });
       }
+
       setRandomPlaces((places) => ({
         ...places,
         placesForGallery: placesGallery,

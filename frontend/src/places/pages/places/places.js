@@ -14,8 +14,6 @@ const Places = () => {
 
   const { sendRequest, isLoading } = useHttpClient();
 
-  console.log("places", places);
-
   const onDeletePlace = async (id) => {
     await axios.delete(`http://localhost:5000/api/places/${id}`, {
       headers: {

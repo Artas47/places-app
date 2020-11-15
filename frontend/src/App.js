@@ -50,8 +50,6 @@ function App() {
 
   const { token, userId, login, logout } = useAuth();
 
-  console.log("token", token);
-
   useLayoutEffect(() => {
     setLoading(false);
   }, []);

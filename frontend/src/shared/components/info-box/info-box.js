@@ -7,7 +7,7 @@ import CustomButton from "../button/button";
 const InfoBox = ({ label, userId }) => {
   const history = useHistory();
   const params = useParams();
-  console.log("label", label);
+
   return (
     <Fade in={true} classNames="fade">
       <Styled.NotFoundMessageBox>
