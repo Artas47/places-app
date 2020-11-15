@@ -5,6 +5,7 @@ import axios from "axios";
 import { AuthContext } from "../../../shared/context/auth-context";
 import { useHttpClient } from "../../../shared/hooks/http-hook";
 import InfoBox from "../../../shared/components/info-box/info-box";
+import Spinner from "../../../shared/components/spinner/spinner";
 
 const Places = () => {
   const location = useLocation();
@@ -13,33 +14,48 @@ const Places = () => {
 
   const { sendRequest, isLoading } = useHttpClient();
 
+  console.log("places", places);
+
   const onDeletePlace = async (id) => {
-    await sendRequest(
-      `http://localhost:5000/api/places/${id}`,
-      "DELETE",
-      null,
-      {
+    await axios.delete(`http://localhost:5000/api/places/${id}`, {
+      headers: {
         Authorization: "Bearer " + token,
-      }
+      },
+    });
+    const responseData = await axios.get(
+      `http://localhost:5000/api/places/user/${userId}`
     );
-    const responseData = await sendRequest(
-      `http://localhost:5000/api/places/user/${userId}`,
-      "GET"
-    );
-    setPlaces(responseData.results);
+    setPlaces(responseData.data.results);
   };
 
   useEffect(() => {
     const fetch = async () => {
       if (location.pathname === "/places" && userId) {
-        const response = await axios.get(
-          `http://localhost:5000/api/places/user/${userId}`
+        const response = await sendRequest(
+          `http://localhost:5000/api/places/user/${userId}`,
+          "GET"
         );
-        setPlaces(response.data.results);
+        setPlaces(response.results);
       }
     };
     fetch();
   }, [userId]);
+
+  if (isLoading) {
+    return (
+      <div style={{ width: "100vw", height: "100vh", position: "relative" }}>
+        <Spinner
+          style={{
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+            zIndex: "1",
+          }}
+        />
+      </div>
+    );
+  }
 
   if (!places || !places.length) {
     return <InfoBox label="Looks like you have no places added" />;

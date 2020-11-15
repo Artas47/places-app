@@ -14,7 +14,7 @@ export const ImageFooter = styled.div`
   bottom: 0;
   width: 100%;
   color: #fff;
-  height: 20%;
+  /* height: 15%; */
   overflow: hidden;
   display: flex;
   justify-content: space-around;
@@ -43,7 +43,7 @@ export const GalleryImageButton = styled.div`
   position: relative;
   border-radius: 0;
   width: 100%;
-  height: 100%;
+  height: 4rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -70,11 +70,16 @@ export const GalleryImageButton = styled.div`
 `;
 
 export const ImageDescriptionWrapper = styled.div`
-  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  margin: 0.5rem 0 0.5rem 1rem;
+  /* position: absolute;
   bottom: 1rem;
   left: 1rem;
   display: flex;
-  flex-direction: column;
+  flex-direction: column; */
 `;
 
 export const ImageTitle = styled.p`

@@ -15,7 +15,7 @@ const ImageGallery = ({ places, onDeletePlace }) => {
   const [photoIndex, setPhotoIndex] = useState(0);
   const [isOpen, setIsOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
-  const [rowHeight, setRowHeight] = useState(450);
+  const [rowHeight, setRowHeight] = useState(300);
 
   const increaseRowHeight = () => {
     setRowHeight(rowHeight + 150);
@@ -63,7 +63,7 @@ const ImageGallery = ({ places, onDeletePlace }) => {
             src: `http://localhost:5000/${place.image.imageUrl}`,
             width: 0,
             height: 0,
-            creatorId: place.creator,
+            creator: place.creator,
             id: place._id,
           });
           placesModal.push(`http://localhost:5000/${place.image.imageUrl}`);

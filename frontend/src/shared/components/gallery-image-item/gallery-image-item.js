@@ -73,11 +73,13 @@ const GalleryImageItem = ({
         />
         <Styled.ImageFooter>
           {/* <Styled.GalleryImageButton>View on map</Styled.GalleryImageButton> */}
-          <Styled.ImageDescriptionWrapper>
-            <Styled.ImageTitle>{photo.creator.name}</Styled.ImageTitle>
-            <Styled.ImageAuthor>{photo.title}</Styled.ImageAuthor>
-          </Styled.ImageDescriptionWrapper>
-          {/* {photo.creatorId === userId && location.pathname === "/places" && (
+          {location.pathname !== "/places" && (
+            <Styled.ImageDescriptionWrapper>
+              <Styled.ImageTitle>{photo.creator.name}</Styled.ImageTitle>
+              <Styled.ImageAuthor>{photo.title}</Styled.ImageAuthor>
+            </Styled.ImageDescriptionWrapper>
+          )}
+          {photo.creator === userId && location.pathname === "/places" && (
             <>
               <Styled.GalleryImageButton
                 onClick={() => onDeletePlace(photo.id)}
@@ -86,7 +88,7 @@ const GalleryImageItem = ({
               </Styled.GalleryImageButton>
               <Styled.GalleryImageButton>Edit</Styled.GalleryImageButton>
             </>
-          )} */}
+          )}
         </Styled.ImageFooter>
       </Styled.ImageWrapper>
     </div>

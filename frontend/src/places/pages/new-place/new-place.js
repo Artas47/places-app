@@ -20,7 +20,7 @@ const FormWrapper = styled.div`
   margin: 5rem auto;
   border-radius: 1rem;
   overflow: hidden;
-  box-shadow: 0px 0px 26px 6px rgba(0, 0, 0, 0.52);
+  box-shadow: 0 1px 10px 5px rgba(0, 0, 0, 0.2);
 `;
 
 const ErrorBox = styled.div`
