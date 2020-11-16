@@ -14,12 +14,14 @@ export const ImageFooter = styled.div`
   bottom: 0;
   width: 100%;
   color: #fff;
-  height: 10rem;
+  /* height: 10rem; */
   overflow: hidden;
   display: flex;
   justify-content: space-around;
   align-items: center;
-  box-shadow: inset 0px -5rem 28px -9px rgba(0, 0, 0, 0.35);
+  box-shadow: 1px -115px 30px -94px rgba(0, 0, 0, 0.62) inset;
+  -webkit-box-shadow: 1px -115px 30px -94px rgba(0, 0, 0, 0.62) inset;
+  -moz-box-shadow: 1px -115px 30px -94px rgba(0, 0, 0, 0.62) inset;
   opacity: 0;
   transition: all 0.2s;
   font-size: 1.5rem;
@@ -76,7 +78,7 @@ export const ImageDescriptionWrapper = styled.div`
   align-items: flex-start;
   height: 100%;
   width: 100%;
-  margin: 0.5rem 0 2rem 1rem;
+  margin: 0.5rem 0 0.5rem 1rem;
 `;
 
 export const ImageTitle = styled.p`
