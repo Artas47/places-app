@@ -20,22 +20,21 @@ import useModal from "./shared/hooks/useModal";
 import RandomPlaces from "./places/pages/random-places/random-places";
 /*
 TO DO
-limit number of pages
 make an option to display one sized images
-on hover or smth view place creator
-make gallery items random
+on hover or smth view place creator - done
+make gallery items random - done
 make possibility to view place on google maps (in modal propably)
 front-end forms validation
 back-end forms validation
 modal when trying to delete a place
-some effect on image hover
+some effect on image hover - 0/5
 lazy loading images when beeing at the bottom of page
 image compress on save
 add proptypes
-paginate gallery images
+paginate gallery images - done
 refactor front-end project structure - done
 display loading spinner on edit place - kepp in mind
-loading spinner when loading whole gallery
+loading spinner when loading whole gallery - done
 */
 
 function App() {

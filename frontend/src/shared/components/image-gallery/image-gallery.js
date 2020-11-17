@@ -40,7 +40,7 @@ const ImageGallery = ({ places, onDeletePlace }) => {
         key={key}
         index={index}
         photo={photo}
-        margin={4}
+        margin={3}
         left={left}
         onDeletePlace={onDeletePlace}
         // direction="column"
@@ -125,7 +125,7 @@ const ImageGallery = ({ places, onDeletePlace }) => {
           renderImage={imageRenderer}
           photos={randomPlaces.placesForGallery}
           onClick={openLightbox}
-          margin={4}
+          margin={3}
           targetRowHeight={rowHeight}
           // direction={"column"}
         />

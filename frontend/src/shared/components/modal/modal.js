@@ -4,7 +4,7 @@ import * as Styled from "./modal.styles";
 import { useHistory } from "react-router-dom";
 import Fade from "../fade-animation/fade";
 
-const Modal = ({ closeModal, Component, goBack }) => {
+const Modal = ({ closeModal, Component, goBack, componentProps, styles }) => {
   const history = useHistory();
 
   return ReactDOM.createPortal(
@@ -12,8 +12,11 @@ const Modal = ({ closeModal, Component, goBack }) => {
       <Styled.ModalWrapper
         onClick={() => (goBack ? history.goBack() : closeModal())}
       >
-        <Styled.ModalContent onClick={(e) => e.stopPropagation()}>
-          <Component />
+        <Styled.ModalContent
+          style={styles}
+          onClick={(e) => e.stopPropagation()}
+        >
+          <Component {...componentProps} />
         </Styled.ModalContent>
       </Styled.ModalWrapper>
     </Fade>,

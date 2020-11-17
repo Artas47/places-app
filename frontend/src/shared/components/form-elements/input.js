@@ -7,7 +7,7 @@ const StyledInput = styled.input`
   width: 100%;
   outline: none;
   border: none;
-  background-color: #d9d9d9;
+  background-color: #e6e6e6;
   margin-bottom: 4rem;
   color: #666666;
   font-size: 1.6rem;
