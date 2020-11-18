@@ -125,7 +125,6 @@ function App() {
       >
         <Router>
           <Header />
-          {/* <BackgroundVideo /> */}
           <main
             style={{
               maxWidth: "100%",
