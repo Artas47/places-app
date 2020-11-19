@@ -4,11 +4,15 @@ import axios from "axios";
 import ImageGallery from "../../../shared/components/image-gallery/image-gallery";
 import { useHttpClient } from "../../../shared/hooks/http-hook";
 import Spinner from "../../../shared/components/spinner/spinner";
+import GoogleMap from "../../../shared/components/google-map/google-map";
+import useModal from "../../../shared/hooks/useModal";
 
 const RandomPlaces = () => {
   const location = useLocation();
   const [places, setPlaces] = useState(null);
   const { sendRequest, isLoading } = useHttpClient();
+
+  const { RenderModal, showModal, hideModal } = useModal();
 
   useEffect(() => {
     const fetch = async () => {
@@ -37,7 +41,18 @@ const RandomPlaces = () => {
     );
   }
 
-  return <ImageGallery path="/places" places={places} />;
+  return (
+    <>
+      <RenderModal
+        Component={GoogleMap}
+        componentProps={{ path: "places" }}
+        styles={{
+          width: "90%",
+        }}
+      />
+      <ImageGallery path="/places" places={places} showModal={showModal} />{" "}
+    </>
+  );
 };
 
 export default RandomPlaces;
