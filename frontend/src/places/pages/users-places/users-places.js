@@ -11,7 +11,7 @@ const UsersPlaces = () => {
   const [places, setPlaces] = useState(null);
   useEffect(() => {
     const fetch = async () => {
-      if (location.pathname.startsWith("/places/user/") && params.userId) {
+      if (params.userId) {
         const response = await axios.get(
           `http://localhost:5000/api/places/user/${params.userId}`
         );

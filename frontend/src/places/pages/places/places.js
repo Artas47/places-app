@@ -19,7 +19,7 @@ const Places = () => {
   const { userId, token } = useContext(AuthContext);
 
   const { sendRequest, isLoading } = useHttpClient();
-  const { RenderModal, showModal, hideModal } = useModal(true);
+  const { RenderModal, showModal, hideModal } = useModal();
 
   const onDeletePlace = async (id) => {
     await axios.delete(`http://localhost:5000/api/places/${id}`, {
@@ -35,7 +35,7 @@ const Places = () => {
 
   useEffect(() => {
     const fetch = async () => {
-      if (location.pathname === "/places" && userId) {
+      if (userId) {
         const response = await sendRequest(
           `http://localhost:5000/api/places/user/${userId}`,
           "GET"
@@ -68,18 +68,20 @@ const Places = () => {
 
   return (
     <>
-      <ImageGallery
-        path="/places"
-        places={places}
-        onDeletePlace={onDeletePlace}
-      />
       <RenderModal
         Component={GoogleMap}
-        componentProps={{ path: "places", places, onDeletePlace }}
+        componentProps={{ path: "places" }}
         styles={{
           width: "90%",
         }}
       />
+      <ImageGallery
+        path="/places"
+        places={places}
+        onDeletePlace={onDeletePlace}
+        showModal={showModal}
+      />
+
       {/* {showModal()}
       <RenderModal Component={<ImageGallery />} goBack /> */}
     </>

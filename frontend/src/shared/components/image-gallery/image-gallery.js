@@ -5,8 +5,9 @@ import "react-image-lightbox/style.css";
 import Spinner from "../spinner/spinner";
 import GalleryImageItem from "../gallery-image-item/gallery-image-item";
 import useScroll from "../../hooks/useScroll";
+import GoogleMap from "../google-map/google-map";
 
-const ImageGallery = ({ places, onDeletePlace }) => {
+const ImageGallery = ({ places, onDeletePlace, showModal }) => {
   const [randomPlaces, setRandomPlaces] = useState({
     placesForGallery: [],
     placesForModal: [],
@@ -41,6 +42,7 @@ const ImageGallery = ({ places, onDeletePlace }) => {
         index={index}
         photo={photo}
         margin={3}
+        showModal={showModal}
         left={left}
         onDeletePlace={onDeletePlace}
         // direction="column"

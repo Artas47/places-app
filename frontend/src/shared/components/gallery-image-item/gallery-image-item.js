@@ -2,7 +2,9 @@ import React, { useState, useContext } from "react";
 import Spinner from "../../../shared/components/spinner/spinner";
 import * as Styled from "./gallery-image-item.styles";
 import { AuthContext } from "../../../shared/context/auth-context";
-import { useLocation } from "react-router-dom";
+import { useLocation, useHistory } from "react-router-dom";
+import MapIcon from "@material-ui/icons/Map";
+import useModal from "../../hooks/useModal";
 
 const cont = {
   backgroundColor: "#eee",
@@ -21,10 +23,12 @@ const GalleryImageItem = ({
   selected,
   openLightbox,
   onDeletePlace,
+  showModal,
 }) => {
   const [isLoaded, setIsLoaded] = useState("loading");
   const location = useLocation();
   const { userId } = useContext(AuthContext);
+  const history = useHistory();
   const handleImageLoaded = () => {
     setIsLoaded("loaded");
   };
@@ -89,6 +93,15 @@ const GalleryImageItem = ({
               <Styled.GalleryImageButton>Edit</Styled.GalleryImageButton>
             </>
           )}
+          <MapIcon
+            onClick={() => showModal()}
+            style={{
+              position: "absolute",
+              right: "2rem",
+              height: "3rem",
+              width: "3rem",
+            }}
+          />
         </Styled.ImageFooter>
       </Styled.ImageWrapper>
     </div>

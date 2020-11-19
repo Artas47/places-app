@@ -8,7 +8,7 @@ export const ModalWrapper = styled.div`
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.7);
   z-index: 10;
-  transition: all 1s;
+  /* transition: all 0.3s; */
   display: flex;
   align-items: center;
   justify-content: center;

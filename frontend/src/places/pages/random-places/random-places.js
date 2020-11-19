@@ -12,13 +12,11 @@ const RandomPlaces = () => {
 
   useEffect(() => {
     const fetch = async () => {
-      if (location.pathname === "/" || location.pathname === "/gallery") {
-        const response = await sendRequest(
-          "http://localhost:5000/api/places/random",
-          "GET"
-        );
-        setPlaces(response.results);
-      }
+      const response = await sendRequest(
+        "http://localhost:5000/api/places/random",
+        "GET"
+      );
+      setPlaces(response.results);
     };
     fetch();
   }, []);
