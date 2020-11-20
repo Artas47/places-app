@@ -19,32 +19,45 @@ const Places = () => {
   const { userId, token } = useContext(AuthContext);
 
   const { sendRequest, isLoading } = useHttpClient();
-  const { RenderModal, showModal, hideModal } = useModal();
 
-  const onDeletePlace = async (id) => {
-    await axios.delete(`http://localhost:5000/api/places/${id}`, {
-      headers: {
-        Authorization: "Bearer " + token,
-      },
-    });
-    const responseData = await axios.get(
-      `http://localhost:5000/api/places/user/${userId}`
-    );
-    setPlaces(responseData.data.results);
-  };
+  // const onDeletePlace = async (id) => {
+  //   await axios.delete(`http://localhost:5000/api/places/${id}`, {
+  //     headers: {
+  //       Authorization: "Bearer " + token,
+  //     },
+  //   });
+  //   const responseData = await axios.get(
+  //     `http://localhost:5000/api/places/user/${userId}`
+  //   );
+  //   setPlaces(responseData.data.results);
+  // };
+
+  console.log("location", location);
 
   useEffect(() => {
     const fetch = async () => {
-      if (userId) {
+      if (
+        userId &&
+        (location.pathname === "/places" || location.pathname === "/")
+      ) {
         const response = await sendRequest(
           `http://localhost:5000/api/places/user/${userId}`,
+          "GET"
+        );
+        setPlaces(response.results);
+      } else if (
+        location.pathname === "/gallery" ||
+        location.pathname === "/"
+      ) {
+        const response = await sendRequest(
+          "http://localhost:5000/api/places/random",
           "GET"
         );
         setPlaces(response.results);
       }
     };
     fetch();
-  }, [userId]);
+  }, [userId, location]);
 
   if (isLoading) {
     return (
@@ -68,22 +81,11 @@ const Places = () => {
 
   return (
     <>
-      <RenderModal
-        Component={GoogleMap}
-        componentProps={{ path: "places" }}
-        styles={{
-          width: "90%",
-        }}
-      />
       <ImageGallery
         path="/places"
         places={places}
-        onDeletePlace={onDeletePlace}
-        showModal={showModal}
+        // onDeletePlace={onDeletePlace}
       />
-
-      {/* {showModal()}
-      <RenderModal Component={<ImageGallery />} goBack /> */}
     </>
   );
 };

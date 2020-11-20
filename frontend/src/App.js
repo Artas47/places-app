@@ -17,7 +17,7 @@ import { useAuth } from "./shared/hooks/auth-hook";
 import UsersPlaces from "./places/pages/users-places/users-places";
 import UpdatePlace from "./places/pages/update-place/update-place";
 import useModal from "./shared/hooks/useModal";
-import RandomPlaces from "./places/pages/random-places/random-places";
+import PlaceMap from "./places/pages/place-map/place-map";
 /*
 TO DO
 make an option to display one sized images
@@ -62,13 +62,11 @@ function App() {
   if (token) {
     routes = (
       <Switch>
-        <Route path="/" exact>
-          <RandomPlaces />
-        </Route>
-        <Route path="/gallery" exact>
-          <RandomPlaces />
-        </Route>
-        <Route path="/places" exact>
+        <Route
+          path={["/", "/places", "/places/mapView/:placeId", "/gallery"]}
+          exact
+        >
+          <PlaceMap />
           <Places />
         </Route>
         <Route path="/places/new" exact>
@@ -88,10 +86,10 @@ function App() {
     routes = (
       <Switch>
         <Route path="/" exact>
-          <RandomPlaces />
+          <Places />
         </Route>
         <Route path="/gallery" exact>
-          <RandomPlaces />
+          <Places />
         </Route>
         <Route path="/auth" exact>
           <Auth />

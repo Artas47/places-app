@@ -23,7 +23,6 @@ const GalleryImageItem = ({
   selected,
   openLightbox,
   onDeletePlace,
-  showModal,
 }) => {
   const [isLoaded, setIsLoaded] = useState("loading");
   const location = useLocation();
@@ -94,7 +93,9 @@ const GalleryImageItem = ({
             </>
           )}
           <MapIcon
-            onClick={() => showModal()}
+            onClick={() => {
+              history.push(`/places/mapView/${photo.id}`);
+            }}
             style={{
               position: "absolute",
               right: "2rem",
