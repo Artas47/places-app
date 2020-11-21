@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from "react";
 import Spinner from "../spinner/spinner";
 import Fade from "../fade-animation/fade";
-const GoogleMap = (props) => {
-  console.log("props", props);
+const GoogleMap = ({ placeCords }) => {
   const [iframeLoaded, setIframeLoaded] = useState(false);
-  console.log("I RTSUDYBFSD");
   return (
     <Fade in={true} classNames="fadeModal">
       <div style={{ backgroundColor: "#E5E2DE" }}>
@@ -26,9 +24,12 @@ const GoogleMap = (props) => {
           onLoad={() => {
             setIframeLoaded(true);
           }}
-          style={{ display: iframeLoaded ? "block" : "none" }}
+          style={{
+            display: iframeLoaded ? "block" : "none",
+            pointerEvents: "none",
+          }}
           height="800px"
-          src="https://www.google.com/maps/embed/v1/view?key=AIzaSyAGtJ63Nwbrvl_3LwBqakW85Sz7Q9QFKiI&center=-33.8569,151.2152&zoom=18&maptype=satellite"
+          src={`https://www.google.com/maps/embed/v1/view?key=AIzaSyAGtJ63Nwbrvl_3LwBqakW85Sz7Q9QFKiI&center=${placeCords}&zoom=18&maptype=satellite`}
         />
       </div>
     </Fade>

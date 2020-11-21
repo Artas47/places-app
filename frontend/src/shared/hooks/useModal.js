@@ -2,7 +2,9 @@ import React, { useState } from "react";
 import Modal from "../components/modal/modal";
 
 const useModal = (visible) => {
+  // console.log("visible", visible);
   const [isVisible, setIsVisible] = useState(visible);
+  console.log("isVisible", isVisible);
 
   const RenderModal = ({ Component, componentProps, goBack, styles }) => {
     return (

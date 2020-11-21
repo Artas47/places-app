@@ -6,11 +6,13 @@ import Fade from "../fade-animation/fade";
 
 const Modal = ({ closeModal, Component, goBack, componentProps, styles }) => {
   const history = useHistory();
-
+  // console.log("componentProps", componentProps);
   return ReactDOM.createPortal(
     <Fade in={true} classNames="fadeModal">
       <Styled.ModalWrapper
-        onClick={() => (goBack ? history.goBack() : closeModal())}
+        onClick={() => {
+          history.push(`/${componentProps.path}`);
+        }}
       >
         <Styled.ModalContent
           style={styles}

@@ -9,12 +9,8 @@ import Spinner from "../../../shared/components/spinner/spinner";
 import useModal from "../../../shared/hooks/useModal";
 import GoogleMap from "../../../shared/components/google-map/google-map";
 
-const Test = () => {
-  return <div>fsdsdfds</div>;
-};
-
-const Places = () => {
-  const location = useLocation();
+const Gallery = () => {
+  console.log("fdfdsfds");
   const [places, setPlaces] = useState(null);
   const { userId, token } = useContext(AuthContext);
 
@@ -31,18 +27,15 @@ const Places = () => {
   //   );
   //   setPlaces(responseData.data.results);
   // };
-  //
-  // console.log("location", location);
 
   useEffect(() => {
     const fetch = async () => {
-      if (userId && location.pathname.startsWith("/places")) {
-        const response = await sendRequest(
-          `http://localhost:5000/api/places/user/${userId}`,
-          "GET"
-        );
-        setPlaces(response.results);
-      }
+      const response = await sendRequest(
+        "http://localhost:5000/api/places/random",
+        "GET"
+      );
+      console.log("response", response);
+      setPlaces(response.results);
     };
     fetch();
   }, [userId]);
@@ -69,13 +62,9 @@ const Places = () => {
 
   return (
     <>
-      <ImageGallery
-        path="/places"
-        places={places}
-        // onDeletePlace={onDeletePlace}
-      />
+      <ImageGallery path="/gallery" places={places} />
     </>
   );
 };
 
-export default Places;
+export default Gallery;

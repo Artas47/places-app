@@ -7,7 +7,7 @@ import GalleryImageItem from "../gallery-image-item/gallery-image-item";
 import useScroll from "../../hooks/useScroll";
 import GoogleMap from "../google-map/google-map";
 
-const ImageGallery = ({ places, onDeletePlace, showModal }) => {
+const ImageGallery = ({ places, onDeletePlace, showModal, path }) => {
   const [randomPlaces, setRandomPlaces] = useState({
     placesForGallery: [],
     placesForModal: [],
@@ -45,6 +45,7 @@ const ImageGallery = ({ places, onDeletePlace, showModal }) => {
         showModal={showModal}
         left={left}
         onDeletePlace={onDeletePlace}
+        path={path}
         // direction="column"
         top={top}
         openLightbox={openLightbox}

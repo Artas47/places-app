@@ -40,6 +40,7 @@ const NewPlace = () => {
   const { userId, token, imgDiemensions } = useContext(AuthContext);
   const history = useHistory();
   const onSubmit = async (data) => {
+    console.log("data", data);
     try {
       const formData = new FormData();
       formData.append("title", data.title);
@@ -48,7 +49,7 @@ const NewPlace = () => {
       formData.append("imageWidth", imgDiemensions.width);
       formData.append("imageHeight", imgDiemensions.height);
       formData.append("creator", userId);
-      formData.append("address", "warsaw");
+      formData.append("address", data.address);
       await sendRequest("http://localhost:5000/api/places", "POST", formData, {
         Authorization: "Bearer " + token,
       });
@@ -98,11 +99,11 @@ const NewPlace = () => {
               >
                 <Label htmlFor="title">Title</Label>
                 <Input id="title" name="title" register={register} />
-                <Label htmlFor="description">Description</Label>
+                <Label htmlFor="address">Address</Label>
                 <Input
-                  id="description"
-                  name="description"
-                  type="description"
+                  id="address"
+                  name="address"
+                  type="address"
                   register={register}
                 />
                 <ErrorBox>{error ? error : ""}</ErrorBox>
