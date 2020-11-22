@@ -14,17 +14,18 @@ const GoogleMap = ({ placeCords }) => {
   useEffect(() => {
     setCords(placeCords);
   }, []);
+
   const [iframeLoaded, setIframeLoaded] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [cords, setCords] = useState({
     lat: -0.481747846041145,
     lng: 51.3233379650232,
   });
-  // console.log("cords", cords);
+
   const _onClickMap = (map, evt) => {
-    // console.log(evt.lngLat);
     setCords(evt.lngLat);
   };
+
   return (
     <Fade in={true} classNames="fadeModal">
       <div style={{ backgroundColor: "#E5E2DE" }}>
@@ -66,25 +67,6 @@ const GoogleMap = ({ placeCords }) => {
           </Layer>
         </Map>
         ;
-        {/* <GoogleMapReact
-          bootstrapURLKeys={{ key: "AIzaSyAGtJ63Nwbrvl_3LwBqakW85Sz7Q9QFKiI" }}
-          defaultCenter={{ lat: 59.95, lng: 30.33 }}
-          defaultZoom={11}
-        >
-          <AnyReactComponent lat={59.955413} lng={30.337844} text="My Marker" />
-        </GoogleMapReact> */}
-        {/* <iframe
-          id="iframe1"
-          width="100%"
-          onLoad={() => {
-            setIframeLoaded(true);
-          }}
-          style={{
-            display: iframeLoaded ? "block" : "none",
-          }}
-          height="800px"
-          src={`https://www.google.com/maps/embed/v1/view?key=AIzaSyAGtJ63Nwbrvl_3LwBqakW85Sz7Q9QFKiI&center=${placeCords}&zoom=18&maptype=satellite`}
-        /> */}
       </div>
     </Fade>
   );
