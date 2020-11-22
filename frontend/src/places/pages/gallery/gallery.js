@@ -10,7 +10,6 @@ import useModal from "../../../shared/hooks/useModal";
 import GoogleMap from "../../../shared/components/google-map/google-map";
 
 const Gallery = () => {
-  console.log("fdfdsfds");
   const [places, setPlaces] = useState(null);
   const { userId, token } = useContext(AuthContext);
 
@@ -34,7 +33,6 @@ const Gallery = () => {
         "http://localhost:5000/api/places/random",
         "GET"
       );
-      console.log("response", response);
       setPlaces(response.results);
     };
     fetch();

@@ -94,9 +94,6 @@ const ImageGallery = ({ places, onDeletePlace, showModal, path }) => {
       setIsLoading(false);
     };
     fetchRandomPlaces();
-    return () => {
-      console.log("I RUN");
-    };
   }, [places]);
 
   return (

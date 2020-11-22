@@ -40,7 +40,6 @@ const NewPlace = () => {
   const { userId, token, imgDiemensions } = useContext(AuthContext);
   const history = useHistory();
   const onSubmit = async (data) => {
-    console.log("data", data);
     try {
       const formData = new FormData();
       formData.append("title", data.title);

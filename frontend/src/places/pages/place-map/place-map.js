@@ -23,8 +23,11 @@ const PlaceMap = ({ path }) => {
           );
         }
         if (response.place.location) {
-          const cordsString = `${response.place.location.lat},${response.place.location.lng}`;
-          setPlaceCords(cordsString);
+          const cords = {
+            lat: response.place.location.lat,
+            lng: response.place.location.lng,
+          };
+          setPlaceCords(cords);
           // setPlace(response.place);
         }
       };
@@ -42,6 +45,10 @@ const PlaceMap = ({ path }) => {
       hideModal();
     }
   }, [location]);
+
+  if (!placeCords) {
+    return null;
+  }
 
   return (
     <RenderModal
