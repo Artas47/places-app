@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useState } from "react";
+import React, { useLayoutEffect, useState, useCallback } from "react";
 import {
   BrowserRouter as Router,
   Route,
@@ -44,6 +44,11 @@ function App() {
   const [users, setUsers] = useState([]);
   const [searchParam, setSearchParam] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
+  const [zoom, setZoom] = useState(0);
+  const [cords, setCords] = useState({
+    lat: -0.481747846041145,
+    lng: 51.3233379650232,
+  });
   const [imgDiemensions, setImgDiemensions] = useState({ height: 0, width: 0 });
 
   const { RenderModal } = useModal();
@@ -121,6 +126,10 @@ function App() {
           currentPage,
           imgDiemensions,
           setImgDiemensions,
+          setZoom,
+          zoom,
+          cords,
+          setCords,
         }}
       >
         <Router>

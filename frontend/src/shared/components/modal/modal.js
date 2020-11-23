@@ -11,7 +11,10 @@ const Modal = ({ closeModal, Component, goBack, componentProps, styles }) => {
     <Fade in={true} classNames="fadeModal">
       <Styled.ModalWrapper
         onClick={() => {
-          history.push(`/${componentProps.path}`);
+          if (componentProps.path) {
+            history.push(`/${componentProps.path}`);
+          }
+          closeModal();
         }}
       >
         <Styled.ModalContent

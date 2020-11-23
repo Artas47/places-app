@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import Spinner from "../spinner/spinner";
 import Fade from "../fade-animation/fade";
 import GoogleMapReact from "google-map-react";
 import ReactMapboxGl, { Layer, Feature, Marker } from "react-mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
+import { AuthContext } from "../../context/auth-context";
 
 const Map = ReactMapboxGl({
   accessToken:
@@ -11,19 +12,21 @@ const Map = ReactMapboxGl({
 });
 
 const GoogleMap = ({ placeCords }) => {
-  useEffect(() => {
-    setCords(placeCords);
-  }, []);
+  const { setCords, cords } = useContext(AuthContext);
+  console.log("cords", cords);
+  // useEffect(() => {
+  //   setCords(placeCords);
+  // }, []);
 
   const [iframeLoaded, setIframeLoaded] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
-  const [cords, setCords] = useState({
+  const [cordss, setCordss] = useState({
     lat: -0.481747846041145,
     lng: 51.3233379650232,
   });
 
   const _onClickMap = (map, evt) => {
-    setCords(evt.lngLat);
+    setCordss(evt.lngLat);
   };
 
   return (
@@ -52,9 +55,9 @@ const GoogleMap = ({ placeCords }) => {
           onStyleLoad={() => setIsLoading(false)}
           onClick={_onClickMap}
           // onBoxZoomEnd={(e) => console.log(e.getCenter())}
-          onBoxZoomEnd={(e) => console.log(e.getZoom())}
+          // onBoxZoomEnd={(e) => setZoom(e.getZoom())}
         >
-          <Marker coordinates={[cords.lng, cords.lat]} anchor="bottom">
+          <Marker coordinates={[cordss.lng, cordss.lat]} anchor="bottom">
             <img src={"https://picsum.photos/200/300"} />
           </Marker>
           <Layer
@@ -72,4 +75,4 @@ const GoogleMap = ({ placeCords }) => {
   );
 };
 
-export default GoogleMap;
+export default React.memo(GoogleMap);

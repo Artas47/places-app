@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useCallback } from "react";
 import { useForm } from "react-hook-form";
 import Input from "../../../shared/components/form-elements/input";
 import Form from "../../../shared/components/form-elements/form";
@@ -43,6 +43,17 @@ const NewPlace = () => {
   const { userId, token, imgDiemensions } = useContext(AuthContext);
   // const [showMap, setShowMap] = useState(false);
   const { RenderModal, showModal, hideModal } = useModal(false);
+  const [zoom, setZoom] = useState(0);
+
+  const setE = useCallback((q) => {
+    setZoom(q);
+  }, []);
+  // const [cords, setCords] = useState({
+  //   lat: -0.481747846041145,
+  //   lng: 51.3233379650232,
+  // });
+  // console.log("cordsdfsfsd", cords);
+  // console.log("zoom", zoom);
   const history = useHistory();
   const onSubmit = async (data) => {
     try {
@@ -142,7 +153,7 @@ const NewPlace = () => {
                     }}
                     style={{ width: "20rem", padding: "0" }}
                   >
-                    Get coordinates
+                    Select place on map
                   </CustomButton>
                 </div>
                 <ErrorBox>{error ? error : ""}</ErrorBox>
