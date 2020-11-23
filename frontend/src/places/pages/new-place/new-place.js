@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import Input from "../../../shared/components/form-elements/input";
 import Form from "../../../shared/components/form-elements/form";
@@ -11,6 +11,9 @@ import Spinner from "../../../shared/components/spinner/spinner";
 import { useHistory } from "react-router-dom";
 import Fade from "../../../shared/components/fade-animation/fade";
 import ImageUpload from "../../../shared/components/form-elements/image-upload/image-upload";
+import CustomButton from "../../../shared/components/button/button";
+import GoogleMap from "../../../shared/components/google-map/google-map";
+import useModal from "../../../shared/hooks/useModal";
 
 const FormWrapper = styled.div`
   width: 60rem;
@@ -38,6 +41,8 @@ const NewPlace = () => {
   const { register, handleSubmit } = useForm(); // initialise the hook
   const { isLoading, sendRequest, error } = useHttpClient();
   const { userId, token, imgDiemensions } = useContext(AuthContext);
+  // const [showMap, setShowMap] = useState(false);
+  const { RenderModal, showModal, hideModal } = useModal(false);
   const history = useHistory();
   const onSubmit = async (data) => {
     try {
@@ -97,18 +102,65 @@ const NewPlace = () => {
                 }}
               >
                 <Label htmlFor="title">Title</Label>
-                <Input id="title" name="title" register={register} />
-                <Label htmlFor="address">Address</Label>
                 <Input
-                  id="address"
-                  name="address"
-                  type="address"
+                  style={{ marginBottom: "3rem" }}
+                  id="title"
+                  name="title"
                   register={register}
                 />
+                <Label htmlFor="address">Address or coordinates</Label>
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    height: "5rem",
+                    marginBottom: "3rem",
+                  }}
+                >
+                  <Input
+                    id="address"
+                    name="address"
+                    type="address"
+                    style={{ width: "50%" }}
+                    register={register}
+                  />
+                  <div
+                    style={{
+                      width: "20%",
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      fontSize: "2rem",
+                    }}
+                  >
+                    or
+                  </div>
+                  <CustomButton
+                    onClick={(e) => {
+                      e.preventDefault();
+                      showModal();
+                    }}
+                    style={{ width: "20rem", padding: "0" }}
+                  >
+                    Get coordinates
+                  </CustomButton>
+                </div>
                 <ErrorBox>{error ? error : ""}</ErrorBox>
                 <Button style={{}} type="submit">
                   Submit
                 </Button>
+                <RenderModal
+                  Component={GoogleMap}
+                  componentProps={{
+                    placeCords: {
+                      lat: -0.481747846041145,
+                      lng: 51.3233379650232,
+                    },
+                  }}
+                  styles={{
+                    width: "90%",
+                  }}
+                />
               </div>
             </Form>
           </fieldset>

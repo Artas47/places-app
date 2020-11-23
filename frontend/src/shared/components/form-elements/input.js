@@ -8,7 +8,6 @@ const StyledInput = styled.input`
   outline: none;
   border: none;
   background-color: #e6e6e6;
-  margin-bottom: 4rem;
   color: #666666;
   font-size: 1.6rem;
   border-bottom: 2px solid transparent;

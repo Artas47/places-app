@@ -144,13 +144,15 @@ const Auth = () => {
                   required: "Email is required",
                 })}
               />
-              <Label htmlFor="password">Password</Label>
-              <Input
-                id="password"
-                name="password"
-                type="password"
-                register={register({ required: "Password is required" })}
-              />
+              <div style={{ margin: "3.5rem 0" }}>
+                <Label htmlFor="password">Password</Label>
+                <Input
+                  id="password"
+                  name="password"
+                  type="password"
+                  register={register({ required: "Password is required" })}
+                />
+              </div>
               <ErrorContainer>
                 {errors.password && <div>{errors.password.message}</div>}
                 {errors.email && <div>{errors.email.message}</div>}
