@@ -12,21 +12,15 @@ const Map = ReactMapboxGl({
 });
 
 const GoogleMap = ({ placeCords }) => {
-  const { setCords, cords } = useContext(AuthContext);
-  console.log("cords", cords);
-  // useEffect(() => {
-  //   setCords(placeCords);
-  // }, []);
-
-  const [iframeLoaded, setIframeLoaded] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
-  const [cordss, setCordss] = useState({
+
+  const [cords, setCords] = useState({
     lat: -0.481747846041145,
     lng: 51.3233379650232,
   });
 
   const _onClickMap = (map, evt) => {
-    setCordss(evt.lngLat);
+    setCords(evt.lngLat);
   };
 
   return (
@@ -50,14 +44,18 @@ const GoogleMap = ({ placeCords }) => {
             height: "60vh",
             width: "100%",
           }}
-          // center={[placeCords.lng, placeCords.lat]}
-          // zoom={[16]}
+          center={placeCords && [placeCords.lng, placeCords.lat]}
+          // zoom={[8]}
           onStyleLoad={() => setIsLoading(false)}
-          onClick={_onClickMap}
-          // onBoxZoomEnd={(e) => console.log(e.getCenter())}
+          onClick={(map, evt) => {
+            if (!placeCords) {
+              _onClickMap(map, evt);
+            }
+            return;
+          }}
           // onBoxZoomEnd={(e) => setZoom(e.getZoom())}
         >
-          <Marker coordinates={[cordss.lng, cordss.lat]} anchor="bottom">
+          <Marker coordinates={[cords.lng, cords.lat]} anchor="bottom">
             <img src={"https://picsum.photos/200/300"} />
           </Marker>
           <Layer
@@ -65,9 +63,7 @@ const GoogleMap = ({ placeCords }) => {
             type="symbol"
             id="marker"
             layout={{ "icon-image": "marker-15" }}
-          >
-            {/* <Feature raster coordinates={[placeCords.lat, placeCords.lng]} /> */}
-          </Layer>
+          ></Layer>
         </Map>
         ;
       </div>

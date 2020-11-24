@@ -4,24 +4,25 @@ import * as Styled from "./modal.styles";
 import { useHistory } from "react-router-dom";
 import Fade from "../fade-animation/fade";
 
-const Modal = ({ closeModal, Component, goBack, componentProps, styles }) => {
+const Modal = ({ path, children, setShowModal }) => {
   const history = useHistory();
-  // console.log("componentProps", componentProps);
+
   return ReactDOM.createPortal(
     <Fade in={true} classNames="fadeModal">
       <Styled.ModalWrapper
         onClick={() => {
-          if (componentProps.path) {
-            history.push(`/${componentProps.path}`);
+          if (path) {
+            history.push(`/${path}`);
           }
-          closeModal();
+          setShowModal(false);
         }}
       >
         <Styled.ModalContent
-          style={styles}
+          // style={styles}
           onClick={(e) => e.stopPropagation()}
         >
-          <Component {...componentProps} />
+          {children}
+          {/* <Component {...componentProps} /> */}
         </Styled.ModalContent>
       </Styled.ModalWrapper>
     </Fade>,

@@ -1,4 +1,4 @@
-import React, { useContext, useState, useCallback } from "react";
+import React, { useContext, useState, useCallback, useRef } from "react";
 import { useForm } from "react-hook-form";
 import Input from "../../../shared/components/form-elements/input";
 import Form from "../../../shared/components/form-elements/form";
@@ -14,6 +14,7 @@ import ImageUpload from "../../../shared/components/form-elements/image-upload/i
 import CustomButton from "../../../shared/components/button/button";
 import GoogleMap from "../../../shared/components/google-map/google-map";
 import useModal from "../../../shared/hooks/useModal";
+import Modal from "../../../shared/components/modal/modal";
 
 const FormWrapper = styled.div`
   width: 60rem;
@@ -38,22 +39,12 @@ const ErrorBox = styled.div`
 `;
 
 const NewPlace = () => {
-  const { register, handleSubmit } = useForm(); // initialise the hook
+  const { register, handleSubmit } = useForm();
   const { isLoading, sendRequest, error } = useHttpClient();
   const { userId, token, imgDiemensions } = useContext(AuthContext);
-  // const [showMap, setShowMap] = useState(false);
-  const { RenderModal, showModal, hideModal } = useModal(false);
-  const [zoom, setZoom] = useState(0);
+  const [showModal, setShowModal] = useState(false);
+  const ref = useRef();
 
-  const setE = useCallback((q) => {
-    setZoom(q);
-  }, []);
-  // const [cords, setCords] = useState({
-  //   lat: -0.481747846041145,
-  //   lng: 51.3233379650232,
-  // });
-  // console.log("cordsdfsfsd", cords);
-  // console.log("zoom", zoom);
   const history = useHistory();
   const onSubmit = async (data) => {
     try {
@@ -149,7 +140,7 @@ const NewPlace = () => {
                   <CustomButton
                     onClick={(e) => {
                       e.preventDefault();
-                      showModal();
+                      setShowModal(true);
                     }}
                     style={{ width: "20rem", padding: "0" }}
                   >
@@ -160,18 +151,25 @@ const NewPlace = () => {
                 <Button style={{}} type="submit">
                   Submit
                 </Button>
-                <RenderModal
+                {showModal && (
+                  <Modal setShowModal={setShowModal}>
+                    <GoogleMap />
+                  </Modal>
+                )}
+
+                {/* <RenderModal
                   Component={GoogleMap}
                   componentProps={{
                     placeCords: {
                       lat: -0.481747846041145,
                       lng: 51.3233379650232,
                     },
+                    ref,
                   }}
                   styles={{
                     width: "90%",
                   }}
-                />
+                /> */}
               </div>
             </Form>
           </fieldset>
