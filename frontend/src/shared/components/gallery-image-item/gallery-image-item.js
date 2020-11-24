@@ -4,7 +4,6 @@ import * as Styled from "./gallery-image-item.styles";
 import { AuthContext } from "../../../shared/context/auth-context";
 import { useLocation, useHistory } from "react-router-dom";
 import MapIcon from "@material-ui/icons/Map";
-import useModal from "../../hooks/useModal";
 
 const cont = {
   backgroundColor: "#eee",

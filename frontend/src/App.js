@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useState, useCallback } from "react";
+import React, { useLayoutEffect, useState } from "react";
 import {
   BrowserRouter as Router,
   Route,
@@ -8,7 +8,6 @@ import {
 import "./App.css";
 import Header from "./shared/components/navigation/header/header";
 import { GlobalStyles } from "./globalStyles";
-import Users from "./user/pages/users";
 import Places from "./places/pages/places/places";
 import NewPlace from "./places/pages/new-place/new-place";
 import Auth from "./user/pages/auth";

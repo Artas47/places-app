@@ -1,17 +1,13 @@
 import React, { useEffect, useState } from "react";
-import useModal from "../../../shared/hooks/useModal";
 import GoogleMap from "../../../shared/components/google-map/google-map";
-import { useLocation, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useHttpClient } from "../../../shared/hooks/http-hook";
 import Modal from "../../../shared/components/modal/modal";
 
 const PlaceMap = ({ path }) => {
-  const location = useLocation();
   const params = useParams();
-  // console.log("params", params);
-  // const { RenderModal, showModal, hideModal } = useModal(false);
   const [showModal, setShowModal] = useState(false);
-  const { sendRequest, isLoading } = useHttpClient();
+  const { sendRequest } = useHttpClient();
   const [placeCords, setPlaceCords] = useState(null);
 
   useEffect(() => {
@@ -31,23 +27,11 @@ const PlaceMap = ({ path }) => {
             lng: response.place.location.lng,
           };
           setPlaceCords(cords);
-          // setPlace(response.place);
         }
       };
       fetch();
     }
-  }, [params]);
-
-  // useEffect(() => {
-  //   if (
-  //     location.pathname.startsWith("/places/mapView") ||
-  //     location.pathname.startsWith("/gallery/mapView")
-  //   ) {
-  //     showModal();
-  //   } else {
-  //     hideModal();
-  //   }
-  // }, [location]);
+  }, [params, sendRequest]);
 
   if (!placeCords) {
     return null;
@@ -61,13 +45,6 @@ const PlaceMap = ({ path }) => {
         </Modal>
       )}
     </div>
-    // <RenderModal
-    //   Component={GoogleMap}
-    //   componentProps={{ path, placeCords }}
-    //   styles={{
-    //     width: "90%",
-    //   }}
-    // />
   );
 };
 

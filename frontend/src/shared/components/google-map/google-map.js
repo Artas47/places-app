@@ -1,10 +1,8 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState } from "react";
 import Spinner from "../spinner/spinner";
 import Fade from "../fade-animation/fade";
-import GoogleMapReact from "google-map-react";
-import ReactMapboxGl, { Layer, Feature, Marker } from "react-mapbox-gl";
+import ReactMapboxGl, { Layer, Marker } from "react-mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
-import { AuthContext } from "../../context/auth-context";
 
 const Map = ReactMapboxGl({
   accessToken:
@@ -35,7 +33,6 @@ const GoogleMap = ({ placeCords }) => {
               transform: "translate(-50%, -50%)",
               zIndex: "1",
             }}
-            // className="color-white"
           />
         )}
         <Map
@@ -56,7 +53,7 @@ const GoogleMap = ({ placeCords }) => {
           // onBoxZoomEnd={(e) => setZoom(e.getZoom())}
         >
           <Marker coordinates={[cords.lng, cords.lat]} anchor="bottom">
-            <img src={"https://picsum.photos/200/300"} />
+            <img alt="marker" src={"https://picsum.photos/200/300"} />
           </Marker>
           <Layer
             raster

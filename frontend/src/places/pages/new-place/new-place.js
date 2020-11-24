@@ -1,4 +1,4 @@
-import React, { useContext, useState, useCallback, useRef } from "react";
+import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import Input from "../../../shared/components/form-elements/input";
 import Form from "../../../shared/components/form-elements/form";
@@ -13,7 +13,6 @@ import Fade from "../../../shared/components/fade-animation/fade";
 import ImageUpload from "../../../shared/components/form-elements/image-upload/image-upload";
 import CustomButton from "../../../shared/components/button/button";
 import GoogleMap from "../../../shared/components/google-map/google-map";
-import useModal from "../../../shared/hooks/useModal";
 import Modal from "../../../shared/components/modal/modal";
 
 const FormWrapper = styled.div`
@@ -43,7 +42,6 @@ const NewPlace = () => {
   const { isLoading, sendRequest, error } = useHttpClient();
   const { userId, token, imgDiemensions } = useContext(AuthContext);
   const [showModal, setShowModal] = useState(false);
-  const ref = useRef();
 
   const history = useHistory();
   const onSubmit = async (data) => {

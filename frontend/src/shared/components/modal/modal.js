@@ -17,12 +17,8 @@ const Modal = ({ path, children, setShowModal }) => {
           setShowModal(false);
         }}
       >
-        <Styled.ModalContent
-          // style={styles}
-          onClick={(e) => e.stopPropagation()}
-        >
+        <Styled.ModalContent onClick={(e) => e.stopPropagation()}>
           {children}
-          {/* <Component {...componentProps} /> */}
         </Styled.ModalContent>
       </Styled.ModalWrapper>
     </Fade>,

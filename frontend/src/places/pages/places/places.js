@@ -1,38 +1,17 @@
 import React, { useEffect, useState, useContext } from "react";
 import ImageGallery from "../../../shared/components/image-gallery/image-gallery";
 import { useLocation } from "react-router-dom";
-import axios from "axios";
 import { AuthContext } from "../../../shared/context/auth-context";
 import { useHttpClient } from "../../../shared/hooks/http-hook";
 import InfoBox from "../../../shared/components/info-box/info-box";
 import Spinner from "../../../shared/components/spinner/spinner";
-import useModal from "../../../shared/hooks/useModal";
-import GoogleMap from "../../../shared/components/google-map/google-map";
-
-const Test = () => {
-  return <div>fsdsdfds</div>;
-};
 
 const Places = () => {
   const location = useLocation();
   const [places, setPlaces] = useState(null);
-  const { userId, token } = useContext(AuthContext);
+  const { userId } = useContext(AuthContext);
 
   const { sendRequest, isLoading } = useHttpClient();
-
-  // const onDeletePlace = async (id) => {
-  //   await axios.delete(`http://localhost:5000/api/places/${id}`, {
-  //     headers: {
-  //       Authorization: "Bearer " + token,
-  //     },
-  //   });
-  //   const responseData = await axios.get(
-  //     `http://localhost:5000/api/places/user/${userId}`
-  //   );
-  //   setPlaces(responseData.data.results);
-  // };
-  //
-  // console.log("location", location);
 
   useEffect(() => {
     const fetch = async () => {
@@ -45,7 +24,7 @@ const Places = () => {
       }
     };
     fetch();
-  }, [userId]);
+  }, [userId, location, sendRequest]);
 
   if (isLoading) {
     return (
