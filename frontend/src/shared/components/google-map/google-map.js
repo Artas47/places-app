@@ -9,15 +9,17 @@ const Map = ReactMapboxGl({
     "pk.eyJ1IjoiYXJ0aTQ3IiwiYSI6ImNraHQydTh0MjBxMzYycWxoNm54aWJld2EifQ._wR4gZMPRohZ3pX3ZEgURw",
 });
 
-const GoogleMap = ({ placeCords }) => {
+const GoogleMap = ({ placeCords, setCords, cords, zoom, setZoom }) => {
   const [isLoading, setIsLoading] = useState(true);
 
-  const [cords, setCords] = useState({
-    lat: -0.481747846041145,
-    lng: 51.3233379650232,
-  });
+  // const [cords, setCords] = useState({
+  //   lat: -0.481747846041145,
+  //   lng: 51.3233379650232,
+  // });
 
   const _onClickMap = (map, evt) => {
+    console.log("evt", evt);
+    console.log("map", map);
     setCords(evt.lngLat);
   };
 
@@ -50,9 +52,21 @@ const GoogleMap = ({ placeCords }) => {
             }
             return;
           }}
-          // onBoxZoomEnd={(e) => setZoom(e.getZoom())}
+          onBoxZoomEnd={(e, q, w) => {
+            if (setZoom) {
+              setZoom(e.getZoom());
+              setCords(e.transform._center);
+            }
+          }}
         >
-          <Marker coordinates={[cords.lng, cords.lat]} anchor="bottom">
+          <Marker
+            coordinates={
+              cords
+                ? [cords.lng, cords.lat]
+                : [51.3233379650232, -0.481747846041145]
+            }
+            anchor="bottom"
+          >
             <img alt="marker" src={"https://picsum.photos/200/300"} />
           </Marker>
           <Layer

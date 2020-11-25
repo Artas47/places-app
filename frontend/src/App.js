@@ -72,8 +72,8 @@ function App() {
           <PlaceMap path="gallery" />
         </Route>
         <Route path={["/places", "/places/mapView/:placeId"]} exact>
-          <Places />
           <PlaceMap path="places" />
+          <Places />
         </Route>
         <Route path="/places/new" exact>
           <NewPlace />

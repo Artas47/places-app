@@ -24,7 +24,7 @@ const Places = () => {
       }
     };
     fetch();
-  }, [userId, location, sendRequest]);
+  }, [userId, sendRequest]);
 
   if (isLoading) {
     return (

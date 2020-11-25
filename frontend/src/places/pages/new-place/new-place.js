@@ -42,6 +42,13 @@ const NewPlace = () => {
   const { isLoading, sendRequest, error } = useHttpClient();
   const { userId, token, imgDiemensions } = useContext(AuthContext);
   const [showModal, setShowModal] = useState(false);
+  const [cords, setCords] = useState({
+    lat: -0.481747846041145,
+    lng: 51.3233379650232,
+  });
+  const [zoom, setZoom] = useState(null);
+  console.log("cords", cords);
+  console.log("zoom", zoom);
 
   const history = useHistory();
   const onSubmit = async (data) => {
@@ -151,23 +158,14 @@ const NewPlace = () => {
                 </Button>
                 {showModal && (
                   <Modal setShowModal={setShowModal}>
-                    <GoogleMap />
+                    <GoogleMap
+                      setCords={setCords}
+                      cords={cords}
+                      setZoom={setZoom}
+                      zoom={zoom}
+                    />
                   </Modal>
                 )}
-
-                {/* <RenderModal
-                  Component={GoogleMap}
-                  componentProps={{
-                    placeCords: {
-                      lat: -0.481747846041145,
-                      lng: 51.3233379650232,
-                    },
-                    ref,
-                  }}
-                  styles={{
-                    width: "90%",
-                  }}
-                /> */}
               </div>
             </Form>
           </fieldset>
