@@ -9,7 +9,7 @@ const Map = ReactMapboxGl({
     "pk.eyJ1IjoiYXJ0aTQ3IiwiYSI6ImNraHQydTh0MjBxMzYycWxoNm54aWJld2EifQ._wR4gZMPRohZ3pX3ZEgURw",
 });
 
-const GoogleMap = ({ placeCords, setCords, cords, zoom, setZoom }) => {
+const GoogleMap = ({ placeCords, setCords, cords, setZoom }) => {
   const [isLoading, setIsLoading] = useState(true);
 
   // const [cords, setCords] = useState({
@@ -44,7 +44,7 @@ const GoogleMap = ({ placeCords, setCords, cords, zoom, setZoom }) => {
             width: "100%",
           }}
           center={placeCords && [placeCords.lng, placeCords.lat]}
-          // zoom={[8]}
+          zoom={placeCords?.zoom && [placeCords.zoom]}
           onStyleLoad={() => setIsLoading(false)}
           onClick={(map, evt) => {
             if (!placeCords) {

@@ -23,8 +23,9 @@ const PlaceMap = ({ path }) => {
         }
         if (response.place.location) {
           const cords = {
-            lat: response.place.location.lat,
-            lng: response.place.location.lng,
+            lat: response.place.location.coordinates.lat,
+            lng: response.place.location.coordinates.lng,
+            zoom: response.place.location.zoom
           };
           setPlaceCords(cords);
         }

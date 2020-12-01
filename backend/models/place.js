@@ -18,8 +18,11 @@ const placeSchema = new Schema({
   },
   address: { type: String },
   location: {
-    lat: { type: Number, required: true },
-    lng: { type: Number, required: true },
+    coordinates: {
+      lat: { type: Number },
+      lng: { type: Number },
+    },
+    zoom: { type: Number }
   },
   creator: { type: mongoose.Types.ObjectId, required: true, ref: "User" },
 });

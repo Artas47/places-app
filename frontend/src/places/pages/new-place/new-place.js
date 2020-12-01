@@ -52,6 +52,11 @@ const NewPlace = () => {
 
   const history = useHistory();
   const onSubmit = async (data) => {
+    const location = {
+      coordinates: cords,
+      zoom
+    }
+    console.log('location', location)
     try {
       const formData = new FormData();
       formData.append("title", data.title);
@@ -61,6 +66,7 @@ const NewPlace = () => {
       formData.append("imageHeight", imgDiemensions.height);
       formData.append("creator", userId);
       formData.append("address", data.address);
+      formData.append("location", JSON.stringify(location));
       await sendRequest("http://localhost:5000/api/places", "POST", formData, {
         Authorization: "Bearer " + token,
       });
