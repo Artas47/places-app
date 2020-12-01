@@ -5,11 +5,12 @@ import { AuthContext } from "../../../shared/context/auth-context";
 import { useHttpClient } from "../../../shared/hooks/http-hook";
 import InfoBox from "../../../shared/components/info-box/info-box";
 import Spinner from "../../../shared/components/spinner/spinner";
+import axios from 'axios';
 
 const Places = () => {
   const location = useLocation();
   const [places, setPlaces] = useState(null);
-  const { userId } = useContext(AuthContext);
+  const { userId, token } = useContext(AuthContext);
 
   const { sendRequest, isLoading } = useHttpClient();
 
@@ -25,6 +26,18 @@ const Places = () => {
     };
     fetch();
   }, [userId, sendRequest]);
+
+  const onDeletePlace = async (id) => {
+    await axios.delete(`http://localhost:5000/api/places/${id}`, {
+      headers: {
+        Authorization: "Bearer " + token,
+      },
+    });
+    const responseData = await axios.get(
+      `http://localhost:5000/api/places/user/${userId}`
+    );
+    setPlaces(responseData.data.results);
+  };
 
   if (isLoading) {
     return (
@@ -51,7 +64,7 @@ const Places = () => {
       <ImageGallery
         path="/places"
         places={places}
-        // onDeletePlace={onDeletePlace}
+        onDeletePlace={onDeletePlace}
       />
     </>
   );
