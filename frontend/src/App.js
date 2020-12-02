@@ -33,6 +33,7 @@ display loading spinner on edit place - kepp in mind
 add backend handling cords
 some kind of user profile
 properly showing mapbox
+code refactor/cleanup
 */
 
 function App() {
