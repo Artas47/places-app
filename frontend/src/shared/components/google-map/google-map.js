@@ -12,11 +12,6 @@ const Map = ReactMapboxGl({
 const GoogleMap = ({ placeCords, setCords, cords, setZoom }) => {
   const [isLoading, setIsLoading] = useState(true);
 
-  // const [cords, setCords] = useState({
-  //   lat: -0.481747846041145,
-  //   lng: 51.3233379650232,
-  // });
-
   const _onClickMap = (map, evt) => {
     console.log("evt", evt);
     console.log("map", map);
@@ -52,11 +47,12 @@ const GoogleMap = ({ placeCords, setCords, cords, setZoom }) => {
             }
             return;
           }}
-          onBoxZoomEnd={(e, q, w) => {
-            if (setZoom) {
-              setZoom(e.getZoom());
-              setCords(e.transform._center);
-            }
+          onMoveEnd={e => {
+            setCords({
+              lng: e.getCenter().lng.toFixed(4),
+              lat: e.getCenter().lat.toFixed(4)
+            })
+            setZoom(e.getZoom())
           }}
         >
           <Marker
