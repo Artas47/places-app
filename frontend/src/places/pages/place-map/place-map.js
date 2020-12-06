@@ -21,11 +21,12 @@ const PlaceMap = ({ path }) => {
             "GET"
           );
         }
+        console.log("response", response);
         if (response.place.location) {
           const cords = {
             lat: response.place.location.coordinates.lat,
             lng: response.place.location.coordinates.lng,
-            zoom: response.place.location.zoom
+            zoom: response.place.location.zoom,
           };
           setPlaceCords(cords);
         }

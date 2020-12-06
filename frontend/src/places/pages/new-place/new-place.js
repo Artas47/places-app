@@ -32,32 +32,27 @@ const ErrorBox = styled.div`
   font-size: 18px;
   display: flex;
   flex-direction: column;
-
   text-align: center;
   color: #c70014;
 `;
 
 const NewPlace = () => {
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, setValue } = useForm();
   const { isLoading, sendRequest, error } = useHttpClient();
+  console.log("error", error);
   const { userId, token, imgDiemensions } = useContext(AuthContext);
   const [showModal, setShowModal] = useState(false);
-  const [cords, setCords] = useState({
-    lat: -0.481747846041145,
-    lng: 51.3233379650232,
-  });
+  const [cords, setCords] = useState(null);
   const [zoom, setZoom] = useState(null);
-  console.log("cords", cords);
-  console.log("zoom", zoom);
 
   const history = useHistory();
   const onSubmit = async (data) => {
     const location = {
       coordinates: cords,
-      zoom
-    }
-    console.log('location', location)
+      zoom,
+    };
     try {
+      console.log("data.address", data.address);
       const formData = new FormData();
       formData.append("title", data.title);
       formData.append("description", data.description);
@@ -65,8 +60,11 @@ const NewPlace = () => {
       formData.append("imageWidth", imgDiemensions.width);
       formData.append("imageHeight", imgDiemensions.height);
       formData.append("creator", userId);
-      formData.append("address", data.address);
+      // if (location.coordinates.lat && location.coordinates.lng) {
+      //   console.log("fdsfsdfdssdfsd");
+      // }
       formData.append("location", JSON.stringify(location));
+      formData.append("address", data.address);
       await sendRequest("http://localhost:5000/api/places", "POST", formData, {
         Authorization: "Bearer " + token,
       });
@@ -159,9 +157,7 @@ const NewPlace = () => {
                   </CustomButton>
                 </div>
                 <ErrorBox>{error ? error : ""}</ErrorBox>
-                <Button style={{}} type="submit">
-                  Submit
-                </Button>
+                <Button type="submit">Submit</Button>
                 {showModal && (
                   <Modal setShowModal={setShowModal}>
                     <GoogleMap
@@ -169,6 +165,7 @@ const NewPlace = () => {
                       cords={cords}
                       setZoom={setZoom}
                       zoom={zoom}
+                      setValue={setValue}
                     />
                   </Modal>
                 )}
