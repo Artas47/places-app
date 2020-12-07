@@ -47,10 +47,13 @@ const NewPlace = () => {
 
   const history = useHistory();
   const onSubmit = async (data) => {
-    const location = {
-      coordinates: cords,
-      zoom,
-    };
+    let location = {};
+    if (cords) {
+      location["coordinates"] = cords;
+      if (zoom) {
+        location["zoom"] = zoom;
+      }
+    }
     try {
       console.log("data.address", data.address);
       const formData = new FormData();
@@ -60,9 +63,6 @@ const NewPlace = () => {
       formData.append("imageWidth", imgDiemensions.width);
       formData.append("imageHeight", imgDiemensions.height);
       formData.append("creator", userId);
-      // if (location.coordinates.lat && location.coordinates.lng) {
-      //   console.log("fdsfsdfdssdfsd");
-      // }
       formData.append("location", JSON.stringify(location));
       formData.append("address", data.address);
       await sendRequest("http://localhost:5000/api/places", "POST", formData, {
