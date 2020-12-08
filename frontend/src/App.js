@@ -34,6 +34,7 @@ add backend handling cords
 some kind of user profile
 properly showing mapbox
 code refactor/cleanup
+clearing input on place creation
 */
 
 function App() {
