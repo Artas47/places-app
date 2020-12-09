@@ -5,12 +5,15 @@ import Form from "../../shared/components/form-elements/form";
 import Label from "../../shared/components/form-elements/label";
 import styled from "styled-components";
 import Button from "../../shared/components/button/button";
-import validator from "validator";
 import { AuthContext } from "../../shared/context/auth-context";
 import Spinner from "../../shared/components/spinner/spinner";
 import { useHttpClient } from "../../shared/hooks/http-hook";
 import Fade from "../../shared/components/fade-animation/fade";
 import ImageUpload from "../../shared/components/form-elements/image-upload/image-upload";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { loginSchema } from "../../utils/validationShemas/loginValidate";
+import { renderError } from "../../utils/renderError";
+import ErrorBox from "../../shared/components/errorBox/errorBox";
 
 const FormWrapper = styled.div`
   width: 40rem;
@@ -49,9 +52,8 @@ const Auth = () => {
 
   const { login } = useContext(AuthContext);
   const { register, handleSubmit, errors, reset } = useForm({
-    mode: "onSubmit",
-    reValidateMode: "onSubmit",
-  }); // initialise the hook
+    resolver: yupResolver(loginSchema),
+  });
   const onSubmit = async (data) => {
     if (!isLoggingIn) {
       try {
@@ -135,15 +137,7 @@ const Auth = () => {
                 ""
               )}
               <Label htmlFor="email">Email</Label>
-              <Input
-                id="email"
-                name="email"
-                register={register({
-                  validate: (value) =>
-                    validator.isEmail(value) || "Email is invalid",
-                  required: "Email is required",
-                })}
-              />
+              <Input id="email" name="email" register={register()} />
               <div style={{ margin: "3.5rem 0" }}>
                 <Label htmlFor="password">Password</Label>
                 <Input
@@ -153,12 +147,7 @@ const Auth = () => {
                   register={register({ required: "Password is required" })}
                 />
               </div>
-              <ErrorContainer>
-                {errors.password && <div>{errors.password.message}</div>}
-                {errors.email && <div>{errors.email.message}</div>}
-                {errors.name && <div>{errors.name.message}</div>}
-                {error && <div>{error}</div>}
-              </ErrorContainer>
+              <ErrorBox>{renderError(errors)}</ErrorBox>
               <Button type="submit">
                 {!isLoggingIn ? "Log in" : "Sign up"}
               </Button>

@@ -14,13 +14,10 @@ import ImageUpload from "../../../shared/components/form-elements/image-upload/i
 import CustomButton from "../../../shared/components/button/button";
 import GoogleMap from "../../../shared/components/google-map/google-map";
 import Modal from "../../../shared/components/modal/modal";
-import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
 import _ from "lodash";
-import {
-  checkIfFilesAreTooBig,
-  checkIfFilesAreCorrectType,
-} from "../../../utils/imageValidator";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { newPlaceSchema } from "../../../utils/validationShemas/newPlaceValidate";
+import { renderError } from "../../../utils/renderError";
 
 const FormWrapper = styled.div`
   width: 60rem;
@@ -42,43 +39,18 @@ const ErrorBox = styled.div`
   color: #eb2f06;
 `;
 
-let schema = yup.object().shape({
-  title: yup.string().required("Title is required"),
-  address: yup.string().required("Address is required"),
-  image: yup
-    .mixed()
-    .required("A file is required")
-    .test("fileExistance", "A file is required", (value) => !!value[0])
-    .test("fileFormat", "Unsupported Format", checkIfFilesAreCorrectType)
-    .test("fileSize", "File too large", checkIfFilesAreTooBig),
-});
-
 const NewPlace = () => {
   const { register, handleSubmit, setValue, errors } = useForm({
-    resolver: yupResolver(schema),
+    resolver: yupResolver(newPlaceSchema),
   });
   const { isLoading, sendRequest, error } = useHttpClient();
-  console.log("errors", errors);
   const { userId, token, imgDiemensions } = useContext(AuthContext);
   const [showModal, setShowModal] = useState(false);
   const [cords, setCords] = useState(null);
   const [zoom, setZoom] = useState(null);
 
-  const renderError = () => {
-    if (!_.isEmpty(errors)) {
-      return Object.keys(errors).map((key, i) => {
-        return <p>{errors[key].message}</p>;
-      });
-      // console.log("e", e);
-      // _.mapKeys((errors, error) => {
-      //   return <p>{error.title}</p>;
-      // });
-    }
-  };
-
   const history = useHistory();
   const onSubmit = async (data) => {
-    console.log("data", data);
     let location = {};
     if (cords) {
       location["coordinates"] = cords;
@@ -188,9 +160,7 @@ const NewPlace = () => {
                     Select place on map
                   </CustomButton>
                 </div>
-                <ErrorBox>
-                  {error ? error : ""} {renderError()}
-                </ErrorBox>
+                <ErrorBox>{renderError(errors)}</ErrorBox>
                 <Button type="submit">Submit</Button>
                 {showModal && (
                   <Modal setShowModal={setShowModal}>
