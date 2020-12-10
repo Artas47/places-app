@@ -5,7 +5,7 @@ import { AuthContext } from "../../../shared/context/auth-context";
 import { useHttpClient } from "../../../shared/hooks/http-hook";
 import InfoBox from "../../../shared/components/info-box/info-box";
 import Spinner from "../../../shared/components/spinner/spinner";
-import axios from 'axios';
+import axios from "axios";
 
 const Places = () => {
   const location = useLocation();
@@ -42,15 +42,7 @@ const Places = () => {
   if (isLoading) {
     return (
       <div style={{ width: "100vw", height: "100vh", position: "relative" }}>
-        <Spinner
-          style={{
-            position: "absolute",
-            top: "50%",
-            left: "50%",
-            transform: "translate(-50%, -50%)",
-            zIndex: "1",
-          }}
-        />
+        <Spinner center />
       </div>
     );
   }

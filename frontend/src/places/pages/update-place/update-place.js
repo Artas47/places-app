@@ -65,20 +65,6 @@ const UpdatePlace = () => {
   return (
     <FormWrapper>
       <fieldset disabled={isLoading} style={{ border: "0" }}>
-        {/* {isLoading ? (
-          <div
-            style={{
-              position: 'absolute',
-              left: '50%',
-              top: '60%',
-              transform: 'translate(-50%, -50%)',
-            }}
-          >
-            <Spinner />
-          </div>
-        ) : (
-          ''
-        )} */}
         <Form onSubmit={handleSubmit(onSubmit)}>
           <Label htmlFor="title">Title</Label>
           <Input id="title" name="title" register={register} />

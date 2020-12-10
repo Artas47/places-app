@@ -14,7 +14,6 @@ import ImageUpload from "../../../shared/components/form-elements/image-upload/i
 import CustomButton from "../../../shared/components/button/button";
 import GoogleMap from "../../../shared/components/google-map/google-map";
 import Modal from "../../../shared/components/modal/modal";
-import _ from "lodash";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { newPlaceSchema } from "../../../utils/validationShemas/newPlaceValidate";
 import { renderError } from "../../../utils/renderError";
@@ -59,7 +58,6 @@ const NewPlace = () => {
       }
     }
     try {
-      console.log("data.address", data.address);
       const formData = new FormData();
       formData.append("title", data.title);
       formData.append("description", data.description);
@@ -79,20 +77,7 @@ const NewPlace = () => {
   return (
     <Fade in={true} classNames="fade">
       <div>
-        {isLoading ? (
-          <Spinner
-            style={{
-              position: "absolute",
-              top: "50%",
-              left: "50%",
-              transform: "translate(-50%, -50%)",
-              zIndex: "1",
-            }}
-            className="color-white"
-          />
-        ) : (
-          ""
-        )}
+        {isLoading ? <Spinner center className="color-white" /> : ""}
         <FormWrapper
           style={{
             filter: isLoading ? "brightness(0.5)" : "",

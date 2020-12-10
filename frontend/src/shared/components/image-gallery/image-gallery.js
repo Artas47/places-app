@@ -12,20 +12,12 @@ const ImageGallery = ({ places, onDeletePlace, showModal, path }) => {
     placesForModal: [],
   });
 
+  const modalPlaces = randomPlaces.placesForModal;
+
   const [photoIndex, setPhotoIndex] = useState(0);
   const [isOpen, setIsOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [rowHeight, setRowHeight] = useState(300);
-
-  const increaseRowHeight = () => {
-    setRowHeight(rowHeight + 150);
-  };
-
-  const decreaseRowHeight = () => {
-    if (rowHeight - 150 > 0) {
-      setRowHeight(rowHeight - 150);
-    }
-  };
 
   useScroll("image-gallery");
 
@@ -45,7 +37,6 @@ const ImageGallery = ({ places, onDeletePlace, showModal, path }) => {
         left={left}
         onDeletePlace={onDeletePlace}
         path={path}
-        // direction="column"
         top={top}
         openLightbox={openLightbox}
       />
@@ -105,20 +96,8 @@ const ImageGallery = ({ places, onDeletePlace, showModal, path }) => {
       }}
       id="image-gallery"
     >
-      <button onClick={increaseRowHeight}>increase row height</button>
-      <button onClick={decreaseRowHeight}>decrease row height</button>
-
       {isLoading ? (
-        <Spinner
-          style={{
-            position: "fixed",
-            top: "50%",
-            left: "50%",
-            transform: "translate(-50%, -50%)",
-            zIndex: "1",
-          }}
-          className="color-white"
-        />
+        <Spinner center className="color-white" />
       ) : (
         <Gallery
           renderImage={imageRenderer}
@@ -126,34 +105,26 @@ const ImageGallery = ({ places, onDeletePlace, showModal, path }) => {
           onClick={openLightbox}
           margin={3}
           targetRowHeight={rowHeight}
-          // direction={"column"}
         />
       )}
       {isOpen && (
         <Lightbox
-          mainSrc={randomPlaces.placesForModal[photoIndex]}
-          nextSrc={
-            randomPlaces.placesForModal[
-              (photoIndex + 1) % randomPlaces.placesForModal.length
-            ]
-          }
+          mainSrc={modalPlaces[photoIndex]}
+          nextSrc={modalPlaces[(photoIndex + 1) % modalPlaces.length]}
           prevSrc={
-            randomPlaces.placesForModal[
-              (photoIndex + randomPlaces.placesForModal.length - 1) %
-                randomPlaces.placesForModal.length
+            modalPlaces[
+              (photoIndex + modalPlaces.length - 1) % modalPlaces.length
             ]
           }
           onCloseRequest={() => setIsOpen(false)}
           onMovePrevRequest={() =>
             setPhotoIndex(
-              (photoIndex + randomPlaces.placesForModal.length - 1) %
-                randomPlaces.placesForModal.length
+              (photoIndex + modalPlaces.length - 1) % modalPlaces.length
             )
           }
           onMoveNextRequest={() =>
             setPhotoIndex(
-              (photoIndex + randomPlaces.placesForModal.length + 1) %
-                randomPlaces.placesForModal.length
+              (photoIndex + modalPlaces.length + 1) % modalPlaces.length
             )
           }
         />

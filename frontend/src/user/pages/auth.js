@@ -34,21 +34,10 @@ const SignUpText = styled.p`
   cursor: pointer;
 `;
 
-const ErrorContainer = styled.div`
-  width: 100%;
-  margin-bottom: 2rem;
-  font-size: 18px;
-  display: flex;
-  flex-direction: column;
-
-  text-align: center;
-  color: #c70014;
-`;
-
 const Auth = () => {
   const [isLoggingIn, setIsLoggingIn] = useState(false);
 
-  const { error, clearError, isLoading, sendRequest } = useHttpClient();
+  const { clearError, isLoading, sendRequest } = useHttpClient();
 
   const { login } = useContext(AuthContext);
   const { register, handleSubmit, errors, reset } = useForm({
@@ -108,20 +97,7 @@ const Auth = () => {
   return (
     <Fade in={true} classNames="fade">
       <div>
-        {isLoading ? (
-          <Spinner
-            style={{
-              position: "absolute",
-              top: "50%",
-              left: "50%",
-              transform: "translate(-50%, -50%)",
-              zIndex: "1",
-            }}
-            className="color-white"
-          />
-        ) : (
-          ""
-        )}
+        {isLoading ? <Spinner center className="color-white" /> : ""}
         <FormWrapper style={{ filter: isLoading ? "brightness(0.5)" : "" }}>
           <fieldset disabled={isLoading} style={{ border: "0" }}>
             <Form onSubmit={handleSubmit(onSubmit)}>

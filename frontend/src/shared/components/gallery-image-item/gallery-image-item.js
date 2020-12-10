@@ -51,18 +51,7 @@ const GalleryImageItem = ({
         backgroundColor: "transparent !important",
       }}
     >
-      {isLoaded === "loading" ? (
-        <Spinner
-          style={{
-            position: "absolute",
-            top: "50%",
-            left: "50%",
-            transform: "translate(-50%, -50%)",
-          }}
-        />
-      ) : (
-        ""
-      )}
+      {isLoaded === "loading" ? <Spinner center /> : ""}
       <Styled.ImageWrapper>
         <Styled.Image
           visible={isLoaded === "loaded"}
