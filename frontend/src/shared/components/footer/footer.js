@@ -35,7 +35,6 @@ const Footer = ({ pages, currentPage, setCurrentPage, pageNumber }) => {
               margin: "0 1rem",
               color: "#fff",
               fontSize: currentPage === page ? "3rem" : "2rem",
-              // color: currentPage === page ? "" : "#fff",
               cursor: "pointer",
               fontWeight: "bold",
               padding: "1rem",

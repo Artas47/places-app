@@ -68,9 +68,7 @@ const ImageUpload = (props) => {
         />
         {props.buttonText}
         {props.large && (
-          <>
-            <Styled.UploadIcon style={{ width: "6rem", height: "6rem" }} />
-          </>
+          <Styled.UploadIcon style={{ width: "6rem", height: "6rem" }} />
         )}
       </Styled.UploadButton>
       {file && (

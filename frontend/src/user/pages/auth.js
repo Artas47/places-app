@@ -9,7 +9,6 @@ import { AuthContext } from "../../shared/context/auth-context";
 import Spinner from "../../shared/components/spinner/spinner";
 import { useHttpClient } from "../../shared/hooks/http-hook";
 import Fade from "../../shared/components/fade-animation/fade";
-import ImageUpload from "../../shared/components/form-elements/image-upload/image-upload";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { loginSchema } from "../../utils/validationShemas/loginValidate";
 import { renderError } from "../../utils/renderError";
@@ -27,6 +26,10 @@ const FormWrapper = styled.div`
   transition: all 0.2s;
 `;
 
+const FormFieldWrapper = styled.div`
+  margin-bottom: 3rem;
+`;
+
 const SignUpText = styled.p`
   margin-top: 2rem;
   color: #4f92e3;
@@ -35,7 +38,7 @@ const SignUpText = styled.p`
 `;
 
 const Auth = () => {
-  const [isLoggingIn, setIsLoggingIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const { clearError, isLoading, sendRequest } = useHttpClient();
 
@@ -43,8 +46,10 @@ const Auth = () => {
   const { register, handleSubmit, errors, reset } = useForm({
     resolver: yupResolver(loginSchema),
   });
+
   const onSubmit = async (data) => {
-    if (!isLoggingIn) {
+    console.log("data", data);
+    if (!isLoggedIn) {
       try {
         const responseData = await sendRequest(
           "http://localhost:5000/api/users/login",
@@ -65,7 +70,6 @@ const Auth = () => {
         formData.append("email", data.email);
         formData.append("name", data.name);
         formData.append("password", data.password);
-        formData.append("image", data.image[0]);
         const responseData = await sendRequest(
           "http://localhost:5000/api/users/signup",
           "POST",
@@ -77,21 +81,17 @@ const Auth = () => {
   };
 
   const onLoggedChange = () => {
-    setIsLoggingIn((prevState) => !prevState);
+    setIsLoggedIn((prevState) => !prevState);
     reset();
     clearError();
   };
 
   const renderNameInput = () => {
     return (
-      <>
+      <FormFieldWrapper>
         <Label htmlFor="name">Name</Label>
-        <Input
-          id="name"
-          name="name"
-          register={register({ required: "Name is required" })}
-        />
-      </>
+        <Input id="name" name="name" register={register()} />
+      </FormFieldWrapper>
     );
   };
   return (
@@ -101,34 +101,26 @@ const Auth = () => {
         <FormWrapper style={{ filter: isLoading ? "brightness(0.5)" : "" }}>
           <fieldset disabled={isLoading} style={{ border: "0" }}>
             <Form onSubmit={handleSubmit(onSubmit)}>
-              {isLoggingIn ? renderNameInput() : ""}
-              {isLoggingIn ? (
-                <ImageUpload
-                  register={register()}
-                  name="image"
-                  id="image-id"
-                  buttonText="Upload profile image"
-                />
-              ) : (
-                ""
-              )}
-              <Label htmlFor="email">Email</Label>
-              <Input id="email" name="email" register={register()} />
-              <div style={{ margin: "3.5rem 0" }}>
+              {isLoggedIn && renderNameInput()}
+              <FormFieldWrapper>
+                <Label htmlFor="email">Email</Label>
+                <Input id="email" name="email" register={register()} />
+              </FormFieldWrapper>
+              <FormFieldWrapper>
                 <Label htmlFor="password">Password</Label>
                 <Input
                   id="password"
                   name="password"
                   type="password"
-                  register={register({ required: "Password is required" })}
+                  register={register()}
                 />
-              </div>
+              </FormFieldWrapper>
               <ErrorBox>{renderError(errors)}</ErrorBox>
               <Button type="submit">
-                {!isLoggingIn ? "Log in" : "Sign up"}
+                {!isLoggedIn ? "Log in" : "Sign up"}
               </Button>
               <SignUpText onClick={onLoggedChange}>
-                {!isLoggingIn
+                {!isLoggedIn
                   ? "Doest have an account? Sign up."
                   : "Already have an accout? Log in."}
               </SignUpText>

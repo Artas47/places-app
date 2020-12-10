@@ -1,5 +1,12 @@
 import styled from "styled-components";
 
+export const GalleryWrapper = styled.div`
+  width: 90%;
+  height: 100%;
+  position: relative;
+  margin: 0 auto;
+`;
+
 export const GalleryList = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(35rem, 1fr));

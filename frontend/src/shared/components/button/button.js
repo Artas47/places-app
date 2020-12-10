@@ -3,7 +3,6 @@ import styled from "styled-components";
 
 const StyledButton = styled.button`
   padding: 1.1rem 5rem;
-  /* border-radius: 2rem; */
   width: 100%;
   border: 0;
   background-color: #4a4a4f;

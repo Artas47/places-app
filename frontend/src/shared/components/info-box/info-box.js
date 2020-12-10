@@ -2,7 +2,7 @@ import React from "react";
 import { useHistory, useParams } from "react-router-dom";
 import * as Styled from "./info-box.styles";
 import Fade from "../fade-animation/fade";
-import CustomButton from "../button/button";
+import Button from "../button/button";
 
 const InfoBox = ({ label, userId }) => {
   const history = useHistory();
@@ -23,9 +23,12 @@ const InfoBox = ({ label, userId }) => {
             >
               What about creating one?
             </p>
-            <CustomButton onClick={() => history.push("/places/new")}>
+            <Button
+              style={{ width: "20rem", borderRadius: "2rem" }}
+              onClick={() => history.push("/places/new")}
+            >
               Create place
-            </CustomButton>
+            </Button>
           </>
         ) : (
           ""

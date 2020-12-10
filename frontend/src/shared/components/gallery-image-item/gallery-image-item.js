@@ -19,7 +19,6 @@ const GalleryImageItem = ({
   direction,
   top,
   left,
-  selected,
   openLightbox,
   onDeletePlace,
   path,
@@ -64,7 +63,6 @@ const GalleryImageItem = ({
           onClick={(e) => handleOnClick(e, { photo, index })}
         />
         <Styled.ImageFooter>
-          {/* <Styled.GalleryImageButton>View on map</Styled.GalleryImageButton> */}
           {location.pathname !== "/places" && (
             <Styled.ImageDescriptionWrapper>
               <Styled.ImageTitle>{photo.creator.name}</Styled.ImageTitle>

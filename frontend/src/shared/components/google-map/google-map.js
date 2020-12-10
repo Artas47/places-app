@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Spinner from "../spinner/spinner";
 import Fade from "../fade-animation/fade";
-import ReactMapboxGl, { Layer, Marker } from "react-mapbox-gl";
+import ReactMapboxGl, { Layer } from "react-mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 
 const Map = ReactMapboxGl({
@@ -9,7 +9,7 @@ const Map = ReactMapboxGl({
     "pk.eyJ1IjoiYXJ0aTQ3IiwiYSI6ImNraHQydTh0MjBxMzYycWxoNm54aWJld2EifQ._wR4gZMPRohZ3pX3ZEgURw",
 });
 
-const GoogleMap = ({ placeCords, setCords, cords, setZoom, setValue }) => {
+const GoogleMap = ({ placeCords, setCords, setZoom, setValue }) => {
   const [isLoading, setIsLoading] = useState(true);
 
   return (

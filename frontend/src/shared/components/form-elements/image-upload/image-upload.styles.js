@@ -42,7 +42,6 @@ export const UploadButton = styled.label`
   margin: 0 auto;
   font-weight: 700;
   border-radius: 3px;
-  /* white-space: nowrap; */
   cursor: pointer;
   font-size: 10pt;
   transition: all 0.2s;

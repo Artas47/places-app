@@ -17,6 +17,7 @@ import Modal from "../../../shared/components/modal/modal";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { newPlaceSchema } from "../../../utils/validationShemas/newPlaceValidate";
 import { renderError } from "../../../utils/renderError";
+import ErrorBox from "../../../shared/components/errorBox/errorBox";
 
 const FormWrapper = styled.div`
   width: 60rem;
@@ -28,21 +29,12 @@ const FormWrapper = styled.div`
   box-shadow: 0 1px 10px 5px rgba(0, 0, 0, 0.2);
 `;
 
-const ErrorBox = styled.div`
-  width: 100%;
-  margin-bottom: 2rem;
-  font-size: 18px;
-  font-weight: 300;
-  display: flex;
-  flex-direction: column;
-  color: #eb2f06;
-`;
-
 const NewPlace = () => {
   const { register, handleSubmit, setValue, errors } = useForm({
     resolver: yupResolver(newPlaceSchema),
   });
-  const { isLoading, sendRequest, error } = useHttpClient();
+
+  const { isLoading, sendRequest } = useHttpClient();
   const { userId, token, imgDiemensions } = useContext(AuthContext);
   const [showModal, setShowModal] = useState(false);
   const [cords, setCords] = useState(null);

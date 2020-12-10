@@ -5,6 +5,7 @@ import "react-image-lightbox/style.css";
 import Spinner from "../spinner/spinner";
 import GalleryImageItem from "../gallery-image-item/gallery-image-item";
 import useScroll from "../../hooks/useScroll";
+import * as Styled from "./image-gallery.styles";
 
 const ImageGallery = ({ places, onDeletePlace, showModal, path }) => {
   const [randomPlaces, setRandomPlaces] = useState({
@@ -17,7 +18,6 @@ const ImageGallery = ({ places, onDeletePlace, showModal, path }) => {
   const [photoIndex, setPhotoIndex] = useState(0);
   const [isOpen, setIsOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
-  const [rowHeight, setRowHeight] = useState(300);
 
   useScroll("image-gallery");
 
@@ -87,15 +87,7 @@ const ImageGallery = ({ places, onDeletePlace, showModal, path }) => {
   }, [places]);
 
   return (
-    <div
-      style={{
-        width: "90%",
-        height: "100%",
-        position: "relative",
-        margin: "0 auto",
-      }}
-      id="image-gallery"
-    >
+    <Styled.GalleryWrapper id="image-gallery">
       {isLoading ? (
         <Spinner center className="color-white" />
       ) : (
@@ -104,7 +96,6 @@ const ImageGallery = ({ places, onDeletePlace, showModal, path }) => {
           photos={randomPlaces.placesForGallery}
           onClick={openLightbox}
           margin={3}
-          targetRowHeight={rowHeight}
         />
       )}
       {isOpen && (
@@ -129,7 +120,7 @@ const ImageGallery = ({ places, onDeletePlace, showModal, path }) => {
           }
         />
       )}
-    </div>
+    </Styled.GalleryWrapper>
   );
 };
 

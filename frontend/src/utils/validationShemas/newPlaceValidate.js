@@ -9,8 +9,8 @@ export const newPlaceSchema = yup.object().shape({
   address: yup.string().required("Address is required"),
   image: yup
     .mixed()
-    .required("An image is required")
-    .test("fileExistance", "An image is required", (value) => !!value[0])
+    .required("Image is required")
+    .test("fileExistance", "Image is required", (value) => !!value[0])
     .test("fileFormat", "Unsupported Format", checkIfFilesAreCorrectType)
     .test("fileSize", "File too large", checkIfFilesAreTooBig),
 });

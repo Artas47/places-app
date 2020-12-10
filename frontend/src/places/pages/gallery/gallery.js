@@ -34,11 +34,7 @@ const Gallery = () => {
     return <InfoBox label="Looks like you have no places added" />;
   }
 
-  return (
-    <>
-      <ImageGallery path="/gallery" places={places} />
-    </>
-  );
+  return <ImageGallery path="/gallery" places={places} />;
 };
 
 export default Gallery;
