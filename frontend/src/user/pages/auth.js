@@ -40,7 +40,7 @@ const SignUpText = styled.p`
 const Auth = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  const { clearError, isLoading, sendRequest } = useHttpClient();
+  const { clearError, isLoading, sendRequest, error } = useHttpClient();
 
   const { login } = useContext(AuthContext);
   const { register, handleSubmit, errors, reset } = useForm({
@@ -115,7 +115,9 @@ const Auth = () => {
                   register={register()}
                 />
               </FormFieldWrapper>
-              <ErrorBox>{renderError(errors)}</ErrorBox>
+              <ErrorBox>
+                {renderError(errors)} {error && error}
+              </ErrorBox>
               <Button type="submit">
                 {!isLoggedIn ? "Log in" : "Sign up"}
               </Button>

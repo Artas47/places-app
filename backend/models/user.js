@@ -1,7 +1,8 @@
-const mongoose = require('mongoose');
-const uniqueValidator = require('mongoose-unique-validator');
-const validator = require('validator');
-const HttpError = require('./http-error');
+const mongoose = require("mongoose");
+const uniqueValidator = require("mongoose-unique-validator");
+const validator = require("validator");
+const HttpError = require("./http-error");
+const bcrypt = require("bcryptjs");
 
 const Schema = mongoose.Schema;
 
@@ -16,7 +17,7 @@ const userSchema = Schema({
     unique: true,
     validate(value) {
       if (!validator.isEmail(value)) {
-        throw new HttpError('Email is invalid');
+        throw new HttpError("Email is invalid");
       }
     },
   },
@@ -33,11 +34,22 @@ const userSchema = Schema({
     {
       type: mongoose.Types.ObjectId,
       required: true,
-      ref: 'Place',
+      ref: "Place",
     },
   ],
 });
 
+userSchema.pre("save", async function (next) {
+  const user = this;
+  console.log("user", user);
+
+  if (user.isModified("password")) {
+    user.password = await bcrypt.hash(user.password, 8);
+  }
+
+  next();
+});
+
 userSchema.plugin(uniqueValidator);
 
-module.exports = mongoose.model('User', userSchema);
+module.exports = mongoose.model("User", userSchema);

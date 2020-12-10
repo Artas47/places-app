@@ -29,14 +29,14 @@ const signup = async (req, res, next) => {
     hashedPassword = await bcrypt.hash(password, 12);
   } catch (err) {
     return next(
-      new HttpError("Could not createe user, please try again later", 500)
+      new HttpError("Could not create user, please try again later", 500)
     );
   }
 
   const createdUser = new User({
     name,
     email,
-    password: hashedPassword,
+    password,
     places: [],
   });
 
@@ -71,11 +71,11 @@ const login = async (req, res, next) => {
   try {
     existingUser = await User.findOne({ email });
   } catch (err) {
-    return next(new HttpError("Looging  in failed, try again later"));
+    return next(new HttpError("Login failed, try again later"));
   }
 
   if (!existingUser) {
-    return next(new HttpError("Email or password are incorrect", 422));
+    return next(new HttpError("Email or password is incorrect", 422));
   }
 
   let isValidPassword = false;
@@ -99,7 +99,7 @@ const login = async (req, res, next) => {
   }
 
   if (!isValidPassword) {
-    return next(new HttpError("Logging failed, try again later"));
+    return next(new HttpError("Login failed, try again later"));
   }
 
   res.send({
