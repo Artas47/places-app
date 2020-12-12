@@ -18,6 +18,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { newPlaceSchema } from "../../../utils/validationShemas/newPlaceValidate";
 import { renderError } from "../../../utils/renderError";
 import ErrorBox from "../../../shared/components/errorBox/errorBox";
+import ClearIcon from "@material-ui/icons/Clear";
 
 const FormWrapper = styled.div`
   width: 60rem;
@@ -30,15 +31,21 @@ const FormWrapper = styled.div`
 `;
 
 const NewPlace = () => {
+  const [showModal, setShowModal] = useState(false);
+  const [cords, setCords] = useState(null);
+  const [zoom, setZoom] = useState(null);
   const { register, handleSubmit, setValue, errors } = useForm({
-    resolver: yupResolver(newPlaceSchema),
+    resolver: yupResolver(newPlaceSchema(cords)),
   });
 
   const { isLoading, sendRequest } = useHttpClient();
   const { userId, token, imgDiemensions } = useContext(AuthContext);
-  const [showModal, setShowModal] = useState(false);
-  const [cords, setCords] = useState(null);
-  const [zoom, setZoom] = useState(null);
+
+  const resetValues = () => {
+    setCords(null);
+    setZoom(null);
+    setValue("address", "");
+  };
 
   const history = useHistory();
   const onSubmit = async (data) => {
@@ -107,15 +114,40 @@ const NewPlace = () => {
                     justifyContent: "space-between",
                     height: "5rem",
                     marginBottom: "3rem",
+                    marginTop: "0.5rem",
                   }}
                 >
-                  <Input
-                    id="address"
-                    name="address"
-                    type="address"
-                    style={{ width: "50%" }}
-                    register={register}
-                  />
+                  <div style={{ width: "50%", position: "relative" }}>
+                    <Input
+                      id="address"
+                      name="address"
+                      disabled={cords}
+                      type="address"
+                      style={{
+                        margin: 0,
+                        paddingRight: "3.5rem",
+                      }}
+                      register={register}
+                    />
+                    <span
+                      style={{
+                        position: "absolute",
+                        right: "1rem",
+                        top: "50%",
+                        transform: "translate(0, -50%)",
+                      }}
+                    >
+                      <ClearIcon
+                        color="action"
+                        style={{
+                          width: "2rem",
+                          height: "2rem",
+                          cursor: "pointer",
+                        }}
+                        onClick={resetValues}
+                      />
+                    </span>
+                  </div>
                   <div
                     style={{
                       width: "20%",
