@@ -20,21 +20,13 @@ import PlaceMap from "./places/pages/place-map/place-map";
 import Gallery from "./places/pages/gallery/gallery";
 /*
 TO DO
-make an option to display one sized images
-make possibility to view place on google maps (in modal propably) - in progress, used mapbox
-front-end forms validation
+display loading spinner on edit place - kepp in mind
 back-end forms validation
 modal when trying to delete a place
-some effect on image hover - 0/5
 lazy loading images when beeing at the bottom of page
-image compress on save
 add proptypes
-display loading spinner on edit place - kepp in mind
-add backend handling cords
-some kind of user profile
-properly showing mapbox
-code refactor/cleanup
-clearing input on place creation
+deploy
+backend cleanup/refactor
 */
 
 function App() {
