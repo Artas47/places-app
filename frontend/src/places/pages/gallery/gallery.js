@@ -31,7 +31,7 @@ const Gallery = () => {
   }
 
   if (!places || !places.length) {
-    return <InfoBox label="Looks like you have no places added" />;
+    return <InfoBox label="Looks like there is no places..." />;
   }
 
   return <ImageGallery path="/gallery" places={places} />;

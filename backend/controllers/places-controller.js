@@ -31,9 +31,6 @@ const getPlacesByUserId = async (req, res, next) => {
       new HttpError("Fetching places failed, please try again later", 500)
     );
   }
-  if (!places || places.length === 0) {
-    return next(new HttpError("Could not find places for provided user id"));
-  }
 };
 
 const createPlace = async (req, res, next) => {
