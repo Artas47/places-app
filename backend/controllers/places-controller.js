@@ -55,17 +55,11 @@ const createPlace = async (req, res, next) => {
 
   let placeLocation = null;
 
-  console.log("location", location);
-
   if (JSON.parse(location).coordinates) {
-    console.log("1");
     placeLocation = JSON.parse(location);
   } else if (address) {
-    console.log("2");
     placeLocation = await getCoordsForAdress(address);
   }
-
-  console.log("coordinates", placeLocation);
 
   if (!req?.file?.path) {
     return next(new HttpError("Image is required"));
@@ -86,8 +80,6 @@ const createPlace = async (req, res, next) => {
       height: imageHeight,
     },
   });
-
-  console.log("place", place);
 
   let user;
 

@@ -27,6 +27,7 @@ lazy loading images when beeing at the bottom of page
 add proptypes
 deploy
 backend cleanup/refactor
+inspect backend error 'cannot set headers ....'
 */
 
 function App() {
