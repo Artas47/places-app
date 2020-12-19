@@ -58,7 +58,7 @@ const createPlace = async (req, res, next) => {
     placeLocation = await getCoordsForAdress(address);
   }
 
-  if (!req?.file?.path) {
+  if (!req.file.path) {
     return next(new HttpError("Image is required"));
   }
 
