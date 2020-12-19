@@ -15,13 +15,15 @@ export const ImageFooter = styled.div`
   width: 100%;
   color: #fff;
   /* height: 10rem; */
+  height: 100%;
+  background-color: rgba(0,0,0,0.12);
   overflow: hidden;
   display: flex;
   justify-content: space-around;
   align-items: center;
-  box-shadow: 1px -115px 30px -94px rgba(0, 0, 0, 0.62) inset;
-  -webkit-box-shadow: 1px -115px 30px -94px rgba(0, 0, 0, 0.62) inset;
-  -moz-box-shadow: 1px -115px 30px -94px rgba(0, 0, 0, 0.62) inset;
+  box-shadow: 1px -130px 30px -94px rgba(0, 0, 0, 0.15) inset;
+  // -webkit-box-shadow: 1px -115px 30px -94px rgba(0, 0, 0, 0.62) inset;
+  // -moz-box-shadow: 1px -115px 30px -94px rgba(0, 0, 0, 0.62) inset;
   opacity: 0;
   transition: all 0.2s;
   font-size: 1.5rem;

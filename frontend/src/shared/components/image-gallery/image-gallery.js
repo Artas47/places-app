@@ -32,7 +32,7 @@ const ImageGallery = ({ places, onDeletePlace, showModal, path }) => {
         key={key}
         index={index}
         photo={photo}
-        margin={3}
+        margin={10}
         showModal={showModal}
         left={left}
         onDeletePlace={onDeletePlace}
@@ -95,7 +95,7 @@ const ImageGallery = ({ places, onDeletePlace, showModal, path }) => {
           renderImage={imageRenderer}
           photos={randomPlaces.placesForGallery}
           onClick={openLightbox}
-          margin={3}
+          margin={10}
         />
       )}
       {isOpen && (

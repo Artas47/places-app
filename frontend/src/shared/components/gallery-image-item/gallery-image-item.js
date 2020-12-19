@@ -86,6 +86,7 @@ const GalleryImageItem = ({
             style={{
               position: "absolute",
               right: "2rem",
+              bottom: '1rem',
               height: "3rem",
               width: "3rem",
             }}
