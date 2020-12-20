@@ -9,8 +9,7 @@ import axios from "axios";
 
 const Places = () => {
   const location = useLocation();
-  const [places, setPlaces] = useState(null);
-  const { userId, token } = useContext(AuthContext);
+  const { userId, token, places, setPlaces } = useContext(AuthContext);
 
   const { sendRequest, isLoading } = useHttpClient();
 
@@ -26,18 +25,6 @@ const Places = () => {
     };
     fetch();
   }, [userId, sendRequest]);
-
-  const onDeletePlace = async (id) => {
-    await axios.delete(`http://localhost:5000/api/places/${id}`, {
-      headers: {
-        Authorization: "Bearer " + token,
-      },
-    });
-    const responseData = await axios.get(
-      `http://localhost:5000/api/places/user/${userId}`
-    );
-    setPlaces(responseData.data.results);
-  };
 
   if (isLoading) {
     return (
@@ -56,7 +43,6 @@ const Places = () => {
       <ImageGallery
         path="/places"
         places={places}
-        onDeletePlace={onDeletePlace}
       />
     </>
   );
