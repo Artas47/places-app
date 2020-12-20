@@ -20,14 +20,14 @@ import PlaceMap from "./places/pages/place-map/place-map";
 import Gallery from "./places/pages/gallery/gallery";
 /*
 TO DO
-display loading spinner on edit place - kepp in mind
+display loading spinner on edit/delete place
 back-end forms validation
 modal when trying to delete a place
 lazy loading images when beeing at the bottom of page
-add proptypes
+add eslint
 deploy
 backend cleanup/refactor
-inspect backend error 'cannot set headers ....' - done
+future plans - likes, followers, users profiles, tags
 */
 
 function App() {

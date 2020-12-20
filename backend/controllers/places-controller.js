@@ -14,10 +14,10 @@ const getPlaceById = async (req, res, next) => {
     place = await Place.findById(_id);
     res.send({ place });
   } catch (err) {
-    return next(new HttpError("Could not find a place", 404));
+    return next(new HttpError("Could not find place", 404));
   }
   if (!place) {
-    return next(new HttpError("Could not find a place by provided id", 404));
+    return next(new HttpError("Could not find place by provided id", 404));
   }
 };
 
