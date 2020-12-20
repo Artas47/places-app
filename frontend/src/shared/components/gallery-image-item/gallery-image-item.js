@@ -60,14 +60,27 @@ const GalleryImageItem = ({
             opacity: isLoaded === "loaded" && "1",
           }}
           {...photo}
-          onClick={(e) => handleOnClick(e, { photo, index })}
+          
         />
-        <Styled.ImageFooter>
+        <Styled.ImageContent onClick={(e) => handleOnClick(e, { photo, index })}>
+            <Styled.ImageFooter onClick={e => e.stopPropagation()}>
           {location.pathname !== "/places" && (
-            <Styled.ImageDescriptionWrapper>
+            <>
+              <div style={{marginLeft: '1.5rem'}}>
               <Styled.ImageTitle>{photo.creator.name}</Styled.ImageTitle>
               <Styled.ImageAuthor>{photo.title}</Styled.ImageAuthor>
-            </Styled.ImageDescriptionWrapper>
+              </div>
+              <MapIcon
+            onClick={() => {
+              history.push(`${path}/mapView/${photo.id}`);
+            }}
+            style={{
+              marginRight: '1.5rem',
+              height: "3rem",
+              width: "3rem",
+            }}
+          />
+          </>
           )}
           {photo.creator === userId && location.pathname === "/places" && (
             <>
@@ -79,19 +92,9 @@ const GalleryImageItem = ({
               <Styled.GalleryImageButton>Edit</Styled.GalleryImageButton>
             </>
           )}
-          <MapIcon
-            onClick={() => {
-              history.push(`${path}/mapView/${photo.id}`);
-            }}
-            style={{
-              position: "absolute",
-              right: "2rem",
-              bottom: '1rem',
-              height: "3rem",
-              width: "3rem",
-            }}
-          />
-        </Styled.ImageFooter>
+            </Styled.ImageFooter>
+          
+        </Styled.ImageContent>
       </Styled.ImageWrapper>
     </div>
   );

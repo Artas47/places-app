@@ -10,6 +10,7 @@ const PlaceMap = ({ path }) => {
   const { sendRequest } = useHttpClient();
   const [placeCords, setPlaceCords] = useState(null);
 
+
   useEffect(() => {
     if (params.placeId) {
       setShowModal(true);

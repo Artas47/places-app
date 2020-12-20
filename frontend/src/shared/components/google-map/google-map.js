@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Spinner from "../spinner/spinner";
 import Fade from "../fade-animation/fade";
 import ReactMapboxGl, { Layer } from "react-mapbox-gl";

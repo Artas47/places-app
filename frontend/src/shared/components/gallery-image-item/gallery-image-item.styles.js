@@ -9,7 +9,7 @@ export const Image = styled.img`
   transition: opacity 0.7s;
 `;
 
-export const ImageFooter = styled.div`
+export const ImageContent = styled.div`
   position: absolute;
   bottom: 0;
   width: 100%;
@@ -22,8 +22,6 @@ export const ImageFooter = styled.div`
   justify-content: space-around;
   align-items: center;
   box-shadow: 1px -130px 30px -94px rgba(0, 0, 0, 0.15) inset;
-  // -webkit-box-shadow: 1px -115px 30px -94px rgba(0, 0, 0, 0.62) inset;
-  // -moz-box-shadow: 1px -115px 30px -94px rgba(0, 0, 0, 0.62) inset;
   opacity: 0;
   transition: all 0.2s;
   font-size: 1.5rem;
@@ -35,9 +33,8 @@ export const ImageWrapper = styled.div`
   position: relative;
   display: flex;
   justify-content: space-between;
-
   &:hover {
-    ${ImageFooter} {
+    ${ImageContent} {
       opacity: 0.9;
     }
   }
@@ -47,7 +44,7 @@ export const GalleryImageButton = styled.div`
   position: relative;
   border-radius: 0;
   width: 100%;
-  height: 4rem;
+  height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -90,4 +87,14 @@ export const ImageTitle = styled.p`
 export const ImageAuthor = styled.p`
   color: #fff;
   font-weight: 300;
+`;
+
+export const ImageFooter = styled.div`
+  position: absolute;
+  bottom: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 4rem;
 `;
