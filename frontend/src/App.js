@@ -20,7 +20,7 @@ import PlaceMap from "./places/pages/place-map/place-map";
 import Gallery from "./places/pages/gallery/gallery";
 /*
 TO DO
-display loading spinner on edit/delete place
+display loading spinner on edit/delete place - done
 back-end forms validation
 modal when trying to delete a place
 lazy loading images when beeing at the bottom of page

@@ -55,7 +55,11 @@ const createPlace = async (req, res, next) => {
   if (JSON.parse(location).coordinates) {
     placeLocation = JSON.parse(location);
   } else if (address) {
-    placeLocation = await getCoordsForAdress(address);
+    try{
+      placeLocation = await getCoordsForAdress(address);
+    } catch(err){
+      return next(new HttpError("Provided address is not valid"));
+    }
   }
 
   if (!req.file.path) {
