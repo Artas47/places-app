@@ -4,6 +4,8 @@ import * as Styled from "./gallery-image-item.styles";
 import { AuthContext } from "../../../shared/context/auth-context";
 import { useLocation, useHistory } from "react-router-dom";
 import MapIcon from "@material-ui/icons/Map";
+import { useHttpClient } from "../../hooks/http-hook";
+import axios from 'axios';
 
 const cont = {
   backgroundColor: "#eee",
@@ -20,12 +22,23 @@ const GalleryImageItem = ({
   top,
   left,
   openLightbox,
-  onDeletePlace,
   path,
 }) => {
   const [isLoaded, setIsLoaded] = useState("loading");
   const location = useLocation();
-  const { userId } = useContext(AuthContext);
+  const { userId, token, setPlaces} = useContext(AuthContext);
+  const {sendRequest, isLoading} = useHttpClient();
+  
+  const onDeletePlace = async (id) => {
+    await sendRequest(`http://localhost:5000/api/places/${id}`, 'DELETE', null, {
+      Authorization: "Bearer " + token,
+    })
+    const responseData = await axios.get(
+      `http://localhost:5000/api/places/user/${userId}`
+    );
+    setPlaces(responseData.data.results);
+  };
+
   const history = useHistory();
   const handleImageLoaded = () => {
     setIsLoaded("loaded");
@@ -48,10 +61,11 @@ const GalleryImageItem = ({
         width: photo.width,
         ...cont,
         backgroundColor: "transparent !important",
+        transition: 'all .2s',
       }}
     >
-      {isLoaded === "loading" ? <Spinner center /> : ""}
-      <Styled.ImageWrapper>
+      {isLoaded === "loading" || isLoading ? <Spinner center className={isLoading && "color-white"} /> : ""}
+      <Styled.ImageWrapper style={{filter: isLoading && 'brightness(65%)'}}>
         <Styled.Image
           visible={isLoaded === "loaded"}
           onLoad={handleImageLoaded}
@@ -85,7 +99,12 @@ const GalleryImageItem = ({
           {photo.creator === userId && location.pathname === "/places" && (
             <>
               <Styled.GalleryImageButton
-                onClick={() => onDeletePlace(photo.id)}
+                onClick={async () => {
+                  // await sendRequest(`http://localhost:5000/api/places/${photo.id}`, 'DELETE', null, {
+                  //   Authorization: "Bearer " + token,
+                  // })
+                  onDeletePlace(photo.id)
+                }}
               >
                 Delete
               </Styled.GalleryImageButton>

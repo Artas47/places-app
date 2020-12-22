@@ -38,7 +38,7 @@ const NewPlace = () => {
     resolver: yupResolver(newPlaceSchema(cords)),
   });
 
-  const { isLoading, sendRequest } = useHttpClient();
+  const { isLoading, sendRequest, error } = useHttpClient();
   const { userId, token, imgDiemensions } = useContext(AuthContext);
 
   const resetValues = () => {
@@ -169,7 +169,7 @@ const NewPlace = () => {
                     Select place on map
                   </CustomButton>
                 </div>
-                <ErrorBox>{renderError(errors)}</ErrorBox>
+                <ErrorBox>{renderError(errors)} {error && error}</ErrorBox>
                 <Button type="submit">Submit</Button>
                 {showModal && (
                   <Modal setShowModal={setShowModal}>

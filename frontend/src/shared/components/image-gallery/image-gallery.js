@@ -7,7 +7,7 @@ import GalleryImageItem from "../gallery-image-item/gallery-image-item";
 import useScroll from "../../hooks/useScroll";
 import * as Styled from "./image-gallery.styles";
 
-const ImageGallery = ({ places, onDeletePlace, showModal, path }) => {
+const ImageGallery = ({ places, showModal, path }) => {
   const [randomPlaces, setRandomPlaces] = useState({
     placesForGallery: [],
     placesForModal: [],
@@ -35,7 +35,6 @@ const ImageGallery = ({ places, onDeletePlace, showModal, path }) => {
         margin={10}
         showModal={showModal}
         left={left}
-        onDeletePlace={onDeletePlace}
         path={path}
         top={top}
         openLightbox={openLightbox}
