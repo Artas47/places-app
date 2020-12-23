@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import Input from "../../../shared/components/form-elements/input";
 import Form from "../../../shared/components/form-elements/form";
@@ -38,8 +38,12 @@ const NewPlace = () => {
     resolver: yupResolver(newPlaceSchema(cords)),
   });
 
-  const { isLoading, sendRequest, error } = useHttpClient();
+  const { isLoading, sendRequest, error, clearError } = useHttpClient();
   const { userId, token, imgDiemensions } = useContext(AuthContext);
+
+  useEffect(() => {
+    clearError();
+  }, [cords]);
 
   const resetValues = () => {
     setCords(null);
@@ -123,6 +127,7 @@ const NewPlace = () => {
                       name="address"
                       disabled={cords}
                       type="address"
+                      onChange={clearError}
                       style={{
                         margin: 0,
                         paddingRight: "3.5rem",
