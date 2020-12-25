@@ -6,7 +6,6 @@ import { AuthContext } from "../../../context/auth-context";
 const ImageUpload = (props) => {
   const [file, setFile] = useState(null);
   const [previewUrl, setPreviewUrl] = useState(null);
-  const [isValid, setIsValid] = useState(false);
   const { setImgDiemensions } = useContext(AuthContext);
 
   useEffect(() => {
@@ -22,17 +21,10 @@ const ImageUpload = (props) => {
 
   const pickedHandler = (e) => {
     let pickedFile;
-    let fileIsValid = isValid;
-
     if (e.target.files || e.target.files.length === 1) {
       pickedFile = e.target.files[0];
       setFile(pickedFile);
-      setIsValid(true);
-      fileIsValid = true;
       return;
-    } else {
-      setIsValid(false);
-      fileIsValid = false;
     }
   };
 

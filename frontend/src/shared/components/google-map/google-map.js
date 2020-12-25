@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Spinner from "../spinner/spinner";
 import Fade from "../fade-animation/fade";
 import ReactMapboxGl, { Layer } from "react-mapbox-gl";
@@ -17,11 +17,10 @@ const GoogleMap = ({ placeCords, setCords, setZoom, setValue }) => {
       <div>
         {isLoading && <Spinner center className="color-white" />}
         <Map
-          style="mapbox://styles/mapbox/satellite-streets-v11"
+          style={"mapbox://styles/mapbox/satellite-streets-v11"} // eslint-disable-line react/style-prop-object
           containerStyle={{
             height: "70vh",
             width: "100%",
-            backgroundColor: "red",
             transition: "all .3s",
             filter: isLoading && "brightness(60%)",
           }}

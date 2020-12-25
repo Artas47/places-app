@@ -1,15 +1,14 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useContext } from "react";
 import ImageGallery from "../../../shared/components/image-gallery/image-gallery";
 import { useLocation } from "react-router-dom";
 import { AuthContext } from "../../../shared/context/auth-context";
 import { useHttpClient } from "../../../shared/hooks/http-hook";
 import InfoBox from "../../../shared/components/info-box/info-box";
 import Spinner from "../../../shared/components/spinner/spinner";
-import axios from "axios";
 
 const Places = () => {
   const location = useLocation();
-  const { userId, token, places, setPlaces } = useContext(AuthContext);
+  const { userId, places, setPlaces } = useContext(AuthContext);
 
   const { sendRequest, isLoading } = useHttpClient();
 
@@ -24,7 +23,7 @@ const Places = () => {
       }
     };
     fetch();
-  }, [userId, sendRequest]);
+  }, [userId, sendRequest]); // eslint-disable-line react-hooks/exhaustive-deps
 
   if (isLoading) {
     return (

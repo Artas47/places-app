@@ -21,28 +21,6 @@ const ImageGallery = ({ places, showModal, path }) => {
 
   useScroll("image-gallery");
 
-  const openLightbox = useCallback((event, { photo, index }) => {
-    setPhotoIndex(index);
-    setIsOpen(true);
-  }, []);
-
-  const imageRenderer = useCallback(
-    ({ index, left, top, key, photo }) => (
-      <GalleryImageItem
-        key={key}
-        index={index}
-        photo={photo}
-        margin={10}
-        showModal={showModal}
-        left={left}
-        path={path}
-        top={top}
-        openLightbox={openLightbox}
-      />
-    ),
-    [openLightbox]
-  );
-
   useEffect(() => {
     const fetchRandomPlaces = async () => {
       setIsLoading(true);
@@ -84,6 +62,30 @@ const ImageGallery = ({ places, showModal, path }) => {
     };
     fetchRandomPlaces();
   }, [places]);
+
+  const openLightbox = useCallback((event, { photo, index }) => {
+    setPhotoIndex(index);
+    setIsOpen(true);
+  }, []);
+
+  const imageRenderer = useCallback(
+    ({ index, left, top, key, photo }) => (
+      <GalleryImageItem
+        key={key}
+        index={index}
+        photo={photo}
+        margin={10}
+        showModal={showModal}
+        left={left}
+        path={path}
+        top={top}
+        openLightbox={openLightbox}
+      />
+    ),
+    [openLightbox] // eslint-disable-line react-hooks/exhaustive-deps
+  );
+
+
 
   return (
     <Styled.GalleryWrapper id="image-gallery">

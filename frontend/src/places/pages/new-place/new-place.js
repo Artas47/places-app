@@ -43,7 +43,7 @@ const NewPlace = () => {
 
   useEffect(() => {
     clearError();
-  }, [cords]);
+  }, [cords, clearError]);
 
   const resetValues = () => {
     setCords(null);

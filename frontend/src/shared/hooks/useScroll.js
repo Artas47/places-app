@@ -9,12 +9,6 @@ const useScrollEvent = (domElement) => {
       setElement(null);
     };
   }, [domElement]);
-  useEffect(() => {
-    document.addEventListener("scroll", throttledFunction, { passive: true });
-    return () => {
-      document.removeEventListener("scroll", throttledFunction);
-    };
-  }, [element]);
   const trackScrolling = () => {
     if (isBottom(element)) {
       console.log("SCROLL DOWn");
@@ -22,6 +16,12 @@ const useScrollEvent = (domElement) => {
     }
   };
   const throttledFunction = throttle(trackScrolling, 100);
+  useEffect(() => {
+    document.addEventListener("scroll", throttledFunction, { passive: true });
+    return () => {
+      document.removeEventListener("scroll", throttledFunction);
+    };
+  }, [element, throttledFunction]);
 
   const isBottom = (el) => {
     if (el) {

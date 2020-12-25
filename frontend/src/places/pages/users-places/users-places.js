@@ -17,7 +17,7 @@ const UsersPlaces = () => {
       }
     };
     fetch();
-  }, []);
+  }, [fetch]); // eslint-disable-line react-hooks/exhaustive-deps
 
   if (!places || !places.length) {
     return <InfoBox label="This user doesn't have any places added" />;

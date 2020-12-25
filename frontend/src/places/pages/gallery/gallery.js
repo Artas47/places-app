@@ -20,7 +20,7 @@ const Gallery = () => {
       setPlaces(response.results);
     };
     fetch();
-  }, [userId]);
+  }, [userId, sendRequest]);
 
   if (isLoading) {
     return (
