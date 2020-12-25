@@ -50,10 +50,6 @@ function App() {
     setLoading(false);
   }, []);
 
-  if (loading) {
-    return <div>SPINNER</div>;
-  }
-
   let routes;
 
   if (token) {
@@ -83,10 +79,7 @@ function App() {
   } else {
     routes = (
       <Switch>
-        <Route path="/" exact>
-          <Gallery />
-        </Route>
-        <Route path="/gallery" exact>
+        <Route path={["/", "/gallery"]} exact>
           <Gallery />
         </Route>
         <Route path="/auth" exact>
