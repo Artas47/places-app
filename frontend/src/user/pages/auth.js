@@ -52,7 +52,7 @@ const Auth = () => {
     if (!isLoggedIn) {
       try {
         const responseData = await sendRequest(
-          "http://localhost:5000/api/users/login",
+          `${process.env.REACT_APP_ROOT_API_ROUTE}/users/login`,
           "POST",
           JSON.stringify({
             email: data.email,
@@ -71,7 +71,7 @@ const Auth = () => {
         formData.append("name", data.name);
         formData.append("password", data.password);
         const responseData = await sendRequest(
-          "http://localhost:5000/api/users/signup",
+          `${process.env.REACT_APP_ROOT_API_ROUTE}/users/signup`,
           "POST",
           formData
         );

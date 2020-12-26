@@ -30,11 +30,11 @@ const GalleryImageItem = ({
   const {sendRequest, isLoading} = useHttpClient();
   
   const onDeletePlace = async (id) => {
-    await sendRequest(`http://localhost:5000/api/places/${id}`, 'DELETE', null, {
+    await sendRequest(`${process.env.REACT_APP_ROOT_API_ROUTE}/places/${id}`, 'DELETE', null, {
       Authorization: "Bearer " + token,
     })
     const responseData = await axios.get(
-      `http://localhost:5000/api/places/user/${userId}`
+      `${process.env.REACT_APP_ROOT_API_ROUTE}/places/user/${userId}`
     );
     setPlaces(responseData.data.results);
   };
@@ -100,9 +100,6 @@ const GalleryImageItem = ({
             <>
               <Styled.GalleryImageButton
                 onClick={async () => {
-                  // await sendRequest(`http://localhost:5000/api/places/${photo.id}`, 'DELETE', null, {
-                  //   Authorization: "Bearer " + token,
-                  // })
                   onDeletePlace(photo.id)
                 }}
               >

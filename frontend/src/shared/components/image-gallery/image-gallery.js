@@ -30,26 +30,26 @@ const ImageGallery = ({ places, showModal, path }) => {
       if (places?.length < 4) {
         places.forEach((place) => {
           placesGallery.push({
-            src: `http://localhost:5000/${place.image.imageUrl}`,
+            src: `${process.env.REACT_APP_ROOT_ROUTE}${place.image.imageUrl}`,
             width: 0,
             height: 0,
             creator: place.creator,
             id: place._id,
             title: place.title,
           });
-          placesModal.push(`http://localhost:5000/${place.image.imageUrl}`);
+          placesModal.push(`${process.env.REACT_APP_ROOT_ROUTE}${place.image.imageUrl}`);
         });
       } else if (places?.length > 3) {
         places.forEach((place) => {
           placesGallery.push({
-            src: `http://localhost:5000/${place.image.imageUrl}`,
+            src: `${process.env.REACT_APP_ROOT_ROUTE}${place.image.imageUrl}`,
             width: place.image.width,
             height: place.image.height,
             creator: place.creator,
             id: place._id,
             title: place.title,
           });
-          placesModal.push(`http://localhost:5000/${place.image.imageUrl}`);
+          placesModal.push(`${process.env.REACT_APP_ROOT_ROUTE}${place.image.imageUrl}`);
         });
       }
 

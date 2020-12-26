@@ -70,7 +70,7 @@ const NewPlace = () => {
       formData.append("creator", userId);
       formData.append("location", JSON.stringify(location));
       formData.append("address", data.address);
-      await sendRequest("http://localhost:5000/api/places", "POST", formData, {
+      await sendRequest(`${process.env.REACT_APP_ROOT_API_ROUTE}/places`, "POST", formData, {
         Authorization: "Bearer " + token,
       });
       history.push("/");

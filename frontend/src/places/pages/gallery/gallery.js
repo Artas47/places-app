@@ -14,7 +14,7 @@ const Gallery = () => {
   useEffect(() => {
     const fetch = async () => {
       const response = await sendRequest(
-        "http://localhost:5000/api/places/random",
+        `${process.env.REACT_APP_ROOT_API_ROUTE}/places/random`,
         "GET"
       );
       setPlaces(response.results);

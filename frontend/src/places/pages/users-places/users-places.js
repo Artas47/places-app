@@ -11,7 +11,7 @@ const UsersPlaces = () => {
     const fetch = async () => {
       if (params.userId) {
         const response = await axios.get(
-          `http://localhost:5000/api/places/user/${params.userId}`
+          `${process.env.REACT_APP_ROOT_API_ROUTE}/places/user/${params.userId}`
         );
         setPlaces(response.data.results);
       }

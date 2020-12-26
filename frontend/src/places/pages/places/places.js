@@ -16,7 +16,7 @@ const Places = () => {
     const fetch = async () => {
       if (userId && location.pathname.startsWith("/places")) {
         const response = await sendRequest(
-          `http://localhost:5000/api/places/user/${userId}`,
+          `${process.env.REACT_APP_ROOT_API_ROUTE}/places/user/${userId}`,
           "GET"
         );
         setPlaces(response.results);

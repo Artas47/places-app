@@ -18,7 +18,7 @@ const PlaceMap = ({ path }) => {
         let response;
         if (params.placeId) {
           response = await sendRequest(
-            `http://localhost:5000/api/places/${params.placeId}`,
+            `${process.env.REACT_APP_ROOT_API_ROUTE}/places/${params.placeId}`,
             "GET"
           );
         }

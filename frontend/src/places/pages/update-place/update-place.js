@@ -30,7 +30,7 @@ const UpdatePlace = () => {
   useEffect(() => {
     const fetchData = async () => {
       const responseData = await sendRequest(
-        `http://localhost:5000/api/places/${placeId}`
+        `${process.env.REACT_APP_ROOT_API_ROUTE}/places/${placeId}`
       );
       setLoadedPlace(responseData.place);
     };
@@ -42,7 +42,7 @@ const UpdatePlace = () => {
   const onSubmit = async (data) => {
     try {
       await sendRequest(
-        `http://localhost:5000/api/places/${loadedPlace._id}`,
+        `${process.env.REACT_APP_ROOT_API_ROUTE}/places/${loadedPlace._id}`,
         "PATCH",
         JSON.stringify({
           title: data.title,
@@ -54,7 +54,7 @@ const UpdatePlace = () => {
         }
       );
       const responseData = await sendRequest(
-        `http://localhost:5000/api/places/user/${userId}`,
+        `${process.env.REACT_APP_ROOT_API_ROUTE}/places/user/${userId}`,
         "GET"
       );
       setPlaces(responseData.places);
