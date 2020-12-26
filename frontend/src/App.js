@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useState } from "react";
+import React, { useState } from "react";
 import {
   BrowserRouter as Router,
   Route,
@@ -30,7 +30,6 @@ future plans - likes, followers, users profiles, tags
 */
 
 function App() {
-  const [loading, setLoading] = useState(true);
   const [places, setPlaces] = useState([]);
   const [users, setUsers] = useState([]);
   const [searchParam, setSearchParam] = useState("");
@@ -45,10 +44,6 @@ function App() {
   const { RenderModal } = useModal();
 
   const { token, userId, login, logout } = useAuth();
-
-  useLayoutEffect(() => {
-    setLoading(false);
-  }, []);
 
   let routes;
 
