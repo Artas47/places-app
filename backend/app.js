@@ -8,11 +8,14 @@ const fs = require("fs");
 const helmet = require("helmet");
 const compression = require("compression");
 const morgan = require("morgan");
+const cors = require('cors')
 
 const port = process.env.PORT || 5000;
 const mongoDbUri = `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@cluster0.lee0p.mongodb.net/${process.env.MONGO_DEFAULT_DATABASE}?retryWrites=true&w=majority`;
 
 const app = express();
+
+app.use(cors());
 
 const accessLogStream = fs.createWriteStream(
   path.join(__dirname, "access.log"),
