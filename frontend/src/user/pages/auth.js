@@ -48,7 +48,6 @@ const Auth = () => {
   });
 
   const onSubmit = async (data) => {
-    console.log("data", data);
     if (!isLoggedIn) {
       try {
         const responseData = await sendRequest(
