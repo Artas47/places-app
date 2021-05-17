@@ -41,32 +41,14 @@ export const ImageWrapper = styled.div`
 `;
 
 export const GalleryImageButton = styled.div`
-  position: relative;
-  border-radius: 0;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  overflow: hidden;
-  margin: 0;
-  border: 0;
-  transition: all 0.2s;
-  :not(:last-child) {
-    :after {
-      content: "";
-      position: absolute;
-      top: 0;
-      right: 0;
-      width: 2px;
-      height: 100%;
-      background-color: #fff;
-      display: block;
-    }
-  }
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  transition: all .2s;
   :hover {
-    background-color: rgba(0, 0, 0, 0.15);
+    background-color: rgba(0,0,0,0.8);
+    border-radius: 10px;
+    transform: scale(1.3);
   }
 `;
 

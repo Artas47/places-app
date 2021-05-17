@@ -4,8 +4,10 @@ import * as Styled from "./gallery-image-item.styles";
 import { AuthContext } from "../../../shared/context/auth-context";
 import { useLocation, useHistory } from "react-router-dom";
 import MapIcon from "@material-ui/icons/Map";
+import DeleteIcon from '@material-ui/icons/Delete';
 import { useHttpClient } from "../../hooks/http-hook";
 import axios from 'axios';
+import { IconButton } from "@material-ui/core";
 
 const cont = {
   backgroundColor: "#eee",
@@ -103,9 +105,8 @@ const GalleryImageItem = ({
                   onDeletePlace(photo.id)
                 }}
               >
-                Delete
+                <DeleteIcon style={{fontSize: '3rem'}} />
               </Styled.GalleryImageButton>
-              <Styled.GalleryImageButton>Edit</Styled.GalleryImageButton>
             </>
           )}
             </Styled.ImageFooter>
