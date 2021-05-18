@@ -19,6 +19,7 @@
     "react-hook-form": "^6.3.3",
     "react-image-lightbox": "^5.1.1",
     "react-images": "^1.1.7",
+    "react-infinite-scroller": "^1.2.4",
     "react-lazyload": "^2.6.9",
     "react-mapbox-gl": "^5.0.0",
     "react-photo-gallery": "^8.0.0",

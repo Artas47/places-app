@@ -4,7 +4,6 @@ import Lightbox from "react-image-lightbox";
 import "react-image-lightbox/style.css";
 import Spinner from "../spinner/spinner";
 import GalleryImageItem from "../gallery-image-item/gallery-image-item";
-import useScroll from "../../hooks/useScroll";
 import * as Styled from "./image-gallery.styles";
 
 const ImageGallery = ({ places, showModal, path }) => {
@@ -18,8 +17,6 @@ const ImageGallery = ({ places, showModal, path }) => {
   const [photoIndex, setPhotoIndex] = useState(0);
   const [isOpen, setIsOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
-
-  useScroll("image-gallery");
 
   useEffect(() => {
     const fetchRandomPlaces = async () => {
