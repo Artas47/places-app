@@ -4,35 +4,50 @@ import { AuthContext } from "../../../shared/context/auth-context";
 import { useHttpClient } from "../../../shared/hooks/http-hook";
 import InfoBox from "../../../shared/components/info-box/info-box";
 import Spinner from "../../../shared/components/spinner/spinner";
-import InfiniteScroll from 'react-infinite-scroller';
-import useScroll from "../../../shared/hooks/useScroll";
+import InfiniteScroll from "react-infinite-scroll-component";
+import axios from "axios";
 
 const Gallery = () => {
   const [places, setPlaces] = useState([]);
   const { userId } = useContext(AuthContext);
   const [page, setPage] = useState(1);
+  const [hasMore, setHasMore] = useState(true);
 
   const { sendRequest, isLoading } = useHttpClient();
 
-
-//   useScroll("image-gallery");
-
-  const fetch = async () => {
+  const initialFetch = async () => {
     const response = await sendRequest(
-      `${process.env.REACT_APP_ROOT_API_ROUTE}/places/random?page=${page}&limit=10`,
+      `${process.env.REACT_APP_ROOT_API_ROUTE}/places/random?page=1&limit=10`,
       "GET"
     );
-    console.log(`response.results`, response.results)
-    let newPlaces= null;
-    // if(places.length){
-        newPlaces = [...places, ...response.results];
-    // }
-    console.log(`newPlaces`, newPlaces)
-    setPlaces(newPlaces);
+    setPlaces(response.results);
   };
+
   useEffect(() => {
-    fetch();
-  }, [userId, sendRequest, page]);
+    initialFetch();
+  }, [sendRequest, userId]);
+
+  const fetchOnScroll = async () => {
+    try {
+      const res = await axios.get(
+        `${process.env.REACT_APP_ROOT_API_ROUTE}/places/random?page=${page}&limit=10`
+      );
+      if (res.data.results.length === 0) {
+        setHasMore(false);
+      } else {
+        setPlaces((prev) => [...prev, ...res.data.results]);
+      }
+    } catch (error) {
+      console.log(`error`, error);
+      alert("Error fetching places", error);
+    }
+  };
+
+  useEffect(() => {
+    if (page > 1) {
+      fetchOnScroll();
+    }
+  }, [page]);
 
   if (isLoading) {
     return (
@@ -46,22 +61,19 @@ const Gallery = () => {
     return <InfoBox label="Looks like there is no places..." />;
   }
 
-  const loadFunc = () => {
-      console.log('AAAAAAAAAAAAAAAAA')
-      setPage(2);
-  }
-
   return (
-  <InfiniteScroll
-  pageStart={page}
-  initialLoad={false}
-  loadMore={loadFunc}
-  hasMore={true || false}
-  loader={<div className="loader" key={0}>Loading ...</div>}
-  useWindow={false}
-> 
-<ImageGallery path="/gallery" places={places} /> 
-</InfiniteScroll>);
+    <InfiniteScroll
+      hasMore={hasMore}
+      next={() => {
+        setPage((prev) => prev + 1);
+      }}
+      loader={"LOADING"}
+      endMessage={"NO MORE DATA"}
+      dataLength={places.length}
+    >
+      <ImageGallery path="/gallery" places={places} />
+    </InfiniteScroll>
+  );
 };
 
 export default Gallery;

@@ -34,7 +34,9 @@ const ImageGallery = ({ places, showModal, path }) => {
             id: place._id,
             title: place.title,
           });
-          placesModal.push(`${process.env.REACT_APP_ROOT_ROUTE}${place.image.imageUrl}`);
+          placesModal.push(
+            `${process.env.REACT_APP_ROOT_ROUTE}${place.image.imageUrl}`
+          );
         });
       } else if (places?.length > 3) {
         places.forEach((place) => {
@@ -46,7 +48,9 @@ const ImageGallery = ({ places, showModal, path }) => {
             id: place._id,
             title: place.title,
           });
-          placesModal.push(`${process.env.REACT_APP_ROOT_ROUTE}${place.image.imageUrl}`);
+          placesModal.push(
+            `${process.env.REACT_APP_ROOT_ROUTE}${place.image.imageUrl}`
+          );
         });
       }
 
@@ -81,8 +85,6 @@ const ImageGallery = ({ places, showModal, path }) => {
     ),
     [openLightbox] // eslint-disable-line react-hooks/exhaustive-deps
   );
-
-
 
   return (
     <Styled.GalleryWrapper id="image-gallery">
